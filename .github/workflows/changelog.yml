@@ -1,0 +1,25 @@
+name: Generate changelog
+on:
+  release:
+    types: [created, edited]
+  push:
+    branches:
+      - master
+
+jobs:
+  generate-changelog:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: BobAnkh/auto-generate-changelog@master
+      with:
+        REPO_NAME: 'BobAnkh/auto-generate-changelog'
+        ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        PATH: '/CHANGELOG.md'
+        COMMIT_MESSAGE: 'docs(CHANGELOG): update CHANGELOG'
+        FEAT: '1'
+        FIX: '1'
+        DOCS: '1'
+        CHORE: '1'
+        REFACTOR: '1'
+        PERF: '1'

@@ -1,0 +1,39 @@
+{
+    "commit": {
+        "cannot_be_fixup": true,
+        "subject_cannot_be_empty": true,
+        "subject_must_be_longer_than": 4,
+        "subject_must_be_shorter_than": 101,
+        "subject_lines_must_be_shorter_than": 51,
+        "subject_must_be_single_line": true,
+        "subject_must_be_in_tense": "imperative",
+        "subject_must_not_end_with_dot": true,
+        "subject_must_include_prefix": {
+            "prefixes": ["feat", "fix", "docs", "refactor", "feature", "style", "test", "chore", "revert", "Revert", "revert"]
+        },
+        "body_lines_must_be_shorter_than": 73
+    },
+    "pull_request":{
+        "subject_cannot_be_empty": true,
+        "subject_must_be_longer_than": 4,
+        "subject_must_be_shorter_than": 101,
+        "subject_must_be_in_tense": "imperative",
+        "subject_must_not_end_with_dot": true,
+        "subject_must_include_prefix": {
+            "prefixes": ["feat", "fix", "docs", "refactor", "feature", "style", "test", "chore", "revert", "build", "ci", "perf", "Revert", "LinuxCommand", "LinuxTool"]
+        },
+        "body_cannot_be_empty": true,
+        "body_must_include_screenshot": [
+            "html",
+            "scss"]
+    },
+    "issue":{
+        "subject_cannot_be_empty": true,
+        "subject_must_be_longer_than": 4,
+        "subject_must_be_shorter_than": 101,
+        "subject_must_not_end_with_dot": true,
+        "body_cannot_be_empty": true,
+        "body_must_include_reproduction_steps": [
+            "bug"]
+    }
+}

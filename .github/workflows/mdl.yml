@@ -1,0 +1,18 @@
+name: markdown lint
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+jobs:
+  markdownlint-cli-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nosborn/github-action-markdown-cli@v1.1.1
+        with:
+          config_file: .markdownlint.json
+          files: | 
+            docs/LinuxCommand  
+            docs/LinuxTool
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

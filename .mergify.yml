@@ -1,0 +1,195 @@
+pull_request_rules:
+  - name: Automatic welcome on new pr
+    conditions:
+      - author!=BobAnkh
+      - author!=dependabot[bot]
+      - "-closed"
+    actions:
+      comment:
+        message: |
+          Thanks for opening this pull request! 
+          Please check out the [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md).
+  - name: Assign author
+    conditions:
+      - "-closed"
+      - "#assignee=0"
+    actions:
+      assign: 
+        users:
+          - "{{author}}"
+  - name: Assign Reviewer
+    conditions:
+      - author!=BobAnkh
+      - "-draft"
+      - "-closed"
+      - "#review-requested=0"
+    actions:
+      request_reviews:
+        users:
+          - BobAnkh
+  - name: Label enhancement
+    conditions:
+      - head~=^feature\/[a-zA-Z0-9-_\/]+$|^feat\/[a-zA-Z0-9-_\/]+$
+    actions:
+      label:
+        add:
+          - enhancement
+  - name: Label bug
+    conditions:
+      - head~=^fix\/[a-zA-Z0-9-_\/]+$
+    actions:
+      label:
+        add:
+          - bug
+  - name: Label documentation
+    conditions:
+      - head~=^docs\/[a-zA-Z0-9-_\/]+$|^LinuxCommand\/[a-zA-Z0-9-_\/]+$|^LinuxTool\/[a-zA-Z0-9-_\/]+$
+    actions:
+      label:
+        add:
+          - documentation
+  - name: Label chore
+    conditions:
+      - head~=^chore\/[a-zA-Z0-9-_\/]+$
+    actions:
+      label:
+        add:
+          - chore
+  - name: Label dependencies
+    conditions:
+      - head~=^dependabot\/[a-zA-Z0-9-_\/]+$
+    actions:
+      label:
+        add:
+          - dependencies
+  - name: Title Validator comment
+    conditions:
+      - "status-failure=Title Validator"
+      - "-closed"
+      - "-merged"
+    actions:
+      comment:
+        message: |
+          @{{author}}
+          Wrong PR Title: {{title}}
+          Please check [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md) for more information.
+  - name: branch name check comment
+    conditions:
+      - "-head~=^(master|develop|((dependabot|chore|docs|LinuxCommand|LinuxTool|feature|feat|fix|refactor|style|test|build|release)\/[a-zA-Z0-9-_\/]{1,64}))$"
+      - "-closed"
+      - "-merged"
+    actions:
+      close:
+        message: |
+          @{{author}}
+          Wrong branch name: {{head}}
+          Please check details and [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md) for more information.
+          This Pull Request will be closed.
+      label:
+        add:
+          - "invalid"
+  - name: message check comment
+    conditions:
+      - "status-failure=gitmagic/rules"
+      - author!=dependabot[bot]
+      - "-closed"
+      - "-merged"
+    actions:
+      comment:
+        message: |
+          @{{author}}
+          Contribution Message Convention Tests failed with GitMagic.
+          Please check details and [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md) for more information.
+  - name: markdownlint check comment
+    conditions:
+      - "status-failure=markdownlint-cli-check"
+      - "-closed"
+      - "-merged"
+    actions:
+      comment:
+        message: |
+          @{{author}}
+          Markdown Files Check failed with markdownlint.
+          Please check details or [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md) for more information.
+  - name: conflict comment
+    conditions:
+      - "-closed"
+      - "-draft"
+      - "-merged"
+      - "conflict"
+    actions:
+      comment:
+        message: |
+          @{{author}}
+          There are some conflicts within your pull request.
+          Could you please fix them?
+  - name: All check pass comment
+    conditions:
+      - status-success=Title Validator
+      - status-success=gitmagic/rules
+      - status-success=markdownlint-cli-check
+      - "-closed"
+      - "-draft"
+      - "-conflict"
+      - "-merged"
+    actions:
+      comment:
+        message: |
+          All checks passed.
+          Please wait for review.
+  - name: Automatic merge on approval
+    conditions:
+      - author!=BobAnkh
+      - author!=dependabot[bot]
+      - "#approved-reviews-by>=1"
+      - status-success=Title Validator
+      - status-success=gitmagic/rules
+      - status-success=markdownlint-cli-check
+      - label!=invalid
+      - "-closed"
+      - "-draft"
+      - "-conflict"
+      - "-merged"
+    actions:
+      comment:
+        message: |
+          This pull request has been approved by:
+          {% for name in approved_reviews_by %}
+          @{{name}}
+          {% endfor %}
+          Thank you @{{author}} for your contributions!
+      merge:
+        method: merge
+        strict: smart+fasttrack
+        strict_method: rebase
+  - name: Automatic merge
+    conditions:
+      - author=BobAnkh
+      - status-success=Title Validator
+      - status-success=gitmagic/rules
+      - status-success=markdownlint-cli-check
+      - label!=invalid
+      - "-closed"
+      - "-draft"
+      - "-conflict"
+      - "-merged"
+    actions:
+      merge:
+        method: merge
+        strict: smart+fasttrack
+        strict_method: rebase
+  - name: Automatic merge dependabot[bot]
+    conditions:
+      - author=dependabot[bot]
+      - "#approved-reviews-by>=1"
+      - "-status-failure=Title Validator"
+      - label!=invalid
+      - "-closed"
+      - "-draft"
+      - "-conflict"
+      - "-merged"
+    actions:
+      merge:
+        method: merge
+        strict: smart+fasttrack
+        strict_method: rebase

@@ -1,0 +1,48 @@
+name: "Auto-add contributors"
+description: "Add contributors to your file automatically on schedule"
+author: "BobAnkh"
+branding:
+  icon: 'award'
+  color: 'orange'
+inputs:
+  REPO_NAME:
+    description: "The name of the repo: user/repo_name"
+    required: true
+  ACCESS_TOKEN:
+    description: "Github Access Token you want to use. Just pass GITHUB_TOKEN"
+    required: true
+  PATH:
+    description: "Path to the file you want to add CHANGELOG"
+    required: false
+    default: '/CHANGELOG.md'
+  COMMIT_MESSAGE:
+    description: "Commit message"
+    required: false
+    default: 'docs(CHANGELOG): update CHANGELOG'
+  FEAT:
+    description: "Set 1 to generate it"
+    required: false
+    default: '1'
+  FIX:
+    description: "Set 1 to generate it"
+    required: false
+    default: '1'
+  DOCS:
+    description: "Set 1 to generate it"
+    required: false
+    default: '1'
+  CHORE:
+    description: "Set 1 to generate it"
+    required: false
+    default: '1'
+  REFACTOR:
+    description: "Set 1 to generate it"
+    required: false
+    default: '1'
+  PERF:
+    description: "Set 1 to generate it"
+    required: false
+    default: '1'
+runs:
+  using: "docker"
+  image: "Dockerfile"

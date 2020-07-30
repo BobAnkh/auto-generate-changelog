@@ -60,6 +60,8 @@ def strip_commits(commits, regex):
         if re.match(regex, commit[1]):
             pre = re.match(regex, commit[1]).group(0)
             scope = re.search(r'\(.+\)', pre).group(0)[1:-1]
+            if scope.lower() == 'changelog' and regex == r'^docs\(.+\)':
+                continue
             subject = re.sub(regex + r':', '', commit[1])
             if subject[0] == ' ':
                 subject = subject[1:]

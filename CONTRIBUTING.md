@@ -8,7 +8,7 @@ We adopt a series of automation tools to check, contributions not following the 
 
 Here are the contributing conventions we'd like you to follow:
 
-## 关于Commit的规范
+## About Commit
 
 Each commit should contain relatively independent change (that is, a hodgepodge of multiple types of modifications is not allowed to be submitted in one commit), and the specific changes need to be clarified in the message
 
@@ -154,9 +154,9 @@ Use `rebase` method or `pull --rebase` method to update your branch so as to mak
 
 The project has configured several automation check tools. Please wait a moment after your Pull Request submitted and deal with some issues according to the comments and details of check tools
 
-## Requirements for files of different languages
+## Conventions for files of different languages
 
-Files of different languages should be checked locally according to the following requirements
+Files of different languages should be checked locally according to the following conventions
 
 Commits should be made after all checks pass
 

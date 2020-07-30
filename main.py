@@ -58,8 +58,8 @@ def strip_commits(commits, regex):
     scope_set = []
     for commit in commits:
         if re.match(regex, commit[1]):
-            pre = re.match(regex, commit[1])
-            scope = re.search(r'\(.+\),', pre).group(0)[1:-1]
+            pre = re.match(regex, commit[1]).group(0)
+            scope = re.search(r'\(.+\)', pre).group(0)[1:-1]
             subject = re.sub(regex + r':', '', commit[1])
             if subject[0] == ' ':
                 subject = subject[1:]
@@ -232,10 +232,10 @@ def generate_changelog(repo, parsed_releases, feat, fix, docs, chore, refactor,
     CHANGELOG = '# CHANGELOG\n\n'
     feat_regex = r'^feat\(.+\)'
     fix_regex = r'^fix\(.+\)'
-    docs_regex = r'^fix\(.+\)'
-    chore_regex = r'^fix\(.+\)'
-    refactor_regex = r'^fix\(.+\)'
-    perf_regex = r'^fix\(.+\)'
+    docs_regex = r'^docs\(.+\)'
+    chore_regex = r'^chore\(.+\)'
+    refactor_regex = r'^refactor\(.+\)'
+    perf_regex = r'^perf\(.+\)'
     for i in range(len(tags)):
         release_info = ''
         if i == 0:

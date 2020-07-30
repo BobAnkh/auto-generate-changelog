@@ -4,8 +4,14 @@
 
 Changes unreleased
 
+## [v0.0.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v0.0.1) - 2020-07-30 02:40:43
+
+See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CHANGELOG.md) for changes
+
 ### Features
 
+- main): ignore docs(changelog:
+  - ignore docs(changelog) to appear ([93df662](https://github.com/BobAnkh/auto-generate-changelog/commit/93df662038b0e7fdf569deaab7c2dc221c127039))
 - main:
   - bypass empty section ([fd47996](https://github.com/BobAnkh/auto-generate-changelog/commit/fd479964d9233f93bb6e692ba5f0692e92cf8a5a))
 - CHANGELOG:
@@ -13,6 +19,9 @@ Changes unreleased
 
 ### Bug Fixes
 
+- git:
+  - install git ([b326c02](https://github.com/BobAnkh/auto-generate-changelog/commit/b326c02b6c2f73e62eb65261a5e60df0be90d2de))
+  - install git ([97dd067](https://github.com/BobAnkh/auto-generate-changelog/commit/97dd067005e97e3359d70bd7e930c7a7637a6a72))
 - main:
   - fix a typo of regex ([fc73d2a](https://github.com/BobAnkh/auto-generate-changelog/commit/fc73d2a1167b9a7ce2689bffee4aa1250de71704))
 - permission:
@@ -20,21 +29,17 @@ Changes unreleased
   - change bash script's permission ([dfb2273](https://github.com/BobAnkh/auto-generate-changelog/commit/dfb2273d070fc6e9ffda3a958fa3684f58a188ea))
 - unrelease:
   - fix unreleased info ([ae5603d](https://github.com/BobAnkh/auto-generate-changelog/commit/ae5603d57a9f7727a75394f991bb83b3f70e943d))
-- git:
-  - install git ([b326c02](https://github.com/BobAnkh/auto-generate-changelog/commit/b326c02b6c2f73e62eb65261a5e60df0be90d2de))
-  - install git ([97dd067](https://github.com/BobAnkh/auto-generate-changelog/commit/97dd067005e97e3359d70bd7e930c7a7637a6a72))
 
 ### Documentation Changes
 
-- CHANGELOG:
-  - update CHANGELOG ([18ffeb2](https://github.com/BobAnkh/auto-generate-changelog/commit/18ffeb2aeca0fde6866b6203ee92536545119eef))
-  - update CHANGELOG ([ea31fd9](https://github.com/BobAnkh/auto-generate-changelog/commit/ea31fd97e24b84fe347eaddbf85805c9447b937f))
-  - update CHANGELOG ([0642919](https://github.com/BobAnkh/auto-generate-changelog/commit/06429197344b2161c75c2460f2a24392f5f8c583))
 - *:
+  - update usage ([70796e5](https://github.com/BobAnkh/auto-generate-changelog/commit/70796e5b5f4d8f17e14b15eb78e0e22ab2b94864))
   - update README for usage and ... ([3a69c33](https://github.com/BobAnkh/auto-generate-changelog/commit/3a69c33712178488b2fe3f1407cf26d6a5ab4ed4))
 
 ### Chores
 
+- changelog:
+  - change trigger-event to release ([7cb0ddd](https://github.com/BobAnkh/auto-generate-changelog/commit/7cb0ddd983b22bd87ba319636910cd9a5a4662f0))
 - CHANGELOG:
   - update config ([627e8f4](https://github.com/BobAnkh/auto-generate-changelog/commit/627e8f4e5ca648803e2045bb8b7bef70bb786ed2))
 - *:

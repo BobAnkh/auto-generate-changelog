@@ -2,9 +2,9 @@ name: Generate changelog
 on:
   release:
     types: [created, edited]
-  push:
-    branches:
-      - master
+# push:
+#   branches:
+#     - master
 
 jobs:
   generate-changelog:
@@ -18,7 +18,7 @@ jobs:
         REPO_NAME: 'BobAnkh/auto-generate-changelog'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: '/CHANGELOG.md'
-        COMMIT_MESSAGE: 'docs(CHANGELOG): update CHANGELOG'
+        COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
         FEAT: '1'
         FIX: '1'
         DOCS: '1'

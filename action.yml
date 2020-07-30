@@ -1,5 +1,5 @@
-name: "Auto-add contributors"
-description: "Add contributors to your file automatically on schedule"
+name: "Auto-generate CHANGELOG"
+description: "Generate CHANGELOG according to conventional commits automatically when released"
 author: "BobAnkh"
 branding:
   icon: 'award'
@@ -18,7 +18,7 @@ inputs:
   COMMIT_MESSAGE:
     description: "Commit message"
     required: false
-    default: 'docs(CHANGELOG): update CHANGELOG'
+    default: 'docs(CHANGELOG): update release notes'
   FEAT:
     description: "Set 1 to generate it"
     required: false

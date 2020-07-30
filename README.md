@@ -25,12 +25,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - uses: BobAnkh/auto-generate-changelog@master
       with:
         REPO_NAME: 'BobAnkh/auto-generate-changelog'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: '/CHANGELOG.md'
-        COMMIT_MESSAGE: 'docs(CHANGELOG): update CHANGELOG'
+        COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
         FEAT: '1'
         FIX: '1'
         DOCS: '1'
@@ -39,6 +41,10 @@ jobs:
         PERF: '1'
 ```
 
+> NOTE: Generating CHANGELOG needs all the commit history so you should set `fetch-depth: 0` with `actions/checkout`
+>
+> NOTE: commit log begins with `docs(changelog)` or `doc(CHANGELOG)` will not be added to the CHANGELOG
+
 ### Parameters
 
 | Parameter | Description | Required | Default |
@@ -46,7 +52,7 @@ jobs:
 | REPO_NAME| Repository name | yes | - |
 | ACCESS_TOKEN | Github Access Token | yes | You can just pass `${{secrets.GITHUB_TOKEN}}` |
 | PATH | Path to the file you want to add contributors' list | no | `/CHANGELOG.md` |
-| COMMIT_MESSAGE | commit message | no | `docs(CHANGELOG): update CHANGELOG` |
+| COMMIT_MESSAGE | commit message | no | `docs(CHANGELOG): update release notes` |
 | FEAT | Set 1 to generate it | no | `1` |
 | FIX | Set 1 to generate it | no | `1` |
 | DOCS | Set 1 to generate it | no | `1` |

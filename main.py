@@ -257,23 +257,29 @@ def generate_changelog(repo, parsed_releases, feat, fix, docs, chore, refactor,
                     release_info = f'''## [{title}]({url}) - {date}\n\n{description}\n\n'''
                     break
         if feat == 1:
-            release_info = release_info + '### Features\n\n' + generate_section(
-                commit_list, feat_regex, repo)
+            sec = generate_section(commit_list, feat_regex, repo)
+            if sec != '\n':
+                release_info = release_info + '### Features\n\n' + sec
         if fix == 1:
-            release_info = release_info + '### Bug Fixes\n\n' + generate_section(
-                commit_list, fix_regex, repo)
+            sec = generate_section(commit_list, fix_regex, repo)
+            if sec != '\n':
+                release_info = release_info + '### Bug Fixes\n\n' + sec
         if docs == 1:
-            release_info = release_info + '### Documentation Changes\n\n' + generate_section(
-                commit_list, docs_regex, repo)
+            sec = generate_section(commit_list, docs_regex, repo)
+            if sec != '\n':
+                release_info = release_info + '### Documentation Changes\n\n' + sec
         if chore == 1:
-            release_info = release_info + '### Chores\n\n' + generate_section(
-                commit_list, chore_regex, repo)
+            sec = generate_section(commit_list, chore_regex, repo)
+            if sec != '\n':
+                release_info = release_info + '### Chores\n\n' + sec
         if refactor == 1:
-            release_info = release_info + '### Refactors\n\n' + generate_section(
-                commit_list, refactor_regex, repo)
+            sec = generate_section(commit_list, refactor_regex, repo)
+            if sec != '\n':
+                release_info = release_info + '### Refactors\n\n' + sec
         if perf == 1:
-            release_info = release_info + '### Performance Improvements\n\n' + generate_section(
-                commit_list, perf_regex, repo)
+            sec = generate_section(commit_list, perf_regex, repo)
+            if sec != '\n':
+                release_info = release_info + '### Performance Improvements\n\n' + sec
         info_list.append(release_info)
     for j in reversed(info_list):
         CHANGELOG = CHANGELOG + j

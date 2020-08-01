@@ -300,8 +300,7 @@ def write_changelog(repo, changelog, path, commit_message):
         commit_message (string): commit message
     '''
     contents = repo.get_contents(path)
-    text = changelog
-    repo.update_file(contents.path, commit_message, text, contents.sha)
+    repo.update_file(contents.path, commit_message, changelog, contents.sha)
 
 
 def main():

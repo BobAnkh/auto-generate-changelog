@@ -45,9 +45,9 @@ jobs:
 >
 > NOTE: commit log begins with `docs(changelog)` or `doc(CHANGELOG)` will not be added to the CHANGELOG
 
-### Parameters
+### Inputs
 
-| Parameter | Description | Required | Default |
+| Inputs | Description | Required | Default |
 | --- | --- | --- | --- |
 | REPO_NAME| Repository name | yes | - |
 | ACCESS_TOKEN | Github Access Token | yes | You can just pass `${{secrets.GITHUB_TOKEN}}` |

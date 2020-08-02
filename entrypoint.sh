@@ -4,9 +4,9 @@
  # @Github: https://github.com/BobAnkh
  # @Date: 2020-07-29 23:47:02
  # @LastEditors: BobAnkh
- # @LastEditTime: 2020-08-02 22:29:08
+ # @LastEditTime: 2020-08-02 22:33:55
  # @FilePath: /auto-generate-changelog/entrypoint.sh
- # @Description: 
+ # @Description: Entrypoint of Github Action
  # @Copyright 2020 BobAnkh
 ### 
 

@@ -8,7 +8,9 @@ We adopt a series of automation tools to check, contributions not following the 
 
 Here are the contributing conventions we'd like you to follow:
 
-## About Commit
+## Style Guide
+
+### Commit Message Convention
 
 Each commit should contain relatively independent change (that is, a hodgepodge of multiple types of modifications is not allowed to be submitted in one commit), and the specific changes need to be clarified in the message
 
@@ -34,7 +36,7 @@ Also, the `<header>` section(only contains one line) cannot be longer than 50 ch
 
 This allows the commit message to be easier to read on GitHub as well as in various git tools.
 
-### About `<header>` section
+#### About `<header>` Section
 
 The `<header>` section only contains one line and three fields(`<type>`, `<scope>` and `<subject>`) need to meet the requirements:
 
@@ -61,7 +63,7 @@ The `<scope>` section mainly describes the influence scope of this commit, usual
 
 The `<subject>` section mainly summarizes the purpose and changes of this commit. It should begin with verb and use the imperative, present tense. The first letter should be lowercase and have no dot(.) at the end
 
-### About `<body>` section
+#### About `<body>` Section
 
 The `<body>` section is the text section, which contains the detailed description of this commit. It should use the imperative, present tense
 
@@ -69,7 +71,7 @@ This section can be bypassed if the `<header>` section is enough to summarize th
 
 It is recommended to use the dashes(-) to create an unordered list, and it should explain what problem this commit solves, how to solve it, and whether other changes have been introduced (such as necessary document updates, etc.)
 
-### About `<footer>` section
+#### About `<footer>` Section
 
 The `<footer>` section is bypassed except 2 situations:
 
@@ -77,7 +79,7 @@ One is breaking change, that is, the current version is not compatible with the 
 
 The other is to reference GitHub issues that this commit closes. Use format `Closes #123, #456` to close one or more issues
 
-### Commit Message Examples
+#### Commit Message Examples
 
 Here are some examples of commit message:
 
@@ -115,9 +117,9 @@ docs(ls.md): fix a typo
 Closes #456
 ```
 
-## About Pull Request
+### About Pull Request
 
-### About Pull Request's branch
+#### Branch Convention
 
 You need to submit a Pull Request (PR) from a new branch with a name related to the changes. Pull Request from master branch will be rejected. This is because when you open a Pull Request from a branch, you can still update the Pull Request by committing and pushing to the branch
 
@@ -128,7 +130,7 @@ As for this project, the branch name of the Pull Request should follow the conve
 - If it is only a change to documentation, the branch name should begin with `docs/`, followed by the scope of documentation change, e.g. `docs/usage` for changing the documentation of usage
 - In other cases, please submit an issue to discuss with the maintainer first
 
-### About Pull Request's Description
+#### Convention of Pull Request Description
 
 Please follow [pull_request_template](.github/PULL_REQUEST_TEMPLATE.md) to describe the changes of the Pull Request so that the reviewers can understand your changes more clearly. This part cannot be empty
 
@@ -154,22 +156,22 @@ Use `rebase` method or `pull --rebase` method to update your branch so as to mak
 
 The project has configured several automation check tools. Please wait a moment after your Pull Request submitted and deal with some issues according to the comments and details of check tools
 
-## Conventions for files of different languages
+### Language Style
 
 Files of different languages should be checked locally according to the following conventions
 
 Commits should be made after all checks pass
 
-### Markdown
+#### Markdown
 
 Use markdownlint to check, configuration can see [.markdownlint.json](/.markdownlint.json)
 
-### Python
+#### Python
 
 Use flake8 default configuration to check and use yapf default configuration to format
 
 Adopt Google's style for comments. Recommended to use vscode extension `Python Docstring Generator` to assist with.
 
-### Shell
+#### Shell
 
 Use shellcheck default configuration to check

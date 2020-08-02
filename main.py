@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+'''
+Author: BobAnkh
+Github: https://github.com/BobAnkh
+Date: 2020-08-01 10:11:31
+LastEditors: BobAnkh
+LastEditTime: 2020-08-02 22:27:29
+FilePath: /auto-generate-changelog/main.py
+Description: 
+Copyright 2020 BobAnkh
+'''
 from github import Github
 import re
 import os

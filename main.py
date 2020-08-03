@@ -5,21 +5,22 @@ Author: BobAnkh
 Github: https://github.com/BobAnkh
 Date: 2020-08-01 10:11:31
 LastEditors: BobAnkh
-LastEditTime: 2020-08-02 22:34:11
+LastEditTime: 2020-08-03 09:40:21
 FilePath: /auto-generate-changelog/main.py
 Description: Main script of Github Action
 Copyright 2020 BobAnkh
 '''
-from github import Github
-import re
 import os
+import re
 import shlex
 import subprocess
+
+from github import Github
 
 
 def github_login(ACCESS_TOKEN, REPO_NAME):
     '''
-    Use Pygithub to login to the repository
+    Use PyGithub to login to the repository
 
     Args:
         ACCESS_TOKEN (string): github Access Token
@@ -70,13 +71,10 @@ def strip_commits(commits, regex):
     scope_set = []
     for commit in commits:
         if re.match(regex, commit[1]):
-            pre = re.match(regex, commit[1]).group(0)
-            scope = re.search(r'\(.+\)', pre).group(0)[1:-1]
-            if scope.lower() == 'changelog' and regex == r'^docs\(.+\)':
+            scope = re.findall(regex, commit[1])[0]
+            if scope.lower() == 'changelog' and regex == r'^docs[(](.+?)[)]':
                 continue
-            subject = re.sub(regex + r':', '', commit[1])
-            if subject[0] == ' ':
-                subject = subject[1:]
+            subject = re.sub(regex + r'\s?:\s?', '', commit[1])
             scope_set.append(scope)
             commit.append(scope)
             commit.append(subject)
@@ -244,12 +242,12 @@ def generate_changelog(repo, parsed_releases, feat, fix, docs, chore, refactor,
     tags = get_tags()
     info_list = []
     CHANGELOG = '# CHANGELOG\n\n'
-    feat_regex = r'^feat\(.+\)'
-    fix_regex = r'^fix\(.+\)'
-    docs_regex = r'^docs\(.+\)'
-    chore_regex = r'^chore\(.+\)'
-    refactor_regex = r'^refactor\(.+\)'
-    perf_regex = r'^perf\(.+\)'
+    feat_regex = r'^feat[(](.+?)[)]'
+    fix_regex = r'^fix[(](.+?)[)]'
+    docs_regex = r'^docs[(](.+?)[)]'
+    chore_regex = r'^chore[(](.+?)[)]'
+    refactor_regex = r'^refactor[(](.+?)[)]'
+    perf_regex = r'^perf[(](.+?)[)]'
     for i in range(len(tags)):
         release_info = ''
         if i == 0:

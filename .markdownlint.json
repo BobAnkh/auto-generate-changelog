@@ -5,6 +5,7 @@
     "MD010": { "code_blocks": false},
     "MD013": false,
     "MD014": false,
+    "MD024": false,
     "MD026": { "punctuation": ".,;。，；"},
     "MD033": false
 }

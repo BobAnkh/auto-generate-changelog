@@ -5,7 +5,7 @@ cryptography==3.0
 Deprecated==1.2.10
 idna==2.10
 pycparser==2.20
-PyGithub==1.51
+PyGithub==1.52
 PyJWT==1.7.1
 requests==2.24.0
 six==1.15.0

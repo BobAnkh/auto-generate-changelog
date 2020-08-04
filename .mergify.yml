@@ -75,7 +75,7 @@ pull_request_rules:
           Please check [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) for more information.
   - name: branch name check comment
     conditions:
-      - "-head~=^(master|develop|((dependabot|chore|docs|LinuxCommand|LinuxTool|feature|feat|fix|refactor|style|test|build|release)\/[a-zA-Z0-9-_\/]{1,64}))$"
+      - "-head~=^(master|develop|((dependabot|chore|docs|LinuxCommand|LinuxTool|feature|feat|fix|refactor|style|test|build|release)\/.{1,64}))$"
       - "-closed"
       - "-merged"
     actions:

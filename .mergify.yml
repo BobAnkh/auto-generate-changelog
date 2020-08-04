@@ -8,7 +8,7 @@ pull_request_rules:
       comment:
         message: |
           Thanks for opening this pull request! 
-          Please check out the [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md).
+          Please check out the [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md).
   - name: Assign author
     conditions:
       - "-closed"
@@ -72,7 +72,7 @@ pull_request_rules:
         message: |
           @{{author}}
           Wrong PR Title: {{title}}
-          Please check [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md) for more information.
+          Please check [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) for more information.
   - name: branch name check comment
     conditions:
       - "-head~=^(master|develop|((dependabot|chore|docs|LinuxCommand|LinuxTool|feature|feat|fix|refactor|style|test|build|release)\/[a-zA-Z0-9-_\/]{1,64}))$"
@@ -83,7 +83,7 @@ pull_request_rules:
         message: |
           @{{author}}
           Wrong branch name: {{head}}
-          Please check details and [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md) for more information.
+          Please check details and [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) for more information.
           This Pull Request will be closed.
       label:
         add:
@@ -99,7 +99,7 @@ pull_request_rules:
         message: |
           @{{author}}
           Contribution Message Convention Tests failed with GitMagic.
-          Please check details and [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md) for more information.
+          Please check details and [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) for more information.
   - name: markdownlint check comment
     conditions:
       - "status-failure=markdownlint-cli-check"
@@ -110,7 +110,7 @@ pull_request_rules:
         message: |
           @{{author}}
           Markdown Files Check failed with markdownlint.
-          Please check details or [Contributing Guidelines](https://github.com/BobAnkh/LinuxBeginner/blob/master/CONTRIBUTING.md) for more information.
+          Please check details or [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) for more information.
   - name: conflict comment
     conditions:
       - "-closed"

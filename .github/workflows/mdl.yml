@@ -11,8 +11,6 @@ jobs:
       - uses: nosborn/github-action-markdown-cli@v1.1.1
         with:
           config_file: .markdownlint.json
-          files: | 
-            docs/LinuxCommand  
-            docs/LinuxTool
+          files: .
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

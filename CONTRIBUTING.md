@@ -170,7 +170,9 @@ Use markdownlint to check, configuration can see [.markdownlint.json](/.markdown
 
 Use flake8 default configuration to check and use yapf default configuration to format
 
-Adopt Google's style for comments. Recommended to use vscode extension `Python Docstring Generator` to assist with.
+Adopt Google's style for comments. Recommended to use vscode extension `Python Docstring Generator` to assist with
+
+We use `Pytest` for test. Just execute command `pytest -vv` under root directory to run all the test. Please add new tests if you add new features and make sure to pass all the tests locally
 
 #### Shell
 

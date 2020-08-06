@@ -9,7 +9,8 @@
         "subject_must_be_in_tense": "imperative",
         "subject_must_not_end_with_dot": true,
         "subject_must_include_prefix": {
-            "prefixes": ["feat", "fix", "docs", "refactor", "feature", "style", "test", "chore", "revert", "Revert", "revert"]
+            "prefixes": ["feat", "fix", "docs", "refactor", "style", "test", "chore", "revert", "Revert", "build"],
+            "require_after_prefix": "(*): "
         },
         "body_lines_must_be_shorter_than": 73
     },
@@ -20,7 +21,8 @@
         "subject_must_be_in_tense": "imperative",
         "subject_must_not_end_with_dot": true,
         "subject_must_include_prefix": {
-            "prefixes": ["feat", "fix", "docs", "refactor", "feature", "style", "test", "chore", "revert", "build", "ci", "perf", "Revert", "LinuxCommand", "LinuxTool"]
+            "prefixes": ["feature", "fix", "docs", "refactor", "style", "test", "chore", "build", "ci", "perf"],
+            "require_after_prefix": "(*): "
         },
         "body_cannot_be_empty": true,
         "body_must_include_screenshot": [
@@ -35,5 +37,18 @@
         "body_cannot_be_empty": true,
         "body_must_include_reproduction_steps": [
             "bug"]
+    },
+    "branch": {
+        "name_must_be_in_set": {
+            "set": "alphanumeric",
+            "ignore": ["/", " ", "-"]
+        },
+        "name_must_be_longer_than": 4,
+        "name_must_be_shorter_than": 128,
+        "name_must_include_prefix": {
+            "prefixes": ["feature", "fix", "docs", "refactor", "dependabot", "chore", "release", "build", "test", "style"],
+            "require_after_prefix": "/",
+            "ignore": ["master", "dev"]
+        }
     }
 }

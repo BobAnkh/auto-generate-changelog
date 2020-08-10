@@ -4,9 +4,9 @@
 Author: BobAnkh
 Github: https://github.com/BobAnkh
 Date: 2020-08-01 10:11:31
-LastEditors: BobAnkh
-LastEditTime: 2020-08-05 23:38:57
-FilePath: /auto-generate-changelog/main.py
+LastEditors  : BobAnkh
+LastEditTime : 2020-08-10 11:55:49
+FilePath     : /auto-generate-changelog/main.py
 Description: Main script of Github Action
 Copyright 2020 BobAnkh
 '''
@@ -216,8 +216,7 @@ def generate_section(commit_list, type_regex, repo):
                 for pr_link in prs:
                     scope_content = scope_content + pr_link
                 scope_content = scope_content + '\n'
-        section = section + scope_content
-    section = section + '\n'
+        section = section + scope_content + '\n'
     return section
 
 

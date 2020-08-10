@@ -134,7 +134,7 @@ As for this project, the branch name of the Pull Request should follow the conve
 
 Please follow [pull_request_template](.github/PULL_REQUEST_TEMPLATE.md) to describe the changes of the Pull Request so that the reviewers can understand your changes more clearly. This part cannot be empty
 
-**If it is for a new feature, the title of the Pull Request should begin with `feature(<Your-New-Feature>):`. If it is for a bug fix, the title should begin with `fix(<Your-Bugfix-Feature>)`. If it is for documentation changes, the title should begin with `docs(<Your-Documentation-change-scope>)`**
+If it is for a new feature, **the title of the Pull Request** should begin with **`feature(<Your-New-Feature>):`**. If it is for a bug fix, the title should begin with **`fix(<Your-Bugfix-Feature>)`**. If it is for documentation changes, the title should begin with **`docs(<Your-Documentation-change-scope>)`**
 
 Motivation of this Pull Request(e.g. what problem is solved and what feature is optimized) should be clarified in the description. What feature has been implemented in this Pull Request should be described in details and the technology stack of this feature should also be introduced. Other necessary changes (e.g. relevant documentation update) also need to be declared in the description
 

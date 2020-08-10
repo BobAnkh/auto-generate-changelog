@@ -6,6 +6,22 @@ Changes unreleased
 
 ### Features
 
+### Bug Fixes
+
+### Documentation Changes
+
+### Chores
+
+### Refactors
+
+### Performance Improvements
+
+## [v0.0.3](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v0.0.3) - 2020-08-10 08:02:40
+
+See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CHANGELOG.md) for changes
+
+### Features
+
 - dockerfile:
   - avoid additional update ([c1346a9](https://github.com/BobAnkh/auto-generate-changelog/commit/c1346a99d527744b6464960f1ade9f384bc61a31))
 
@@ -46,11 +62,11 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 
 ### Bug Fixes
 
-- dockerfile:
-  - use chmod to deal with ... ([6089466](https://github.com/BobAnkh/auto-generate-changelog/commit/60894669e73d634d84aab1aee79476406ec60d45))
-
 - main:
   - deal with DeprecationWarning ([50cfdf3](https://github.com/BobAnkh/auto-generate-changelog/commit/50cfdf32ec07b81d3140b9a06fd5275fc69f8f7b))
+
+- dockerfile:
+  - use chmod to deal with ... ([6089466](https://github.com/BobAnkh/auto-generate-changelog/commit/60894669e73d634d84aab1aee79476406ec60d45))
 
 ### Documentation Changes
 
@@ -65,32 +81,32 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 
 ### Chores
 
-- mdl:
-  - ignore md024 and code_of_conduct ([e19c0ff](https://github.com/BobAnkh/auto-generate-changelog/commit/e19c0ffcdfb553b8bb0286f8a9ee5969661638a1))
-
 - pytest:
   - change name ([21ff26b](https://github.com/BobAnkh/auto-generate-changelog/commit/21ff26b0075845f116dfdd9c87d5a3c89fda8660))
   - change to self-written one ([dd85763](https://github.com/BobAnkh/auto-generate-changelog/commit/dd857636e1362f78aa436f8fb75886ce2f5ba54b))
   - install requirements ([4cf8e46](https://github.com/BobAnkh/auto-generate-changelog/commit/4cf8e46a803f8f6180691b0fd7ccf68343e7e161))
   - add pytest to python convention ([97aec2b](https://github.com/BobAnkh/auto-generate-changelog/commit/97aec2b5464db1b442b85e050f94b29f0261e7fe))
 
-- mergify:
-  - fix a typo ([997b3c8](https://github.com/BobAnkh/auto-generate-changelog/commit/997b3c8d4f5e5253bba0d0eecbab4b6fb6e92768))
-
-- deps:
-  - bump pygithub from 1.51 to 1.52 ([33e6b99](https://github.com/BobAnkh/auto-generate-changelog/commit/33e6b99411852635a61175950d6a6d59545c9f3c)) ([#2](https://github.com/BobAnkh/auto-generate-changelog/pull/2))
+- gitigore:
+  - ignore python-related files ([94e29d3](https://github.com/BobAnkh/auto-generate-changelog/commit/94e29d3fd772cc3787143196ed0f7b62490846b3))
 
 - template:
   - update template style ([ec67d8b](https://github.com/BobAnkh/auto-generate-changelog/commit/ec67d8bef6350d79fed18423eb85364c7a5ff1ec))
 
-- gitigore:
-  - ignore python-related files ([94e29d3](https://github.com/BobAnkh/auto-generate-changelog/commit/94e29d3fd772cc3787143196ed0f7b62490846b3))
-
-- gitmagic:
-  - update rules ([82d2f10](https://github.com/BobAnkh/auto-generate-changelog/commit/82d2f10cf6035218e2f0898be3e09fdb41b2d144))
+- mergify:
+  - fix a typo ([997b3c8](https://github.com/BobAnkh/auto-generate-changelog/commit/997b3c8d4f5e5253bba0d0eecbab4b6fb6e92768))
 
 - *:
   - fix some typos ([e217912](https://github.com/BobAnkh/auto-generate-changelog/commit/e217912f5738c8a9e7c0a7fbd2c37e546d07a4ce))
+
+- deps:
+  - bump pygithub from 1.51 to 1.52 ([33e6b99](https://github.com/BobAnkh/auto-generate-changelog/commit/33e6b99411852635a61175950d6a6d59545c9f3c)) ([#2](https://github.com/BobAnkh/auto-generate-changelog/pull/2))
+
+- mdl:
+  - ignore md024 and code_of_conduct ([e19c0ff](https://github.com/BobAnkh/auto-generate-changelog/commit/e19c0ffcdfb553b8bb0286f8a9ee5969661638a1))
+
+- gitmagic:
+  - update rules ([82d2f10](https://github.com/BobAnkh/auto-generate-changelog/commit/82d2f10cf6035218e2f0898be3e09fdb41b2d144))
 
 ### Refactors
 
@@ -142,11 +158,11 @@ See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/C
 - *:
   - add basic ci tools ([e7301db](https://github.com/BobAnkh/auto-generate-changelog/commit/e7301db4ac79b7b193c7c8be39c30b1377e25c80))
 
-- changelog:
-  - change trigger-event to release ([7cb0ddd](https://github.com/BobAnkh/auto-generate-changelog/commit/7cb0ddd983b22bd87ba319636910cd9a5a4662f0))
-
 - CHANGELOG:
   - update config ([627e8f4](https://github.com/BobAnkh/auto-generate-changelog/commit/627e8f4e5ca648803e2045bb8b7bef70bb786ed2))
+
+- changelog:
+  - change trigger-event to release ([7cb0ddd](https://github.com/BobAnkh/auto-generate-changelog/commit/7cb0ddd983b22bd87ba319636910cd9a5a4662f0))
 
 ### Refactors
 

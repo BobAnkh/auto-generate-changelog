@@ -2,9 +2,9 @@ name: Generate changelog
 on:
   release:
     types: [created, edited]
-# push:
-#   branches:
-#     - master
+  push:
+    branches:
+      - master
 
 jobs:
   generate-changelog:

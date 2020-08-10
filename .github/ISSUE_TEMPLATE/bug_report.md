@@ -13,7 +13,7 @@ A clear and concise description of what the bug is.
 
 ## To Reproduce
 
-[**NOTE**:Self-contained, minimal reproducing samples are extremely helpful and will expedite addressing your issue]
+> **NOTE**:Self-contained, minimal reproducing samples are extremely helpful and will expedite addressing your issue
 
 Steps to reproduce the behavior:
 
@@ -33,10 +33,10 @@ If applicable, add screenshots to help explain your problem.
 ## Environment
 <!--- Please provide the necessary environment information -->
 
-- Device: [e.g. iPhone6]
-- OS: [e.g. Ubuntu 18.04LTS]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
+- Device: \[e.g. iPhone6]
+- OS: \[e.g. Ubuntu 18.04LTS]
+- Browser \[e.g. chrome, safari]
+- Version \[e.g. 22]
 
 ## Additional context
 

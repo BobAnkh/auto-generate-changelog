@@ -8,13 +8,13 @@
 <!--- Tasklist format is recommended for all pull requests and is required for all draft pull requests. You can couple your description with the tasklist -->
 <!--- If it fixes an open issue, please link to the issue here in the last line. -->
 
-## How Has This Been Tested?
+## How Has This Been Tested
 <!--- Please describe in detail how you tested your changes locally -->
 <!--- Include details of your testing environment, and the tests you ran to -->
 <!--- For example, markdown files should pass markdownlint locally according to the rules -->
 <!--- See how your change affects other areas of the code, etc. -->
 
-## Screenshots (optional):
+## Screenshots(optional)
 <!--- If Screenshots is not necessary or not available in this pull request, you can delete this section -->
 <!--- Changes including html and css are required to have screenshots -->
 
@@ -29,7 +29,7 @@
 - Refactoring (no functional changes, no api changes)
 - Other (please describe here):
 
-## Checklist:
+## Checklist
 <!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
 - [ ] Code follows the code style of this project.

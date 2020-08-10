@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''
-Author       : BobAnkh
-Github       : https://github.com/BobAnkh
-Date         : 2020-08-01 10:11:31
-LastEditors  : BobAnkh
-LastEditTime : 2020-08-10 13:00:30
-FilePath     : /auto-generate-changelog/main.py
-Description  : Main script of Github Action
-Copyright 2020 BobAnkh
-'''
+# @Author       : BobAnkh
+# @Github       : https://github.com/BobAnkh
+# @Date         : 2020-08-06 10:48:37
+# @LastEditors  : BobAnkh
+# @LastEditTime : 2020-08-10 14:56:29
+# @FilePath     : /auto-generate-changelog/main.py
+# @Description  : Main script of Github Action
+# @Copyright 2020 BobAnkh
+
 import os
 import re
 import shlex

@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''
-Author       : BobAnkh
-Github       : https://github.com/BobAnkh
-Date         : 2020-08-05 23:12:39
-LastEditors  : BobAnkh
-LastEditTime : 2020-08-10 13:00:58
-FilePath     : /auto-generate-changelog/tests/test_main.py
-Description  : Test main.py
-Copyright 2020 BobAnkh
-'''
+# @Author       : BobAnkh
+# @Github       : https://github.com/BobAnkh
+# @Date         : 2020-08-05 23:12:39
+# @LastEditors  : BobAnkh
+# @LastEditTime : 2020-08-10 14:55:27
+# @FilePath     : /auto-generate-changelog/tests/test_main.py
+# @Description  : Tests for main.py
+# @Copyright 2020 BobAnkh
+
 import os
 import sys
 

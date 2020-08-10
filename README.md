@@ -47,18 +47,18 @@ jobs:
 
 ### Inputs
 
-| Inputs | Description | Required | Default |
-| --- | --- | --- | --- |
-| REPO_NAME| Repository name | yes | - |
-| ACCESS_TOKEN | Github Access Token | yes | You can just pass `${{secrets.GITHUB_TOKEN}}` |
-| PATH | Path to the file you want to add contributors' list | no | `/CHANGELOG.md` |
-| COMMIT_MESSAGE | commit message | no | `docs(CHANGELOG): update release notes` |
-| FEAT | Set 1 to generate it | no | `1` |
-| FIX | Set 1 to generate it | no | `1` |
-| DOCS | Set 1 to generate it | no | `1` |
-| CHORE | Set 1 to generate it | no | `1` |
-| REFACTOR | Set 1 to generate it | no | `1` |
-| PERF | Set 1 to generate it | no | `1` |
+| Inputs         | Description           | Required | Default                                       |
+| -------------- | --------------------- | -------- | --------------------------------------------- |
+| REPO_NAME      | Repository name       | yes      | -                                             |
+| ACCESS_TOKEN   | Github Access Token   | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}` |
+| PATH           | Path to the your file | no       | `/CHANGELOG.md`                               |
+| COMMIT_MESSAGE | commit message        | no       | `docs(CHANGELOG): update release notes`       |
+| FEAT           | Set 1 to generate it  | no       | `1`                                           |
+| FIX            | Set 1 to generate it  | no       | `1`                                           |
+| DOCS           | Set 1 to generate it  | no       | `1`                                           |
+| CHORE          | Set 1 to generate it  | no       | `1`                                           |
+| REFACTOR       | Set 1 to generate it  | no       | `1`                                           |
+| PERF           | Set 1 to generate it  | no       | `1`                                           |
 
 ## Maintainer
 

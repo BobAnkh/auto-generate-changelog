@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 '''
-Author: BobAnkh
-Github: https://github.com/BobAnkh
-Date: 2020-08-01 10:11:31
+Author       : BobAnkh
+Github       : https://github.com/BobAnkh
+Date         : 2020-08-01 10:11:31
 LastEditors  : BobAnkh
-LastEditTime : 2020-08-10 11:55:49
+LastEditTime : 2020-08-10 13:00:30
 FilePath     : /auto-generate-changelog/main.py
-Description: Main script of Github Action
+Description  : Main script of Github Action
 Copyright 2020 BobAnkh
 '''
 import os
@@ -119,10 +120,10 @@ def get_commit_log_between_versions(previous_version, later_version, flag):
     output = output_bytes.decode('utf-8')
     output = output.split('\n')
     output_list = []
-    for i in range(len(output)):
+    for item in output:
         tmp = []
-        tmp.append(output[i][0:40])
-        tmp.append(output[i][41:])
+        tmp.append(item[0:40])
+        tmp.append(item[41:])
         output_list.append(tmp)
     return output_list
 
@@ -247,7 +248,7 @@ def generate_changelog(repo, parsed_releases, feat, fix, docs, chore, refactor,
     chore_regex = r'^chore[(](.+?)[)]'
     refactor_regex = r'^refactor[(](.+?)[)]'
     perf_regex = r'^perf[(](.+?)[)]'
-    for i in range(len(tags)):
+    for i, _ in enumerate(tags):
         release_info = ''
         if i == 0:
             commit_list = get_commit_log_between_versions(tags[i], tags[i], 0)

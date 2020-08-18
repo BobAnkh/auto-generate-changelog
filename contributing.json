@@ -41,7 +41,7 @@
     "branch": {
         "name_must_be_in_set": {
             "set": "alphanumeric",
-            "ignore": ["/", " ", "-"]
+            "ignore": ["/", " ", "-", "."]
         },
         "name_must_be_longer_than": 4,
         "name_must_be_shorter_than": 128,

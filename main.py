@@ -5,7 +5,7 @@
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
 # @LastEditors  : BobAnkh
-# @LastEditTime : 2020-08-10 14:56:29
+# @LastEditTime : 2020-09-05 19:59:38
 # @FilePath     : /auto-generate-changelog/main.py
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
@@ -220,20 +220,60 @@ def generate_section(commit_list, type_regex, repo):
     return section
 
 
-def generate_changelog(repo, parsed_releases, feat, fix, docs, chore, refactor,
-                       perf):
+def generate_release_body(commit_list, repo, regex_list, part_name_dict):
+    '''
+    Generate release body using part_name_dict and regex_list
+
+    Args:
+        commit_list (list): commits
+        repo (github.Repository.Repository): object represents the repo
+        regex_list (list): list of regex
+        part_name_dict (dict): a dict of part_name and its flag
+
+    Returns:
+        string: body part of release info
+    '''
+    release_body = ''
+    for i, name in enumerate(part_name_dict.keys()):
+        if part_name_dict[name] == 1:
+            sec = generate_section(commit_list, regex_list[i], repo)
+            if sec != '':
+                release_body = release_body + '### ' + name + '\n\n' + sec
+    return release_body
+
+
+def generate_part_name_dict():
+    '''
+    Generate part name dictionary
+
+    Returns:
+        dict: {part_name:flag} flag is 1 means to generate this part
+    '''
+    part_name_dict = {
+        'Features': 1,
+        'Bug Fixes': 1,
+        'Documentation Changes': 1,
+        'Chores': 1,
+        'Refactor': 1,
+        'Performance Improvements': 1
+    }
+    part_name_dict['Features'] = int(get_inputs('FEAT'))
+    part_name_dict['Bug Fixes'] = int(get_inputs('FIX'))
+    part_name_dict['Documentation Changes'] = int(get_inputs('DOCS'))
+    part_name_dict['Chores'] = int(get_inputs('CHORE'))
+    part_name_dict['Refactor'] = int(get_inputs('REFACTOR'))
+    part_name_dict['Performance Improvements'] = int(get_inputs('PERF'))
+    return part_name_dict
+
+
+def generate_changelog(repo, parsed_releases, part_name_dict):
     '''
     Generate CHANGELOG
 
     Args:
         repo (github.Repository.Repository): object represents the repo
         parsed_releases (list): releases' information
-        feat (string): set to 1 to generate it
-        fix (string): set to 1 to generate it
-        docs (string): set to 1 to generate it
-        chore (string): set to 1 to generate it
-        refactor (string): set to 1 to generate it
-        perf (string): set to 1 to generate it
+        part_name_dict (dict): a dict of part_name and its flag
 
     Returns:
         string: content of CHANGELOG
@@ -241,12 +281,10 @@ def generate_changelog(repo, parsed_releases, feat, fix, docs, chore, refactor,
     tags = get_tags()
     info_list = []
     CHANGELOG = '# CHANGELOG\n\n'
-    feat_regex = r'^feat[(](.+?)[)]'
-    fix_regex = r'^fix[(](.+?)[)]'
-    docs_regex = r'^docs[(](.+?)[)]'
-    chore_regex = r'^chore[(](.+?)[)]'
-    refactor_regex = r'^refactor[(](.+?)[)]'
-    perf_regex = r'^perf[(](.+?)[)]'
+    regex_list = [
+        r'^feat[(](.+?)[)]', r'^fix[(](.+?)[)]', r'^docs[(](.+?)[)]',
+        r'^chore[(](.+?)[)]', r'^refactor[(](.+?)[)]', r'^perf[(](.+?)[)]'
+    ]
     for i, _ in enumerate(tags):
         release_info = ''
         if i == 0:
@@ -267,30 +305,8 @@ def generate_changelog(repo, parsed_releases, feat, fix, docs, chore, refactor,
                     date = release[3]
                     release_info = f'''## [{title}]({url}) - {date}\n\n{description}\n\n'''
                     break
-        if feat == 1:
-            sec = generate_section(commit_list, feat_regex, repo)
-            if sec != '\n':
-                release_info = release_info + '### Features\n\n' + sec
-        if fix == 1:
-            sec = generate_section(commit_list, fix_regex, repo)
-            if sec != '\n':
-                release_info = release_info + '### Bug Fixes\n\n' + sec
-        if docs == 1:
-            sec = generate_section(commit_list, docs_regex, repo)
-            if sec != '\n':
-                release_info = release_info + '### Documentation Changes\n\n' + sec
-        if chore == 1:
-            sec = generate_section(commit_list, chore_regex, repo)
-            if sec != '\n':
-                release_info = release_info + '### Chores\n\n' + sec
-        if refactor == 1:
-            sec = generate_section(commit_list, refactor_regex, repo)
-            if sec != '\n':
-                release_info = release_info + '### Refactors\n\n' + sec
-        if perf == 1:
-            sec = generate_section(commit_list, perf_regex, repo)
-            if sec != '\n':
-                release_info = release_info + '### Performance Improvements\n\n' + sec
+        release_body = generate_release_body(commit_list, repo, regex_list, part_name_dict)
+        release_info = release_info + release_body
         info_list.append(release_info)
     for j in reversed(info_list):
         CHANGELOG = CHANGELOG + j
@@ -318,17 +334,10 @@ def main():
     REPO_NAME = get_inputs('REPO_NAME')
     PATH = get_inputs('PATH')
     COMMIT_MESSAGE = get_inputs('COMMIT_MESSAGE')
-    FEAT = int(get_inputs('FEAT'))
-    FIX = int(get_inputs('FIX'))
-    DOCS = int(get_inputs('DOCS'))
-    CHORE = int(get_inputs('CHORE'))
-    REFACTOR = int(get_inputs('REFACTOR'))
-    PERF = int(get_inputs('PERF'))
-
+    part_name_dict = generate_part_name_dict()
     repo = github_login(ACCESS_TOKEN, REPO_NAME)
     parsed_releases = parse_releases(repo)
-    CHANGELOG = generate_changelog(repo, parsed_releases, FEAT, FIX, DOCS,
-                                   CHORE, REFACTOR, PERF)
+    CHANGELOG = generate_changelog(repo, parsed_releases, part_name_dict)
     write_changelog(repo, CHANGELOG, PATH, COMMIT_MESSAGE)
 
 

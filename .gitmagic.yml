@@ -1,0 +1,57 @@
+pr:
+  - rules:
+      - title.eq./^((fix|feat|feature|docs|refactor|style|test|chore|build|perf|ci|revert|Revert|Merge|merge)\(.+\):)|((revert|Revert|Merge|merge):)/
+    message: "{{type}} title must use proper `<type>` or `<scope>`."
+  - conditions:
+    - owner.ne.dependabot
+    rules:
+      - tense.eq.imperative
+    message: "{{type}} title must use imperative form - e.g. Add, Fix etc"
+  - conditions:
+      - branch.ne.dev
+      - branch.ne.master
+      - branch.ne.develop
+    rules:
+      - branch.eq./^(fix|feat|feature|docs|refactor|style|test|chore|build|perf|ci)\/.+/
+    message: "Branch name must have a proper prefix."
+  - rules:
+      - commitTitles.eq./^((fix|feat|docs|refactor|style|test|chore|build|perf|ci|revert|Revert|Merge|merge)\(.+\):)|((revert|Revert|Merge|merge):)/
+    message: "`<header>` of commit message must use proper `<type>` or `<scope>`."
+  - conditions:
+      - owner.ne.dependabot
+    rules:
+      - commitTitles.gt.4
+      - commitTitles.lt.51
+    message: "`<header>` of commit message needs to be between 5 and 50 characters long"
+  - conditions:
+    - owner.ne.dependabot
+    rules:
+      - commitTenses.eq.imperative
+    message: "Commit message must use imperative form - e.g. Add, Fix etc"
+  - conditions:
+    - owner.ne.dependabot
+    rules:
+      - commitBodies.gt.4
+      - commitBodies.lt.73
+    message: "Each line in `<body>` of commit message needs to be between 5 and 72 characters long"
+
+
+issue:
+  - conditions:
+      - labels.eq.bug
+    rules:
+      - body.eq./reproduction|reproduce/i
+    message: |
+      As you have added a bug label please add your reproduction steps in the body using one of:
+      * reproduction steps
+      * to reproduce
+
+settings:
+  header: |
+    @{{sender}} - Your {{type}} does not follow our contribution guidelines. Please review the following issues and update.
+    
+  footer: |
+    
+    If you have any questions, please refer to our [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) or ask us here.
+    
+    Thanks

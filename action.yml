@@ -19,30 +19,10 @@ inputs:
     description: "Commit message"
     required: false
     default: 'docs(CHANGELOG): update release notes'
-  FEAT:
-    description: "Set 1 to generate it"
+  TYPE:
+    description: "The type of commits you want to add to CHANGELOG"
     required: false
-    default: '1'
-  FIX:
-    description: "Set 1 to generate it"
-    required: false
-    default: '1'
-  DOCS:
-    description: "Set 1 to generate it"
-    required: false
-    default: '1'
-  CHORE:
-    description: "Set 1 to generate it"
-    required: false
-    default: '1'
-  REFACTOR:
-    description: "Set 1 to generate it"
-    required: false
-    default: '1'
-  PERF:
-    description: "Set 1 to generate it"
-    required: false
-    default: '1'
+    default: 'feat:Feature,fix:Fix'
 runs:
   using: "docker"
   image: "Dockerfile"

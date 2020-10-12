@@ -117,11 +117,15 @@ docs(ls.md): fix a typo
 Closes #456
 ```
 
-### About Pull Request
+### Pull Request Convention
 
-#### Branch Convention
+> **NOTE**: Use `rebase` method or `pull --rebase` method to update your branch so as to make the commit history clean.
 
-You need to submit a Pull Request (PR) from a new branch with a name related to the changes. Pull Request from master branch will be rejected. This is because when you open a Pull Request from a branch, you can still update the Pull Request by committing and pushing to the branch
+The project has configured several automation check tools. Please wait a moment after your Pull Request submitted and deal with some issues according to the comments and details of check tools.
+
+#### Branch Name
+
+You are recommended to submit a Pull Request (PR) from a new branch with a name related to the changes. **Pull Request from master branch may cause trouble to your future work**. This is because when you open a Pull Request from a branch, you can still update the Pull Request by committing and pushing to the branch. And your master branch can be used to track the latest changes.
 
 As for this project, the branch name of the Pull Request should follow the conventions below:
 
@@ -130,15 +134,23 @@ As for this project, the branch name of the Pull Request should follow the conve
 - If it is only a change to documentation, the branch name should begin with `docs/`, followed by the scope of documentation change, e.g. `docs/usage` for changing the documentation of usage
 - In other cases, please submit an issue to discuss with the maintainer first
 
-#### Convention of Pull Request Description
+#### Title of Pull Request
 
-Please follow [pull_request_template](.github/PULL_REQUEST_TEMPLATE.md) to describe the changes of the Pull Request so that the reviewers can understand your changes more clearly. This part cannot be empty
+The title of the Pull Request should summarize the changes. It should begin with type that represents the changes. Here are some examples:
 
-If it is for a new feature, **the title of the Pull Request** should begin with **`feature(<Your-New-Feature>):`**. If it is for a bug fix, the title should begin with **`fix(<Your-Bugfix-Feature>)`**. If it is for documentation changes, the title should begin with **`docs(<Your-Documentation-change-scope>)`**
+For a new feature, the title should begin with **`feature(<Your-New-Feature>):`**
 
-Motivation of this Pull Request(e.g. what problem is solved and what feature is optimized) should be clarified in the description. What feature has been implemented in this Pull Request should be described in details and the technology stack of this feature should also be introduced. Other necessary changes (e.g. relevant documentation update) also need to be declared in the description
+For a bug fix, the title should begin with **`fix(<Your-Bugfix-Feature>)`**
 
-It is recommended to use `Tasklist` format in order to organize the description more clearly. Note that **any `draft pull request` must contain a `Tasklist` in the description** and update it when the development progresses
+For documentation changes, the title should begin with **`docs(<Your-Documentation-change-scope>)`**
+
+#### Description of Pull Request
+
+Please follow [pull_request_template](.github/PULL_REQUEST_TEMPLATE.md) to describe the changes of the Pull Request so that the reviewers can understand your changes more clearly. This part cannot be empty.
+
+Motivation of this Pull Request(e.g. what problem is solved and what feature is optimized) should be clarified in the description. What feature has been implemented in this Pull Request should be described in details and the technology stack of this feature should also be introduced. Other necessary changes (e.g. relevant documentation update) also need to be declared in the description.
+
+It is recommended to use `Tasklist` format to describe the steps or technology stack of the changes. Any `draft pull request` is recommended to contain a `Tasklist` in the description and update it when the development progresses.
 
 > Following is the Tasklist format:
 >
@@ -146,15 +158,9 @@ It is recommended to use `Tasklist` format in order to organize the description 
 >
 > [ ] This is what you plan to do and how you plan to achieve it.
 
-If this Pull Request fixes a issue, you should use the right format to link it in the description
+If this Pull Request fixes a issue, you should use the right format to link it in the description. You can use format like `Resolves: #123` or `Closes: #123` to close that issue when this Pull Request is merged and use format like `Ref: #123` just for reference.
 
-Besides, please make sure that your Pull Request is not a duplicate to any assigned issue or existing Pull Request. Screenshots are needed for changes to html files or css files
-
-It is also recommended to open a **issue** or **draft pull request** to discuss if you want to make feature changes (new feature or optimize existing feature)
-
-Use `rebase` method or `pull --rebase` method to update your branch so as to make the commit history clean
-
-The project has configured several automation check tools. Please wait a moment after your Pull Request submitted and deal with some issues according to the comments and details of check tools
+Besides, please make sure that your Pull Request is not a duplicate to any assigned issue or existing Pull Request. **Screenshots** are needed for changes to html files or css files
 
 ### Language Style
 
@@ -164,11 +170,11 @@ Commits should be made after all checks pass
 
 #### Markdown
 
-Use markdownlint to check, configuration can see [.markdownlint.json](/.markdownlint.json)
+Use `markdownlint` to check, configuration can see [.markdownlint.json](/.markdownlint.json)
 
 #### Python
 
-Use flake8 default configuration to check and use yapf default configuration to format
+Use `flake8` default configuration to check and use `yapf` default configuration to format
 
 Adopt Google's style for comments. Recommended to use vscode extension `Python Docstring Generator` to assist with
 
@@ -176,4 +182,4 @@ We use `Pytest` for test. Just execute command `pytest -vv` under root directory
 
 #### Shell
 
-Use shellcheck default configuration to check
+Use `shellcheck` default configuration to check

@@ -33,12 +33,7 @@ jobs:
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: '/CHANGELOG.md'
         COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
-        FEAT: '1'
-        FIX: '1'
-        DOCS: '1'
-        CHORE: '1'
-        REFACTOR: '1'
-        PERF: '1'
+        TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
 ```
 
 > NOTE: Generating CHANGELOG needs all the commit history so you should set `fetch-depth: 0` with `actions/checkout`
@@ -47,18 +42,17 @@ jobs:
 
 ### Inputs
 
-| Inputs         | Description           | Required | Default                                       |
-| -------------- | --------------------- | -------- | --------------------------------------------- |
-| REPO_NAME      | Repository name       | yes      | -                                             |
-| ACCESS_TOKEN   | Github Access Token   | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}` |
-| PATH           | Path to the your file | no       | `/CHANGELOG.md`                               |
-| COMMIT_MESSAGE | commit message        | no       | `docs(CHANGELOG): update release notes`       |
-| FEAT           | Set 1 to generate it  | no       | `1`                                           |
-| FIX            | Set 1 to generate it  | no       | `1`                                           |
-| DOCS           | Set 1 to generate it  | no       | `1`                                           |
-| CHORE          | Set 1 to generate it  | no       | `1`                                           |
-| REFACTOR       | Set 1 to generate it  | no       | `1`                                           |
-| PERF           | Set 1 to generate it  | no       | `1`                                           |
+| Inputs         | Description                                      | Required | Default                                       |
+| -------------- | ------------------------------------------------ | -------- | --------------------------------------------- |
+| REPO_NAME      | Repository name                                  | yes      | -                                             |
+| ACCESS_TOKEN   | Github Access Token                              | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}` |
+| PATH           | Path to the your file                            | no       | `/CHANGELOG.md`                               |
+| COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`       |
+| TYPE           | The type of commits you want to add to CHANGELOG | no       | 'feat:Feature,fix:Fix'                        |
+
+> You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`
+>
+> For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
 
 ## Maintainer
 

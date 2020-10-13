@@ -3,6 +3,8 @@ on:
   release:
     types: [created, edited]
   push:
+    branches: 
+      - master
   pull_request:
     branches: 
       - master
@@ -20,9 +22,4 @@ jobs:
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: '/CHANGELOG.md'
         COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
-        FEAT: '1'
-        FIX: '1'
-        DOCS: '1'
-        CHORE: '1'
-        REFACTOR: '1'
-        PERF: '1'
+        TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'

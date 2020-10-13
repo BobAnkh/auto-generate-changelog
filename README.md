@@ -1,8 +1,9 @@
 # auto-generate-changelog
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/47a06388ecd34ff5a1d623827d9bb659)](https://www.codacy.com/manual/bobankhshen/auto-generate-changelog/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BobAnkh/auto-generate-changelog&amp;utm_campaign=Badge_Grade)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/BobAnkh/auto-generate-changelog?color=orange&logo=github-actions)
 ![language-python](https://img.shields.io/github/languages/top/BobAnkh/auto-generate-changelog?logo=python&logoColor=yellow)
 ![LICENSE Apache-2.0](https://img.shields.io/github/license/BobAnkh/auto-generate-changelog?logo=apache)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/BobAnkh/auto-generate-changelog?color=orange&logo=github-actions)
 
 A Github Action to generate CHANGELOG automatically according to conventional commits
 

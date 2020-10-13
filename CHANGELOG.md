@@ -7,7 +7,7 @@ Changes unreleased.
 ### Features
 
 - type:
-  - merge different types into one ([4361af2](https://github.com/BobAnkh/auto-generate-changelog/commit/4361af20b49889d5fed90c9b90834f414ec1b5a6))
+  - merge different types into one ([4361af2](https://github.com/BobAnkh/auto-generate-changelog/commit/4361af20b49889d5fed90c9b90834f414ec1b5a6)) ([#20](https://github.com/BobAnkh/auto-generate-changelog/pull/20))
 
 ### Bug Fixes
 
@@ -21,12 +21,13 @@ Changes unreleased.
 
 ### Chores
 
-- changelog:
-  - update action to new version ([07b1de4](https://github.com/BobAnkh/auto-generate-changelog/commit/07b1de4559ffa7cb144e47ccc7ed94538aef2159))
-  - update trigger-events ([bc2fb1f](https://github.com/BobAnkh/auto-generate-changelog/commit/bc2fb1f388da3366745254625d922b73bf3fe8f6))
-
 - gitmagic:
   - update to v2 ([715a20b](https://github.com/BobAnkh/auto-generate-changelog/commit/715a20b9cb981d782919d0dd7a3ffdb81e22a8e3))
+
+- changelog:
+  - update trigger-event ([7c1c133](https://github.com/BobAnkh/auto-generate-changelog/commit/7c1c1333033257bc4ced740d7b993d55324f04ea)) ([#20](https://github.com/BobAnkh/auto-generate-changelog/pull/20))
+  - update action to new version ([07b1de4](https://github.com/BobAnkh/auto-generate-changelog/commit/07b1de4559ffa7cb144e47ccc7ed94538aef2159)) ([#20](https://github.com/BobAnkh/auto-generate-changelog/pull/20))
+  - update trigger-events ([bc2fb1f](https://github.com/BobAnkh/auto-generate-changelog/commit/bc2fb1f388da3366745254625d922b73bf3fe8f6))
 
 - deps:
   - bump cryptography from 3.1 to 3.1.1 ([e8a6a01](https://github.com/BobAnkh/auto-generate-changelog/commit/e8a6a01712b30f59ad0d0102baca701818f25c14)) ([#18](https://github.com/BobAnkh/auto-generate-changelog/pull/18))
@@ -72,11 +73,11 @@ See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/C
 
 ### Documentation Changes
 
-- README:
-  - format table ([a7500d3](https://github.com/BobAnkh/auto-generate-changelog/commit/a7500d31865196b3c10d0fc60b5aa3b06750d956))
-
 - CONTRIBUTING:
   - update format ([7470c9d](https://github.com/BobAnkh/auto-generate-changelog/commit/7470c9d22e4837ec81f99187fdf1d3b2c8132b02))
+
+- README:
+  - format table ([a7500d3](https://github.com/BobAnkh/auto-generate-changelog/commit/a7500d31865196b3c10d0fc60b5aa3b06750d956))
 
 ### Performance Improvements
 
@@ -90,11 +91,11 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 
 ### Features
 
-- changelog:
-  - add newline after list item ([f9ed121](https://github.com/BobAnkh/auto-generate-changelog/commit/f9ed121906994757e380851ef77415b48b865d13))
-
 - codecov:
   - add coverage report ([1a3e15a](https://github.com/BobAnkh/auto-generate-changelog/commit/1a3e15a4bdf7850688f925dd0b1d8ace52e75fc3)) ([#3](https://github.com/BobAnkh/auto-generate-changelog/pull/3))
+
+- changelog:
+  - add newline after list item ([f9ed121](https://github.com/BobAnkh/auto-generate-changelog/commit/f9ed121906994757e380851ef77415b48b865d13))
 
 ### Bug Fixes
 
@@ -106,19 +107,22 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 
 ### Documentation Changes
 
-- README:
-  - change `parameters` to `inputs` ([74e884d](https://github.com/BobAnkh/auto-generate-changelog/commit/74e884d18af0cab2ddbe61554d962ef55d105d6c))
+- CONTRIBUTING.md:
+  - fix typo and change a word ([6721474](https://github.com/BobAnkh/auto-generate-changelog/commit/6721474cb8d4b5d862389690981de72ad09b62cb))
 
 - CONTRIBUTING:
   - refactor to have styleguide ([de4c460](https://github.com/BobAnkh/auto-generate-changelog/commit/de4c46091900679835c0a005435aa447b6aea1db))
 
-- CONTRIBUTING.md:
-  - fix typo and change a word ([6721474](https://github.com/BobAnkh/auto-generate-changelog/commit/6721474cb8d4b5d862389690981de72ad09b62cb))
+- README:
+  - change `parameters` to `inputs` ([74e884d](https://github.com/BobAnkh/auto-generate-changelog/commit/74e884d18af0cab2ddbe61554d962ef55d105d6c))
 
 ### Chores
 
-- gitmagic:
-  - update rules ([82d2f10](https://github.com/BobAnkh/auto-generate-changelog/commit/82d2f10cf6035218e2f0898be3e09fdb41b2d144))
+- *:
+  - fix some typos ([e217912](https://github.com/BobAnkh/auto-generate-changelog/commit/e217912f5738c8a9e7c0a7fbd2c37e546d07a4ce))
+
+- template:
+  - update template style ([ec67d8b](https://github.com/BobAnkh/auto-generate-changelog/commit/ec67d8bef6350d79fed18423eb85364c7a5ff1ec))
 
 - mdl:
   - ignore md024 and code_of_conduct ([e19c0ff](https://github.com/BobAnkh/auto-generate-changelog/commit/e19c0ffcdfb553b8bb0286f8a9ee5969661638a1))
@@ -126,14 +130,8 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 - mergify:
   - fix a typo ([997b3c8](https://github.com/BobAnkh/auto-generate-changelog/commit/997b3c8d4f5e5253bba0d0eecbab4b6fb6e92768))
 
-- gitigore:
-  - ignore python-related files ([94e29d3](https://github.com/BobAnkh/auto-generate-changelog/commit/94e29d3fd772cc3787143196ed0f7b62490846b3))
-
-- deps:
-  - bump pygithub from 1.51 to 1.52 ([33e6b99](https://github.com/BobAnkh/auto-generate-changelog/commit/33e6b99411852635a61175950d6a6d59545c9f3c)) ([#2](https://github.com/BobAnkh/auto-generate-changelog/pull/2))
-
-- *:
-  - fix some typos ([e217912](https://github.com/BobAnkh/auto-generate-changelog/commit/e217912f5738c8a9e7c0a7fbd2c37e546d07a4ce))
+- gitmagic:
+  - update rules ([82d2f10](https://github.com/BobAnkh/auto-generate-changelog/commit/82d2f10cf6035218e2f0898be3e09fdb41b2d144))
 
 - pytest:
   - change name ([21ff26b](https://github.com/BobAnkh/auto-generate-changelog/commit/21ff26b0075845f116dfdd9c87d5a3c89fda8660))
@@ -141,8 +139,11 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
   - install requirements ([4cf8e46](https://github.com/BobAnkh/auto-generate-changelog/commit/4cf8e46a803f8f6180691b0fd7ccf68343e7e161))
   - add pytest to python convention ([97aec2b](https://github.com/BobAnkh/auto-generate-changelog/commit/97aec2b5464db1b442b85e050f94b29f0261e7fe))
 
-- template:
-  - update template style ([ec67d8b](https://github.com/BobAnkh/auto-generate-changelog/commit/ec67d8bef6350d79fed18423eb85364c7a5ff1ec))
+- gitigore:
+  - ignore python-related files ([94e29d3](https://github.com/BobAnkh/auto-generate-changelog/commit/94e29d3fd772cc3787143196ed0f7b62490846b3))
+
+- deps:
+  - bump pygithub from 1.51 to 1.52 ([33e6b99](https://github.com/BobAnkh/auto-generate-changelog/commit/33e6b99411852635a61175950d6a6d59545c9f3c)) ([#2](https://github.com/BobAnkh/auto-generate-changelog/pull/2))
 
 ### Performance Improvements
 
@@ -170,16 +171,16 @@ See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/C
 - main:
   - fix a typo of regex ([fc73d2a](https://github.com/BobAnkh/auto-generate-changelog/commit/fc73d2a1167b9a7ce2689bffee4aa1250de71704))
 
-- git:
-  - install git ([b326c02](https://github.com/BobAnkh/auto-generate-changelog/commit/b326c02b6c2f73e62eb65261a5e60df0be90d2de))
-  - install git ([97dd067](https://github.com/BobAnkh/auto-generate-changelog/commit/97dd067005e97e3359d70bd7e930c7a7637a6a72))
-
 - permission:
   - change permission of main.py ([f8bef73](https://github.com/BobAnkh/auto-generate-changelog/commit/f8bef73840ffbc4a6975d1340c711a14838a8e88))
   - change bash script's permission ([dfb2273](https://github.com/BobAnkh/auto-generate-changelog/commit/dfb2273d070fc6e9ffda3a958fa3684f58a188ea))
 
 - unrelease:
   - fix unreleased info ([ae5603d](https://github.com/BobAnkh/auto-generate-changelog/commit/ae5603d57a9f7727a75394f991bb83b3f70e943d))
+
+- git:
+  - install git ([b326c02](https://github.com/BobAnkh/auto-generate-changelog/commit/b326c02b6c2f73e62eb65261a5e60df0be90d2de))
+  - install git ([97dd067](https://github.com/BobAnkh/auto-generate-changelog/commit/97dd067005e97e3359d70bd7e930c7a7637a6a72))
 
 ### Documentation Changes
 

@@ -19,6 +19,9 @@ Changes unreleased.
 - CONTRIBUTING:
   - update style guide ([1f67fb9](https://github.com/BobAnkh/auto-generate-changelog/commit/1f67fb9279ad39ec9aff7021b484343ccc2bd914))
 
+- README:
+  - update inputs for new version ([c2d4415](https://github.com/BobAnkh/auto-generate-changelog/commit/c2d4415e7e1840c57bf17eab72b56db2f6cac802))
+
 ## [v0.0.4](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v0.0.4) - 2020-09-05 12:03:11
 
 This might be the last release for this major version. I'm going to refactor the code to give more flexibility to the users in the future.
@@ -75,11 +78,11 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 
 ### Bug Fixes
 
-- main:
-  - deal with DeprecationWarning ([50cfdf3](https://github.com/BobAnkh/auto-generate-changelog/commit/50cfdf32ec07b81d3140b9a06fd5275fc69f8f7b))
-
 - dockerfile:
   - use chmod to deal with ... ([6089466](https://github.com/BobAnkh/auto-generate-changelog/commit/60894669e73d634d84aab1aee79476406ec60d45))
+
+- main:
+  - deal with DeprecationWarning ([50cfdf3](https://github.com/BobAnkh/auto-generate-changelog/commit/50cfdf32ec07b81d3140b9a06fd5275fc69f8f7b))
 
 ### Documentation
 
@@ -115,15 +118,15 @@ See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/C
 
 ### Bug Fixes
 
+- unrelease:
+  - fix unreleased info ([ae5603d](https://github.com/BobAnkh/auto-generate-changelog/commit/ae5603d57a9f7727a75394f991bb83b3f70e943d))
+
 - main:
   - fix a typo of regex ([fc73d2a](https://github.com/BobAnkh/auto-generate-changelog/commit/fc73d2a1167b9a7ce2689bffee4aa1250de71704))
 
 - git:
   - install git ([b326c02](https://github.com/BobAnkh/auto-generate-changelog/commit/b326c02b6c2f73e62eb65261a5e60df0be90d2de))
   - install git ([97dd067](https://github.com/BobAnkh/auto-generate-changelog/commit/97dd067005e97e3359d70bd7e930c7a7637a6a72))
-
-- unrelease:
-  - fix unreleased info ([ae5603d](https://github.com/BobAnkh/auto-generate-changelog/commit/ae5603d57a9f7727a75394f991bb83b3f70e943d))
 
 - permission:
   - change permission of main.py ([f8bef73](https://github.com/BobAnkh/auto-generate-changelog/commit/f8bef73840ffbc4a6975d1340c711a14838a8e88))

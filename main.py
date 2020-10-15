@@ -5,7 +5,7 @@
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
 # @LastEditors  : BobAnkh
-# @LastEditTime : 2020-10-13 00:19:18
+# @LastEditTime : 2020-10-16 00:21:45
 # @FilePath     : /auto-generate-changelog/main.py
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
@@ -178,7 +178,8 @@ def parse_releases(repo):
         processed_release = []
         processed_release.append(release.tag_name)
         processed_release.append(release.html_url)
-        processed_release.append(release.body)
+        release_body = re.sub(r'\r\n', r'\n', release.body)
+        processed_release.append(release_body)
         processed_release.append(release.created_at)
         parsed_releases.append(processed_release)
     return parsed_releases

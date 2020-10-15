@@ -1,12 +1,26 @@
 # CHANGELOG
 
+## Unreleased
+
+Changes unreleased.
+
+### Bug Fixes
+
+- release_body:
+  - replace CRLF with LF ([afa6acb](https://github.com/BobAnkh/auto-generate-changelog/commit/afa6acbb82fde7ff625b012f8e30b8999550f18e))
+
+### Documentation
+
+- README:
+  - add a new badge ([38eaef5](https://github.com/BobAnkh/auto-generate-changelog/commit/38eaef54fcbf2bb481c0f1ae2c5e30d9da7ab030))
+
 ## [v1.0.0](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.0) - 2020-10-13 00:59:50
 
 Major version changes with some inputs removed and a new flexible and scaleble input introduced.
 
-TYPE is introduced for users to define what they want to detect and where they want to have it in CHANGELOG all by themselves. Users can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
+TYPE is introduced for users to define what they want to detect and where they want to have it in CHANGELOG all by themselves. Users can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`.
 
-BREAKING CHANGE: FEAT,FIX,DOCS,CHORE,REFACTOR,PERF are removed. 
+BREAKING CHANGE: FEAT,FIX,DOCS,CHORE,REFACTOR,PERF are removed.
 
 ### Feature
 
@@ -20,11 +34,11 @@ BREAKING CHANGE: FEAT,FIX,DOCS,CHORE,REFACTOR,PERF are removed.
 
 ### Documentation
 
-- README:
-  - update inputs for new version ([c2d4415](https://github.com/BobAnkh/auto-generate-changelog/commit/c2d4415e7e1840c57bf17eab72b56db2f6cac802))
-
 - CONTRIBUTING:
   - update style guide ([1f67fb9](https://github.com/BobAnkh/auto-generate-changelog/commit/1f67fb9279ad39ec9aff7021b484343ccc2bd914))
+
+- README:
+  - update inputs for new version ([c2d4415](https://github.com/BobAnkh/auto-generate-changelog/commit/c2d4415e7e1840c57bf17eab72b56db2f6cac802))
 
 ## [v0.0.4](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v0.0.4) - 2020-09-05 12:03:11
 
@@ -56,11 +70,11 @@ See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/C
 
 ### Documentation
 
-- README:
-  - format table ([a7500d3](https://github.com/BobAnkh/auto-generate-changelog/commit/a7500d31865196b3c10d0fc60b5aa3b06750d956))
-
 - CONTRIBUTING:
   - update format ([7470c9d](https://github.com/BobAnkh/auto-generate-changelog/commit/7470c9d22e4837ec81f99187fdf1d3b2c8132b02))
+
+- README:
+  - format table ([a7500d3](https://github.com/BobAnkh/auto-generate-changelog/commit/a7500d31865196b3c10d0fc60b5aa3b06750d956))
 
 ### Performance Improvements
 
@@ -90,11 +104,11 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 
 ### Documentation
 
-- README:
-  - change `parameters` to `inputs` ([74e884d](https://github.com/BobAnkh/auto-generate-changelog/commit/74e884d18af0cab2ddbe61554d962ef55d105d6c))
-
 - CONTRIBUTING:
   - refactor to have styleguide ([de4c460](https://github.com/BobAnkh/auto-generate-changelog/commit/de4c46091900679835c0a005435aa447b6aea1db))
+
+- README:
+  - change `parameters` to `inputs` ([74e884d](https://github.com/BobAnkh/auto-generate-changelog/commit/74e884d18af0cab2ddbe61554d962ef55d105d6c))
 
 - CONTRIBUTING.md:
   - fix typo and change a word ([6721474](https://github.com/BobAnkh/auto-generate-changelog/commit/6721474cb8d4b5d862389690981de72ad09b62cb))
@@ -122,19 +136,19 @@ See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/C
 
 ### Bug Fixes
 
-- main:
-  - fix a typo of regex ([fc73d2a](https://github.com/BobAnkh/auto-generate-changelog/commit/fc73d2a1167b9a7ce2689bffee4aa1250de71704))
-
-- unrelease:
-  - fix unreleased info ([ae5603d](https://github.com/BobAnkh/auto-generate-changelog/commit/ae5603d57a9f7727a75394f991bb83b3f70e943d))
-
 - permission:
   - change permission of main.py ([f8bef73](https://github.com/BobAnkh/auto-generate-changelog/commit/f8bef73840ffbc4a6975d1340c711a14838a8e88))
   - change bash script's permission ([dfb2273](https://github.com/BobAnkh/auto-generate-changelog/commit/dfb2273d070fc6e9ffda3a958fa3684f58a188ea))
 
+- main:
+  - fix a typo of regex ([fc73d2a](https://github.com/BobAnkh/auto-generate-changelog/commit/fc73d2a1167b9a7ce2689bffee4aa1250de71704))
+
 - git:
   - install git ([b326c02](https://github.com/BobAnkh/auto-generate-changelog/commit/b326c02b6c2f73e62eb65261a5e60df0be90d2de))
   - install git ([97dd067](https://github.com/BobAnkh/auto-generate-changelog/commit/97dd067005e97e3359d70bd7e930c7a7637a6a72))
+
+- unrelease:
+  - fix unreleased info ([ae5603d](https://github.com/BobAnkh/auto-generate-changelog/commit/ae5603d57a9f7727a75394f991bb83b3f70e943d))
 
 ### Documentation
 

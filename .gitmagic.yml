@@ -20,9 +20,8 @@ pr:
   - conditions:
       - owner.ne.dependabot
     rules:
-      - commitTitles.gt.4
       - commitTitles.lt.51
-    message: "`<header>` of commit message needs to be between 5 and 50 characters long"
+    message: "`<header>` of commit message needs to be less than 51 characters long"
   - conditions:
     - owner.ne.dependabot
     rules:
@@ -31,9 +30,8 @@ pr:
   - conditions:
     - owner.ne.dependabot
     rules:
-      - commitBodies.gt.4
       - commitBodies.lt.73
-    message: "Each line in `<body>` of commit message needs to be between 5 and 72 characters long"
+    message: "Each line in `<body>` of commit message needs to be less than 73 characters long"
 
 
 issue:

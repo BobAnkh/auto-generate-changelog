@@ -379,20 +379,15 @@ def main():
     PATH = get_inputs_mode(args, 'PATH')
     COMMIT_MESSAGE = get_inputs_mode(args, 'COMMIT_MESSAGE')
     part_name = get_inputs_mode(args, 'TYPE').split(',')
-    print("[DEBUG]finish reading configuration\n")
     repo = github_login(ACCESS_TOKEN, REPO_NAME)
-    print("[DEBUG]finish logging into github\n")
     parsed_releases = parse_releases(repo)
     CHANGELOG = generate_changelog(repo, parsed_releases, part_name)
-    print("[DEBUG]finish generatiing changelog\n")
     if args.mode == "github":
         write_changelog(repo, CHANGELOG, PATH, COMMIT_MESSAGE)
-        print("[DEBUG]finish updating changelog\n")
     elif args.mode == "local":
         write_file = open("test_result.md", 'w', encoding='utf-8')
         write_file.write(CHANGELOG)
         write_file.close()
-        print("[DEBUG]finish printing changelog\n")
 
 
 if __name__ == '__main__':

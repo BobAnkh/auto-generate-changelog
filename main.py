@@ -382,8 +382,6 @@ def main():
     repo = github_login(ACCESS_TOKEN, REPO_NAME)
     parsed_releases = parse_releases(repo)
     CHANGELOG = generate_changelog(repo, parsed_releases, part_name)
-    if args.mode == "github":
-        write_changelog(repo, CHANGELOG, PATH, COMMIT_MESSAGE)
 
 
 if __name__ == '__main__':

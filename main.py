@@ -384,10 +384,6 @@ def main():
     CHANGELOG = generate_changelog(repo, parsed_releases, part_name)
     if args.mode == "github":
         write_changelog(repo, CHANGELOG, PATH, COMMIT_MESSAGE)
-    elif args.mode == "local":
-        write_file = open("test_result.md", 'w', encoding='utf-8')
-        write_file.write(CHANGELOG)
-        write_file.close()
 
 
 if __name__ == '__main__':

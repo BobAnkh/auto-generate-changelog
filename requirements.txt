@@ -9,5 +9,5 @@ PyGithub==1.53
 PyJWT==1.7.1
 requests==2.24.0
 six==1.15.0
-urllib3==1.25.10
+urllib3==1.25.11
 wrapt==1.12.1

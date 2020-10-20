@@ -12,23 +12,23 @@ pr:
       - branch.ne.master
       - branch.ne.develop
     rules:
-      - branch.eq./^(fix|feat|feature|docs|refactor|style|test|chore|build|perf|ci)\/.+/
+      - branch.eq./^(fix|feat|feature|docs|refactor|style|test|chore|build|perf|ci|dependabot)\/.+/
     message: "Branch name must have a proper prefix."
   - rules:
       - commitTitles.eq./^((fix|feat|docs|refactor|style|test|chore|build|perf|ci|revert|Revert|Merge|merge)\(.+\):)|((revert|Revert|Merge|merge):)/
     message: "`<header>` of commit message must use proper `<type>` or `<scope>`."
   - conditions:
-      - owner.ne.dependabot
+      - owner.ne.dependabot[bot]
     rules:
       - commitTitles.lt.51
     message: "`<header>` of commit message needs to be less than 51 characters long"
   - conditions:
-    - owner.ne.dependabot
+    - owner.ne.dependabot[bot]
     rules:
       - commitTenses.eq.imperative
     message: "Commit message must use imperative form - e.g. Add, Fix etc"
   - conditions:
-    - owner.ne.dependabot
+    - owner.ne.dependabot[bot]
     rules:
       - commitBodies.lt.73
     message: "Each line in `<body>` of commit message needs to be less than 73 characters long"
@@ -46,7 +46,7 @@ issue:
 
 settings:
   header: |
-    @{{sender}} - Your {{type}} does not follow our contribution guidelines. Please review the following issues and update.
+    @{{owner}} - Your {{type}} does not follow our contribution guidelines. Please review the following issues and update.
     
   footer: |
     

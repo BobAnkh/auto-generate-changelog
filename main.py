@@ -14,6 +14,7 @@ import os
 import re
 import shlex
 import subprocess
+import argparse
 
 from github import Github
 
@@ -236,7 +237,7 @@ def generate_release_body(commit_list, repo, part_name):
     release_body = ''
     for part in part_name:
         reg, name = part.split(':')
-        regex = r'^'+ reg + r'[(](.+?)[)]'
+        regex = r'^' + reg + r'[(](.+?)[)]'
         sec = generate_section(commit_list, regex, repo)
         if sec != '':
             release_body = release_body + '### ' + name + '\n\n' + sec
@@ -305,16 +306,88 @@ def write_changelog(repo, changelog, path, commit_message):
     repo.update_file(contents.path, commit_message, changelog, contents.sha)
 
 
+def get_inputs_from_file(file_name, input_name):
+    '''
+    Read configuration from given local workflow file
+
+    Args:
+        file_name (string): the file to read from
+        input_name (string): input_name in workflow file
+
+    Returns:
+        string: action_input
+    '''
+    file = open(file_name, 'r', encoding='utf-8')
+    file_content = file.read().split('\n')
+    file.close()
+    target_flag = 0
+    for _, line in enumerate(file_content):
+        if target_flag == 0 and re.search('auto-generate-changelog@master',
+                                          line):
+            target_flag = 1
+        if target_flag == 1 and re.search(input_name, line):
+            return re.search("'(.*)'", line).group().strip('\'')
+    return
+
+
+def get_inputs_mode(arg, input_name):
+    '''
+    Choose proper place to get configuration when running locally or on github
+
+    Args:
+        arg (Namespace): place where parameters from cmd store
+        input_name (str): input_name in workflow file
+
+    Returns:
+        string: action_input
+    '''
+    if arg.mode == 'local':
+        return get_inputs_from_file(arg.file, input_name)
+    elif arg.mode == 'github':
+        return get_inputs(input_name)
+
+
+def argument_parser():
+    '''
+    Parse parameters conveyed from cmd
+
+    Returns:
+        Namespace: place where parameters from cmd store
+    '''
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-m",
+        "--mode",
+        help="input local|github to choose to start locally or on github server",
+        default="github")
+    parser.add_argument(
+        "-f",
+        "--file",
+        help="file to read configuration from when running local mode",
+        default="./.github/workflows/changelog.yml")
+    args = parser.parse_args()
+    if args.mode not in ['local', 'github']:
+        print("illegal input, please type \'-h\' to read the help")
+        os.exit()
+    return args
+
+
 def main():
-    ACCESS_TOKEN = get_inputs('ACCESS_TOKEN')
-    REPO_NAME = get_inputs('REPO_NAME')
-    PATH = get_inputs('PATH')
-    COMMIT_MESSAGE = get_inputs('COMMIT_MESSAGE')
-    part_name = get_inputs('TYPE').split(',')
+    args = argument_parser()
+    ACCESS_TOKEN = get_inputs_mode(args, 'ACCESS_TOKEN')
+    REPO_NAME = get_inputs_mode(args, 'REPO_NAME')
+    PATH = get_inputs_mode(args, 'PATH')
+    COMMIT_MESSAGE = get_inputs_mode(args, 'COMMIT_MESSAGE')
+    part_name = get_inputs_mode(args, 'TYPE').split(',')
     repo = github_login(ACCESS_TOKEN, REPO_NAME)
     parsed_releases = parse_releases(repo)
     CHANGELOG = generate_changelog(repo, parsed_releases, part_name)
-    write_changelog(repo, CHANGELOG, PATH, COMMIT_MESSAGE)
+    if args.mode == "github":
+        write_changelog(repo, CHANGELOG, PATH, COMMIT_MESSAGE)
+    elif args.mode == "local":
+        write_file = open("test_result.md", 'w', encoding='utf-8')
+        write_file.write(CHANGELOG)
+        write_file.close()
 
 
 if __name__ == '__main__':

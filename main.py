@@ -4,9 +4,9 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditors  : BobAnkh
-# @LastEditTime : 2020-10-16 00:21:45
-# @FilePath     : /auto-generate-changelog/main.py
+# @LastEditors  : ,: BobAnkh
+# @LastEditTime : ,: 2020-10-20 20:07:45
+# @FilePath     : ,: /auto-generate-changelog/main.py
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -121,8 +121,18 @@ def get_commit_log_between_versions(previous_version, later_version, flag):
     output_list = []
     for item in output:
         tmp = []
-        tmp.append(item[0:40])
-        tmp.append(item[41:])
+        commit_sha = item[0:40]
+        commit_title = item[41:]
+        if commit_title[-3:] == '...':
+            commit_command = f'git log -1 {commit_sha} --pretty=format:"%B"'
+            commit_bytes = subprocess.check_output(shlex.split(commit_command), stderr=subprocess.STDOUT)
+            commit_content = commit_bytes.decode('utf-8')
+            commit_content = commit_content.split('\n\n')
+            if len(commit_content) > 1:
+                if commit_content[1][0:3] == '...':
+                    commit_title = commit_title[:-3] + ' ' + commit_content[1].split('\n')[0][3:]
+        tmp.append(commit_sha)
+        tmp.append(commit_title)
         output_list.append(tmp)
     return output_list
 

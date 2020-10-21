@@ -4,9 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditors  : ,: BobAnkh
-# @LastEditTime : ,: 2020-10-20 20:07:45
-# @FilePath     : ,: /auto-generate-changelog/main.py
+# @LastEditTime : ,: 2020-10-21 14:44:07
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 

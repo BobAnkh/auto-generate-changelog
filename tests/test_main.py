@@ -4,9 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-05 23:12:39
-# @LastEditors  : BobAnkh
-# @LastEditTime : 2020-10-21 14:31:06
-# @FilePath     : /auto-generate-changelog/tests/test_main.py
+# @LastEditTime : ,: 2020-10-21 14:39:00
 # @Description  : Tests for main.py
 # @Copyright 2020 BobAnkh
 
@@ -139,8 +137,7 @@ def test_get_tags():
      ]])])
 def test_get_commit_log_between_versions(previous_version, later_version,
                                          flag, result):
-    assert result == main.get_commit_log_between_versions(
-        previous_version, later_version, flag)
+    assert result == main.get_commit_log_between_versions(previous_version, later_version, flag)
 
 
 @pytest.mark.parametrize("commits, regex, output, set", [

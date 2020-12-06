@@ -73,21 +73,6 @@ pull_request_rules:
           @{{author}}
           Wrong PR Title: {{title}}
           Please check [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) for more information.
-  - name: branch name check comment
-    conditions:
-      - "-head~=^(master|develop|((dependabot|chore|docs|LinuxCommand|LinuxTool|feature|feat|fix|refactor|style|test|build|release)\/.{1,64}))$"
-      - "-closed"
-      - "-merged"
-    actions:
-      close:
-        message: |
-          @{{author}}
-          Wrong branch name: {{head}}
-          Please check details and [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) for more information.
-          This Pull Request will be closed.
-      label:
-        add:
-          - "invalid"
   - name: message check comment
     conditions:
       - "status-failure=gitmagic/rules"
@@ -100,6 +85,7 @@ pull_request_rules:
           @{{author}}
           Contribution Message Convention Tests failed with GitMagic.
           Please check details and [Contributing Guidelines](https://github.com/BobAnkh/auto-generate-changelog/blob/master/CONTRIBUTING.md) for more information.
+          If you don't want to correct it yourself, just tell the maintainers. They will do it when merging.
   - name: markdownlint check comment
     conditions:
       - "status-failure=markdownlint-cli-check"

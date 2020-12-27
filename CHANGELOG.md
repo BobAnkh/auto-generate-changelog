@@ -105,13 +105,16 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 
 ### Bug Fixes
 
-- dockerfile:
-  - use chmod to deal with   execution permission issue ([6089466](https://github.com/BobAnkh/auto-generate-changelog/commit/60894669e73d634d84aab1aee79476406ec60d45))
-
 - main:
   - deal with DeprecationWarning ([50cfdf3](https://github.com/BobAnkh/auto-generate-changelog/commit/50cfdf32ec07b81d3140b9a06fd5275fc69f8f7b))
 
+- dockerfile:
+  - use chmod to deal with   execution permission issue ([6089466](https://github.com/BobAnkh/auto-generate-changelog/commit/60894669e73d634d84aab1aee79476406ec60d45))
+
 ### Documentation
+
+- CONTRIBUTING.md:
+  - fix typo and change a word ([6721474](https://github.com/BobAnkh/auto-generate-changelog/commit/6721474cb8d4b5d862389690981de72ad09b62cb))
 
 - README:
   - change `parameters` to `inputs` ([74e884d](https://github.com/BobAnkh/auto-generate-changelog/commit/74e884d18af0cab2ddbe61554d962ef55d105d6c))
@@ -119,16 +122,13 @@ Please [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/maste
 - CONTRIBUTING:
   - refactor to have styleguide ([de4c460](https://github.com/BobAnkh/auto-generate-changelog/commit/de4c46091900679835c0a005435aa447b6aea1db))
 
-- CONTRIBUTING.md:
-  - fix typo and change a word ([6721474](https://github.com/BobAnkh/auto-generate-changelog/commit/6721474cb8d4b5d862389690981de72ad09b62cb))
-
 ### Performance Improvements
-
-- changelog:
-  - simplify progress of updating ([dd778cb](https://github.com/BobAnkh/auto-generate-changelog/commit/dd778cbc48b3e8c306e06773f499e06e46f18269))
 
 - main:
   - improve regex match ([0591844](https://github.com/BobAnkh/auto-generate-changelog/commit/0591844384a8a62f13eac0cec35d34df66dd07b9))
+
+- changelog:
+  - simplify progress of updating ([dd778cb](https://github.com/BobAnkh/auto-generate-changelog/commit/dd778cbc48b3e8c306e06773f499e06e46f18269))
 
 ## [v0.0.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v0.0.1) - 2020-07-30 02:40:43
 
@@ -136,24 +136,24 @@ See [CHANGELOG](https://github.com/BobAnkh/auto-generate-changelog/blob/master/C
 
 ### Feature
 
-- CHANGELOG:
-  - add main script ([5de4459](https://github.com/BobAnkh/auto-generate-changelog/commit/5de4459403ffd65976bed5051620e216092e67e4))
-
 - main:
   - ignore docs(changelog) to appear ([93df662](https://github.com/BobAnkh/auto-generate-changelog/commit/93df662038b0e7fdf569deaab7c2dc221c127039))
   - bypass empty section ([fd47996](https://github.com/BobAnkh/auto-generate-changelog/commit/fd479964d9233f93bb6e692ba5f0692e92cf8a5a))
 
+- CHANGELOG:
+  - add main script ([5de4459](https://github.com/BobAnkh/auto-generate-changelog/commit/5de4459403ffd65976bed5051620e216092e67e4))
+
 ### Bug Fixes
 
-- unrelease:
-  - fix unreleased info ([ae5603d](https://github.com/BobAnkh/auto-generate-changelog/commit/ae5603d57a9f7727a75394f991bb83b3f70e943d))
+- main:
+  - fix a typo of regex ([fc73d2a](https://github.com/BobAnkh/auto-generate-changelog/commit/fc73d2a1167b9a7ce2689bffee4aa1250de71704))
 
 - git:
   - install git ([b326c02](https://github.com/BobAnkh/auto-generate-changelog/commit/b326c02b6c2f73e62eb65261a5e60df0be90d2de))
   - install git ([97dd067](https://github.com/BobAnkh/auto-generate-changelog/commit/97dd067005e97e3359d70bd7e930c7a7637a6a72))
 
-- main:
-  - fix a typo of regex ([fc73d2a](https://github.com/BobAnkh/auto-generate-changelog/commit/fc73d2a1167b9a7ce2689bffee4aa1250de71704))
+- unrelease:
+  - fix unreleased info ([ae5603d](https://github.com/BobAnkh/auto-generate-changelog/commit/ae5603d57a9f7727a75394f991bb83b3f70e943d))
 
 - permission:
   - change permission of main.py ([f8bef73](https://github.com/BobAnkh/auto-generate-changelog/commit/f8bef73840ffbc4a6975d1340c711a14838a8e88))

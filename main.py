@@ -4,16 +4,40 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : ,: 2020-10-21 14:44:07
+# @LastEditTime : 2021-01-11 10:36:47
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
+import argparse
 import os
 import re
 import shlex
 import subprocess
 
+import yaml
 from github import Github
+
+
+def argument_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-m',
+        '--mode',
+        help=
+        'choose to use local-dev mode or on github action mode. Valid values are \'local\' or \'github\'',
+        default='github')
+    parser.add_argument(
+        '-f',
+        '--file',
+        help='configuration file to read from when running local-dev mode',
+        default='.github/workflows/changelog.yml')
+    parser.add_argument('-o',
+                        '--output',
+                        help='output file when running local-dev mode',
+                        default='local-dev.md')
+    parser.add_argument('-t', '--token', help='Github Access Token')
+    args = parser.parse_args()
+    return args
 
 
 def github_login(ACCESS_TOKEN, REPO_NAME):
@@ -36,6 +60,17 @@ def github_login(ACCESS_TOKEN, REPO_NAME):
     return repo
 
 
+def set_local_env(env_name, env_value, prefix='INPUT'):
+    '''
+    set local env for dev
+
+    Args:
+        env_name (str): local env name
+        env_value (str): value of local env name
+    '''
+    os.environ[prefix + '_{}'.format(env_name).upper()] = env_value
+
+
 def get_inputs(input_name):
     '''
     Get a Github actions input by name
@@ -51,6 +86,42 @@ def get_inputs(input_name):
     [1] https://help.github.com/en/actions/automating-your-workflow-with-github-actions/metadata-syntax-for-github-actions#example
     '''
     return os.getenv('INPUT_{}'.format(input_name).upper())
+
+
+def set_env_from_file(file, args, prefix='INPUT'):
+    '''
+    Set env when use local-dev mode
+
+    Args:
+        file (str): path to config file
+        args (object): argument
+        prefix (str, optional): prefix of env. Defaults to 'INPUT'.
+    '''
+    f = open(file, encoding='utf-8')
+    y = yaml.safe_load(f)
+    for job in y['jobs'].values():
+        for step in job['steps']:
+            if re.match(r'BobAnkh/auto-generate-changelog', step['uses']):
+                params = step['with']
+                break
+    option_params = [
+        'REPO_NAME', 'ACCESS_TOKEN', 'PATH', 'COMMIT_MESSAGE', 'TYPE'
+    ]
+    for param in option_params:
+        if param not in params.keys():
+            if args.token:
+                tmp = args.token
+            else:
+                tmp = input('Please input the value of ' + param + ':')
+        elif param == 'ACCESS_TOKEN':
+            if re.match(r'\$\{\{secrets\.', params[param]):
+                if args.token:
+                    tmp = args.token
+                else:
+                    tmp = input('Please input the value of ' + param + ':')
+        else:
+            tmp = params[param]
+        set_local_env(param, tmp, prefix)
 
 
 def strip_commits(commits, regex):
@@ -314,6 +385,14 @@ def write_changelog(repo, changelog, path, commit_message):
 
 
 def main():
+    args = argument_parser()
+    if args.mode == 'local':
+        set_env_from_file('.github/workflows/changelog.yml', args)
+    elif args.mode == 'github':
+        pass
+    else:
+        print("Illegal mode option, please type \'-h\' to read the help")
+        os.exit()
     ACCESS_TOKEN = get_inputs('ACCESS_TOKEN')
     REPO_NAME = get_inputs('REPO_NAME')
     PATH = get_inputs('PATH')

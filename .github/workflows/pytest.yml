@@ -28,7 +28,7 @@ jobs:
         pip install pytest-cov
     - name: pytest
       run: |
-        pytest -vv
+        pytest -ra
         pytest --cov=./ --cov-report=xml
     - name: Code Coverage Report Upload
       uses: codecov/codecov-action@v1

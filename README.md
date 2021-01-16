@@ -54,6 +54,14 @@ jobs:
 > You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
 >
 > NOTE: You can use `<branch>:<file>` format to specify the branch where your file is located. e.g. 'dev:/CHANGELOG.md'
+>
+> NOTE: You can use format below to avoid some lines in release description to appear in CHANGELOG:
+>
+> ```markdown
+> <!-- HIDE IN CHANGELOG BEGIN -->
+> See CHANGELOG for more details.
+> <!-- HIDE IN CHANGELOG END -->
+> ```
 
 ## Maintainer
 

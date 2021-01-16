@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-01-16 12:36:45
+# @LastEditTime : 2021-01-16 20:15:42
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -291,8 +291,35 @@ def generate_changelog(releases, part_name):
         else:
             title = release_tag
             url = releases[release_tag]['html_url']
-            description = releases[release_tag]['body']
+            origin_desc = re.split(r'<!-- HIDE IN CHANGELOG BEGIN -->(?:.|\n)*?<!-- HIDE IN CHANGELOG END -->', releases[release_tag]['body'])
+            if len(origin_desc) == 1:
+                description = origin_desc[0]
+            else:
+                description = ''
+                for elem in origin_desc:
+                    if elem == origin_desc[0]:
+                        para = re.sub(r'\n*$', r'', elem)
+                        description = description + para
+                    elif elem == origin_desc[-1]:
+                        para = re.sub(r'^\n*', r'', elem)
+                        if para == '':
+                            continue
+                        elif description == '':
+                            description = description + para
+                        else:
+                            description = description + '\n\n' + para
+                    else:
+                        para = re.sub(r'\n*$', r'', elem)
+                        para = re.sub(r'^\n*', r'', para)
+                        if para == '':
+                            continue
+                        elif description == '':
+                            description = description + para
+                        else:
+                            description = description + '\n\n' + para
             date = releases[release_tag]['created_at']
+            if description == '':
+                description = '*No description*'
             release_info = f'''## [{title}]({url}) - {date}\n\n{description}\n\n'''
         release_body = generate_release_body(release_commits, part_name)
         if release_body == '' and release_tag == 'Unreleased':

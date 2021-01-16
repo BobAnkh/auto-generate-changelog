@@ -12,7 +12,7 @@ inputs:
     description: "Github Access Token you want to use. Just pass GITHUB_TOKEN"
     required: true
   PATH:
-    description: "Path to the file you want to add CHANGELOG"
+    description: "Path to the file you want to add contributors' list. You can use <branch>:<file> format to specify the branch"
     required: false
     default: '/CHANGELOG.md'
   COMMIT_MESSAGE:

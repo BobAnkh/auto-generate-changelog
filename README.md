@@ -69,9 +69,28 @@ jobs:
 
 ## How to contribute
 
-You should follow our [Code of Conduct](/CODE_OF_CONDUCT.md)
+You should follow our [Code of Conduct](/CODE_OF_CONDUCT.md).
 
-See [CONTRIBUTING GUIDELINES](/CONTRIBUTING.md) for contributing conventions
+See [CONTRIBUTING GUIDELINES](/CONTRIBUTING.md) for contributing conventions.
+
+Make sure to pass all the tests before submitting your code. You can conduct `pytest -ra` at the root directory to run all tests.
+
+You can use local mode when develope it on your local machine, here is the command-line help info:
+
+```console
+usage: main.py [-h] [-m MODE] [-f FILE] [-o OUTPUT] [-t TOKEN]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m MODE, --mode MODE  choose to use local-dev mode or on github action mode.
+                        Valid values are 'local' or 'github'
+  -f FILE, --file FILE  configuration file to read from when running local-dev
+                        mode
+  -o OUTPUT, --output OUTPUT
+                        output file when running local-dev mode
+  -t TOKEN, --token TOKEN
+                        Github Access Token
+```
 
 ### Contributors
 

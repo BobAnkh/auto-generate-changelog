@@ -51,9 +51,17 @@ jobs:
 | COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`       |
 | TYPE           | The type of commits you want to add to CHANGELOG | no       | 'feat:Feature,fix:Fix'                        |
 
-> You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`
+> You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
 >
-> For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
+> NOTE: You can use `<branch>:<file>` format to specify the branch where your file is located. e.g. 'dev:/CHANGELOG.md'
+>
+> NOTE: You can use format below to avoid some lines in release description to appear in CHANGELOG:
+>
+> ```markdown
+> <!-- HIDE IN CHANGELOG BEGIN -->
+> See CHANGELOG for more details.
+> <!-- HIDE IN CHANGELOG END -->
+> ```
 
 ## Maintainer
 

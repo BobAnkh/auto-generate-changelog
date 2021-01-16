@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-05 23:12:39
-# @LastEditTime : 2021-01-11 16:25:37
+# @LastEditTime : 2021-01-16 20:38:37
 # @Description  : Tests for main.py
 # @Copyright 2020 BobAnkh
 
@@ -38,19 +38,22 @@ def test_env(generate_env):
     msg = "Test case %s is wrong" % (env_name)
     assert env_value == main.get_inputs(env_name), msg
 
-def test_get_tags():
-    result = os.popen('git tag').read()
-    result = result.split('\n')
-    result[-1] = 'HEAD'
-    assert result == main.get_tags()
+
+@pytest.mark.parametrize("commits, regex, scopes", case['test_strip_commits'])
+def test_strip_commits(commits, regex, scopes):
+    assert scopes == main.strip_commits(commits, regex)
 
 
-@pytest.mark.parametrize("previous_version, later_version, flag, result", case['test_get_commit_log_between_versions_case'])
-def test_get_commit_log_between_versions(previous_version, later_version,
-                                         flag, result):
-    assert result == main.get_commit_log_between_versions(previous_version, later_version, flag)
+@pytest.mark.parametrize("release_commits, type_regex, sec", case['test_generate_section'])
+def test_generate_section(release_commits, type_regex, sec):
+    assert sec == main.generate_section(release_commits, type_regex)
 
 
-@pytest.mark.parametrize("commits, regex, output, sets", case['test_strip_commits_case'])
-def test_strip_commits(commits, regex, output, sets):
-    assert output, set(sets) == main.strip_commits(commits, regex)
+@pytest.mark.parametrize("release_commits, part_name, release_body", case['test_generate_release_body'])
+def test_generate_release_body(release_commits, part_name, release_body):
+    assert release_body == main.generate_release_body(release_commits, part_name)
+
+
+@pytest.mark.parametrize("releases, part_name, changelog", case['test_generate_changelog'])
+def generate_changelog(releases, part_name, changelog):
+    assert changelog == main.generate_changelog(releases, part_name)

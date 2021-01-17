@@ -4,6 +4,19 @@
 
 Changes unreleased.
 
+### Documentation
+
+- README:
+  - add info for local mode and tests ([ce7ca61](https://github.com/BobAnkh/auto-generate-changelog/commit/ce7ca6149979df82b500bd0ce194127823ebc4dc))
+
+## [v1.0.2](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.2) - 2021-01-16 12:52:26
+
+In this version:
+
+- refactor the data structure
+- support other branches
+- can hide lines in release description
+
 ### Feature
 
 - release_info:

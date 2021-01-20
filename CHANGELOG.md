@@ -9,6 +9,11 @@ Changes unreleased.
 - README:
   - add info for local mode and tests ([ce7ca61](https://github.com/BobAnkh/auto-generate-changelog/commit/ce7ca6149979df82b500bd0ce194127823ebc4dc))
 
+### Performance Improvements
+
+- Dockerfile:
+  - merge layers ([b657899](https://github.com/BobAnkh/auto-generate-changelog/commit/b65789969c1e8dc686fdb75fdaf8173116f0cdae))
+
 ## [v1.0.2](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.2) - 2021-01-16 12:52:26
 
 In this version:

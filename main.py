@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-01-16 20:48:48
+# @LastEditTime : 2021-01-25 19:22:28
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -123,31 +123,32 @@ class GithubChangelog:
             BRANCH (str): The branch of the file
             COMMIT_MESSAGE (str): Commit message you want to use
         '''
-        self.COMMIT_MESSAGE = COMMIT_MESSAGE
-        self.PATH = PATH
-        self.BRANCH = BRANCH
-        self.SHA = ''
-        self.releases = {}
-        self.changelog = ''
+        self.__commit_message = COMMIT_MESSAGE
+        self.__path = PATH
+        self.__branch = BRANCH
+        self.__sha = ''
+        self.__releases = {}
+        self.__changelog = ''
+        self.__file_exists = False
         # Use PyGithub to login to the repository
         # References: https://pygithub.readthedocs.io/en/latest/github_objects/Repository.html#github.Repository.Repository
         g = github.Github(ACCESS_TOKEN)
-        self.repo = g.get_repo(REPO_NAME)
+        self.__repo = g.get_repo(REPO_NAME)
 
     def get_data(self):
         # get release info
-        releases = self.repo.get_releases()
-        self.releases['Unreleased'] = {'html_url': '', 'body': '', 'created_at': '', 'commit_sha': ''}
+        releases = self.__repo.get_releases()
+        self.__releases['Unreleased'] = {'html_url': '', 'body': '', 'created_at': '', 'commit_sha': ''}
         for release in releases:
-            self.releases[release.tag_name] = {'html_url': release.html_url, 'body': re.sub(r'\r\n', r'\n', release.body), 'created_at': release.created_at}
+            self.__releases[release.tag_name] = {'html_url': release.html_url, 'body': re.sub(r'\r\n', r'\n', release.body), 'created_at': release.created_at}
         # get tags and commits
-        tags = self.repo.get_tags()
+        tags = self.__repo.get_tags()
         for tag in tags:
-            if tag.name in self.releases:
-                self.releases[tag.name]['commit_sha'] = tag.commit.sha
-        release_tags = list(self.releases.keys())[::-1]
+            if tag.name in self.__releases:
+                self.__releases[tag.name]['commit_sha'] = tag.commit.sha
+        release_tags = list(self.__releases.keys())[::-1]
         seq = 0
-        commits = self.repo.get_commits(sha=self.BRANCH).reversed
+        commits = self.__repo.get_commits(sha=self.__branch).reversed
         selected_commits = []
         pbar = tqdm(desc='Commits progress', total=commits.totalCount)
         for commit in commits:
@@ -166,43 +167,56 @@ class GithubChangelog:
                     pr = f''' ([#{pull.number}]({pull.html_url}))'''
                     pr_links.append(pr)
             selected_commits.append({'head': message_head, 'sha': commit.sha, 'url': url, 'pr_links': pr_links})
-            if commit.sha == self.releases[release_tags[seq]]['commit_sha']:
-                self.releases[release_tags[seq]]['commits'] = selected_commits[::-1]
+            if commit.sha == self.__releases[release_tags[seq]]['commit_sha']:
+                self.__releases[release_tags[seq]]['commits'] = selected_commits[::-1]
                 selected_commits = []
                 seq = seq + 1
             pbar.update(1)
         pbar.close()
-        self.releases[release_tags[seq]]['commits'] = selected_commits[::-1]
+        self.__releases[release_tags[seq]]['commits'] = selected_commits[::-1]
         # get file content
-        contents = self.repo.get_contents(self.PATH, self.BRANCH)
-        self.PATH = contents.path
-        self.SHA = contents.sha
-        base = contents.content
-        base = base.replace('\n', '')
-        self.changelog = base64.b64decode(base).decode('utf-8')
+        try:
+            contents = self.__repo.get_contents(self.__path, self.__branch)
+        except github.GithubException as e:
+            if e.status == 404:
+                self.__changelog = ''
+            else:
+                raise github.GithubException(e.status, e.data)
+        else:
+            self.__file_exists = True
+            self.__path = contents.path
+            self.__sha = contents.sha
+            base = contents.content
+            base = base.replace('\n', '')
+            self.__changelog = base64.b64decode(base).decode('utf-8')
 
     def read_releases(self):
-        return self.releases
+        return self.__releases
 
     def write_data(self, changelog):
-        if changelog == self.changelog:
+        if changelog == self.__changelog:
             pass
         else:
-            self.repo.update_file(self.PATH, self.COMMIT_MESSAGE, changelog,
-                                  self.SHA, self.BRANCH)
+            if self.__file_exists:
+                self.__repo.update_file(self.__path, self.__commit_message, changelog,
+                                    self.__sha, self.__branch)
+            else:
+                self.__repo.create_file(self.__path, self.__commit_message, changelog,
+                                    self.__branch)
 
 
-def strip_commits(commits, regex):
+def strip_commits(commits, type_regex):
     '''
     Bypass some commits
 
     Args:
         commits (list): list of commit(dict), whose keys are 'head', 'sha', 'url', 'pr_links'
-        regex (string): regex expression to match.
+        type_regex (string): regex expression to match.
 
     Returns:
         dict: selected commits of every scope.
     '''
+    regex = r'^'+ type_regex + r'[(](.+?)[)]'
     scopes = {}
     for commit in commits:
         if re.match(regex, commit['head']):
@@ -218,19 +232,19 @@ def strip_commits(commits, regex):
     return scopes
 
 
-def generate_section(release_commits, type_regex):
+def generate_section(release_commits, regex):
     '''
     Generate scopes of a section
 
     Args:
         release_commits (dict): commits of the release
-        type_regex (string): regex expression
+        regex (string): regex expression
 
     Returns:
         string: content of section
     '''
     section = ''
-    scopes = strip_commits(release_commits, type_regex)
+    scopes = strip_commits(release_commits, regex)
     for scope in scopes:
         scope_content = f'''- {scope}:\n'''
         for sel_commit in scopes[scope]:
@@ -260,8 +274,7 @@ def generate_release_body(release_commits, part_name):
     '''
     release_body = ''
     for part in part_name:
-        reg, name = part.split(':')
-        regex = r'^'+ reg + r'[(](.+?)[)]'
+        regex, name = part.split(':')
         sec = generate_section(release_commits, regex)
         if sec != '':
             release_body = release_body + '### ' + name + '\n\n' + sec

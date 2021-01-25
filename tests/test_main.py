@@ -4,10 +4,11 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-05 23:12:39
-# @LastEditTime : 2021-01-16 20:38:37
+# @LastEditTime : 2021-01-17 14:58:19
 # @Description  : Tests for main.py
 # @Copyright 2020 BobAnkh
 
+import datetime
 import json
 import os
 import random
@@ -56,4 +57,6 @@ def test_generate_release_body(release_commits, part_name, release_body):
 
 @pytest.mark.parametrize("releases, part_name, changelog", case['test_generate_changelog'])
 def generate_changelog(releases, part_name, changelog):
+    for release in releases:
+        releases[release]['created_at'] = datetime.datetime(2000, 1, 2, 3, 4, 5)
     assert changelog == main.generate_changelog(releases, part_name)

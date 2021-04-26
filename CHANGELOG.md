@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Unreleased
+## [v1.0.3](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.3) - 2021-04-26 05:03:38
 
-Changes unreleased.
+Performance improvement for Dockerfile.
 
 ### Documentation
 

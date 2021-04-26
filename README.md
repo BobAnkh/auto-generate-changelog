@@ -45,13 +45,13 @@ jobs:
 
 ### Inputs
 
-| Inputs         | Description                                      | Required | Default                                       |
-| -------------- | ------------------------------------------------ | -------- | --------------------------------------------- |
-| REPO_NAME      | Repository name                                  | yes      | -                                             |
-| ACCESS_TOKEN   | Github Access Token                              | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}` |
-| PATH           | Path to the your file                            | no       | `/CHANGELOG.md`                               |
-| COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`       |
-| TYPE           | The type of commits you want to add to CHANGELOG | no       | 'feat:Feature,fix:Fix'                        |
+| Inputs         | Description                                      | Required | Default                                                   |
+| -------------- | ------------------------------------------------ | -------- | --------------------------------------------------------- |
+| REPO_NAME      | Repository name                                  | yes      | No. **Please do remember to change it to your repo name** |
+| ACCESS_TOKEN   | Github Access Token                              | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`             |
+| PATH           | Path to the your file                            | no       | `/CHANGELOG.md`                                           |
+| COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`                   |
+| TYPE           | The type of commits you want to add to CHANGELOG | no       | 'feat:Feature,fix:Fix'                                    |
 
 > You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
 >

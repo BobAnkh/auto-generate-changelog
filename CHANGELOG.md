@@ -7,6 +7,7 @@ Changes unreleased.
 ### Documentation
 
 - README:
+  - update desc ([25451eb](https://github.com/BobAnkh/auto-generate-changelog/commit/25451eb5c449298e3d1d3ebe3ce919cc1438eb72))
   - add info for local mode and tests ([ce7ca61](https://github.com/BobAnkh/auto-generate-changelog/commit/ce7ca6149979df82b500bd0ce194127823ebc4dc))
 
 ### Performance Improvements

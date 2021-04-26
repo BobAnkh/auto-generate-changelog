@@ -5,11 +5,13 @@
 ![language-python](https://img.shields.io/github/languages/top/BobAnkh/auto-generate-changelog?logo=python&logoColor=yellow)
 ![LICENSE Apache-2.0](https://img.shields.io/github/license/BobAnkh/auto-generate-changelog?logo=apache)
 
-A Github Action to generate CHANGELOG automatically according to conventional commits
+A Github Action to generate CHANGELOG automatically according to conventional commits.
 
-Feel free to submit a pull request or an issue, but make sure to follow the templates
+Feel free to submit a pull request or an issue, but make sure to follow the templates.
 
 Welcome contributors to improve this project together!
+
+**If you like this, please give me a star!**
 
 ## Usage
 

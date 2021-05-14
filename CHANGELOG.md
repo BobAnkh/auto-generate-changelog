@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Unreleased
+
+Changes unreleased.
+
+### Documentation
+
+- README:
+  - change the example ([6d20b11](https://github.com/BobAnkh/auto-generate-changelog/commit/6d20b1131256e313b7ef2842f38492daa2df7b64))
+
 ## [v1.0.3](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.3) - 2021-04-26 05:03:38
 
 Performance improvement for Dockerfile.

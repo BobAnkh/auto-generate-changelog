@@ -32,7 +32,7 @@ jobs:
         fetch-depth: 0
     - uses: BobAnkh/auto-generate-changelog@master
       with:
-        REPO_NAME: 'BobAnkh/auto-generate-changelog'
+        REPO_NAME: '<YourUserName>/<YourRepoName>'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: '/CHANGELOG.md'
         COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'

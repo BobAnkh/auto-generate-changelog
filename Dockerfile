@@ -1,4 +1,4 @@
-FROM python:3.9.5-slim
+FROM python:3.9.6-slim
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git=1:2.20.1-2+deb10u3 && \

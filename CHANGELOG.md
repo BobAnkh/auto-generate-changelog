@@ -4,6 +4,11 @@
 
 Changes unreleased.
 
+### Bug Fixes
+
+- release:
+  - exclude release commits not in git log history ([aed3b71](https://github.com/BobAnkh/auto-generate-changelog/commit/aed3b712c06c8781730fa3649fbf911bfcd40646))
+
 ### Documentation
 
 - README:
@@ -13,6 +18,11 @@ Changes unreleased.
 ## [v1.0.3](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.3) - 2021-04-26 05:03:38
 
 Performance improvement for Dockerfile.
+
+### Feature
+
+- changelog:
+  - support to create new file ([812a532](https://github.com/BobAnkh/auto-generate-changelog/commit/812a532d569106083c9b2f73978f8e435b64bc02))
 
 ### Documentation
 

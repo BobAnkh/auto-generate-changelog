@@ -5,11 +5,13 @@
 ![language-python](https://img.shields.io/github/languages/top/BobAnkh/auto-generate-changelog?logo=python&logoColor=yellow)
 ![LICENSE Apache-2.0](https://img.shields.io/github/license/BobAnkh/auto-generate-changelog?logo=apache)
 
-A Github Action to generate CHANGELOG automatically according to conventional commits
+A Github Action to generate CHANGELOG automatically according to conventional commits.
 
-Feel free to submit a pull request or an issue, but make sure to follow the templates
+Feel free to submit a pull request or an issue, but make sure to follow the templates.
 
 Welcome contributors to improve this project together!
+
+**If you like this, please give me a star!**
 
 ## Usage
 
@@ -30,7 +32,7 @@ jobs:
         fetch-depth: 0
     - uses: BobAnkh/auto-generate-changelog@master
       with:
-        REPO_NAME: 'BobAnkh/auto-generate-changelog'
+        REPO_NAME: '<YourUserName>/<YourRepoName>'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
         PATH: '/CHANGELOG.md'
         COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
@@ -43,17 +45,19 @@ jobs:
 
 ### Inputs
 
-| Inputs         | Description                                      | Required | Default                                       |
-| -------------- | ------------------------------------------------ | -------- | --------------------------------------------- |
-| REPO_NAME      | Repository name                                  | yes      | -                                             |
-| ACCESS_TOKEN   | Github Access Token                              | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}` |
-| PATH           | Path to the your file                            | no       | `/CHANGELOG.md`                               |
-| COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`       |
-| TYPE           | The type of commits you want to add to CHANGELOG | no       | 'feat:Feature,fix:Fix'                        |
+**Please see notes below the table for more optional features**.
+
+| Inputs         | Description                                      | Required | Default                                                   |
+| -------------- | ------------------------------------------------ | -------- | --------------------------------------------------------- |
+| REPO_NAME      | Repository name                                  | yes      | No. **Please do remember to change it to your repo name** |
+| ACCESS_TOKEN   | Github Access Token                              | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`             |
+| PATH           | Path to the your file                            | no       | `/CHANGELOG.md`                                           |
+| COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`                   |
+| TYPE           | The type of commits you want to add to CHANGELOG | no       | 'feat:Feature,fix:Fix'                                    |
 
 > You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
 >
-> NOTE: You can use `<branch>:<file>` format to specify the branch where your file is located. e.g. 'dev:/CHANGELOG.md'
+> NOTE: You can use `<branch>:<file>` format to **specify the branch** where your file is located. e.g. 'dev:/CHANGELOG.md'
 >
 > NOTE: You can use format below to avoid some lines in release description to appear in CHANGELOG:
 >

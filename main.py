@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-01-25 19:22:28
+# @LastEditTime : 2021-07-16 18:30:55
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -89,7 +89,7 @@ def set_env_from_file(file, args, prefix='INPUT'):
     ]
     for param in option_params:
         if param not in params.keys():
-            if args.token:
+            if param == 'ACCESS_TOKEN' and args.token:
                 tmp = args.token
             else:
                 tmp = input('Please input the value of ' + param + ':')
@@ -146,6 +146,7 @@ class GithubChangelog:
         for tag in tags:
             if tag.name in self.__releases:
                 self.__releases[tag.name]['commit_sha'] = tag.commit.sha
+        release_commit_sha_list = {self.__releases[x]['commit_sha']:x for x in self.__releases}
         release_tags = list(self.__releases.keys())[::-1]
         seq = 0
         commits = self.__repo.get_commits(sha=self.__branch).reversed
@@ -157,6 +158,7 @@ class GithubChangelog:
             if message_head[-3:] == '...' and len(message) > 1:
                 if message[1][0:3] == '...':
                     message_head = re.sub(r'  ', r' ', message_head[:-3] + ' ' + message[1].split('\n')[0][3:])
+            # TODO: #5 revert: remove from selected_commits
             url = commit.html_url
             pulls = commit.get_pulls()
             pr_links = []
@@ -171,8 +173,22 @@ class GithubChangelog:
                 self.__releases[release_tags[seq]]['commits'] = selected_commits[::-1]
                 selected_commits = []
                 seq = seq + 1
+            else:
+                if commit.sha in release_commit_sha_list:
+                    while (seq < release_tags.index(release_commit_sha_list[commit.sha])):
+                        print(f'\n[DEBUG]Skip {release_tags[seq]} because the release commit is not in the log history')
+                        self.__releases[release_tags[seq]]['commits'] = []
+                        seq = seq + 1
+                    if commit.sha == self.__releases[release_tags[seq]]['commit_sha']:
+                        self.__releases[release_tags[seq]]['commits'] = selected_commits[::-1]
+                        selected_commits = []
+                        seq = seq + 1
             pbar.update(1)
         pbar.close()
+        while (seq < len(release_tags) - 1):
+            print(f'\n[DEBUG]Skip {release_tags[seq]} because the release commit is not in the log history')
+            self.__releases[release_tags[seq]]['commits'] = []
+            seq = seq + 1
         self.__releases[release_tags[seq]]['commits'] = selected_commits[::-1]
         # get file content
         try:
@@ -216,6 +232,7 @@ def strip_commits(commits, type_regex):
     Returns:
         dict: selected commits of every scope.
     '''
+    # TODO: add an attribute to ignore scope 
     regex = r'^'+ type_regex + r'[(](.+?)[)]'
     scopes = {}
     for commit in commits:
@@ -273,6 +290,7 @@ def generate_release_body(release_commits, part_name):
         string: body part of release info
     '''
     release_body = ''
+    # TODO: add a new attribute to ignore some commits with another new function
     for part in part_name:
         regex, name = part.split(':')
         sec = generate_section(release_commits, regex)
@@ -350,7 +368,7 @@ def generate_changelog(releases, part_name):
 def main():
     args = argument_parser()
     if args.mode == 'local':
-        set_env_from_file('.github/workflows/changelog.yml', args)
+        set_env_from_file(args.file, args)
     elif args.mode == 'github':
         pass
     else:

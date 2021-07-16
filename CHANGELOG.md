@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Unreleased
+## [v1.0.4](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.4) - 2021-07-16 10:37:12
 
-Changes unreleased.
+Fix the problem of release tag commit not in the git log history with empty commits list given to the release. The corresponding section in CHANGELOG will be empty.
 
 ### Bug Fixes
 

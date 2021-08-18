@@ -55,6 +55,8 @@ jobs:
 | COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`                   |
 | TYPE           | The type of commits you want to add to CHANGELOG | no       | 'feat:Feature,fix:Fix'                                    |
 
+> `${{secrets.GITHUB_TOKEN}}` has a rate limit smaller than Personal Access Token, so if you have much more requests(commits, prs, etc.), use PAT instead.
+>
 > You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
 >
 > NOTE: You can use `<branch>:<file>` format to **specify the branch** where your file is located. e.g. 'dev:/CHANGELOG.md'

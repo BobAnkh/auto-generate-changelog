@@ -1,7 +1,7 @@
 FROM python:3.9.6-slim
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends git=1:2.20.1-2+deb10u3 && \
+    apt-cache madison git | awk '{print $3}'| xargs -i apt-get install -y --no-install-recommends git={} && \
     rm -rf /var/lib/apt/lists/*
 
 COPY main.py entrypoint.sh requirements.txt /

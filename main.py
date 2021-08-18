@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-08-18 10:18:12
+# @LastEditTime : 2021-08-18 10:42:18
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -85,7 +85,7 @@ def set_env_from_file(file, args, prefix='INPUT'):
                 params = step['with']
                 break
     option_params = [
-        'REPO_NAME', 'ACCESS_TOKEN', 'PATH', 'COMMIT_MESSAGE', 'TYPE'
+        'REPO_NAME', 'ACCESS_TOKEN', 'PATH', 'COMMIT_MESSAGE', 'TYPE', 'COMMITTER'
     ]
     for param in option_params:
         if param not in params.keys():
@@ -112,7 +112,7 @@ class GithubChangelog:
 
     Use it to get changelog data and file content from Github and write new file content to Github
     '''
-    def __init__(self, ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, COMMIT_MESSAGE):
+    def __init__(self, ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, COMMIT_MESSAGE, COMMITTER):
         '''
         Initial GithubContributors
 
@@ -122,6 +122,7 @@ class GithubChangelog:
             PATH (str): The path to the file
             BRANCH (str): The branch of the file
             COMMIT_MESSAGE (str): Commit message you want to use
+            COMMITTER (str): Committer you want to use to commit the file
         '''
         self.__commit_message = COMMIT_MESSAGE
         self.__path = PATH
@@ -134,7 +135,7 @@ class GithubChangelog:
         # References: https://pygithub.readthedocs.io/en/latest/github_objects/Repository.html#github.Repository.Repository
         g = github.Github(ACCESS_TOKEN)
         self.__repo = g.get_repo(REPO_NAME)
-        self.__author = github.InputGitAuthor('github-actions[bot]', '41898282+github-actions[bot]@users.noreply.github.com')
+        self.__author = github.GithubObject.NotSet if COMMITTER == '' else github.InputGitAuthor(COMMITTER.split(' ')[0], COMMITTER.split(' ')[1])
 
     def get_data(self):
         # get release info
@@ -379,13 +380,14 @@ def main():
     REPO_NAME = get_inputs('REPO_NAME')
     PATH = get_inputs('PATH')
     COMMIT_MESSAGE = get_inputs('COMMIT_MESSAGE')
+    COMMITTER = get_inputs('COMMITTER')
     if re.match(r'.*:.*', PATH):
         BRANCH = re.sub(r':.*', '', PATH)
         PATH = re.sub(r'.*:', '', PATH)
     else:
         BRANCH = github.GithubObject.NotSet
     part_name = re.split(r'\s?,\s?', get_inputs('TYPE'))
-    changelog = GithubChangelog(ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, COMMIT_MESSAGE)
+    changelog = GithubChangelog(ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, COMMIT_MESSAGE, COMMITTER)
     changelog.get_data()
 
     CHANGELOG = generate_changelog(changelog.read_releases(), part_name)

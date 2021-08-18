@@ -23,6 +23,10 @@ inputs:
     description: "The type of commits you want to add to CHANGELOG"
     required: false
     default: 'feat:Feature,fix:Fix'
+  COMMITTER:
+    description: "The name and email of the committer. e.g. 'author <author@example.com>'"
+    required: false
+    default: ''
 runs:
   using: "docker"
   image: "Dockerfile"

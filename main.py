@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-07-16 18:30:55
+# @LastEditTime : 2021-08-18 10:18:12
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -134,6 +134,7 @@ class GithubChangelog:
         # References: https://pygithub.readthedocs.io/en/latest/github_objects/Repository.html#github.Repository.Repository
         g = github.Github(ACCESS_TOKEN)
         self.__repo = g.get_repo(REPO_NAME)
+        self.__author = github.InputGitAuthor('github-actions[bot]', '41898282+github-actions[bot]@users.noreply.github.com')
 
     def get_data(self):
         # get release info
@@ -215,10 +216,10 @@ class GithubChangelog:
         else:
             if self.__file_exists:
                 self.__repo.update_file(self.__path, self.__commit_message, changelog,
-                                    self.__sha, self.__branch)
+                                    self.__sha, self.__branch, self.__author)
             else:
                 self.__repo.create_file(self.__path, self.__commit_message, changelog,
-                                    self.__branch)
+                                    self.__branch, self.__author)
 
 
 def strip_commits(commits, type_regex):

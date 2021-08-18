@@ -7,6 +7,7 @@ Changes unreleased.
 ### Feature
 
 - changelog:
+  - add new input param COMMITTER ([741e5f3](https://github.com/BobAnkh/auto-generate-changelog/commit/741e5f3f130283e749fea0526bed1c2c3cd7fcb4))
   - specify commiter ([61c0ba1](https://github.com/BobAnkh/auto-generate-changelog/commit/61c0ba1706d112abcab006f6ae404dce644bd4f7))
 
 ### Documentation

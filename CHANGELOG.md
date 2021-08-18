@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Unreleased
+## [v1.0.6](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.6) - 2021-08-18 02:51:28
 
-Changes unreleased.
+Feature: Add new input param `COMMITTER` for user to specify the committer to update file. It should be in format like `author <author@example>`
 
 ### Feature
 

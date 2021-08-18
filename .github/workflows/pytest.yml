@@ -32,4 +32,15 @@ jobs:
         pytest --cov=./ --cov-report=xml
     - name: Code Coverage Report Upload
       uses: codecov/codecov-action@v1
-
+  build-test:
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Build test
+      run: |
+        docker build .

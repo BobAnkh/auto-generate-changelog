@@ -6,6 +6,20 @@ Changes unreleased.
 
 ### Feature
 
+- changelog:
+  - specify commiter ([61c0ba1](https://github.com/BobAnkh/auto-generate-changelog/commit/61c0ba1706d112abcab006f6ae404dce644bd4f7))
+
+### Documentation
+
+- README:
+  - update usage for token ([4bcbaff](https://github.com/BobAnkh/auto-generate-changelog/commit/4bcbaff70b2325361036b9584bf43ed85cb832b5))
+
+## [v1.0.5](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.5) - 2021-08-18 01:41:46
+
+Bugfix: automatically detect git version used in docker build to avoid mismatching git version
+
+### Feature
+
 - dockerfile:
   - add auto-detect git version ([d13f31d](https://github.com/BobAnkh/auto-generate-changelog/commit/d13f31df06904cb98e7b9e2404052829a0b12df9))
 

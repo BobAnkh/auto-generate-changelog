@@ -12,6 +12,11 @@ Changes unreleased.
 - param:
   - add repo detect and BRANCH option ([d7b7a99](https://github.com/BobAnkh/auto-generate-changelog/commit/d7b7a992110cd9454b29d4496f6b68b303a12e35))
 
+### Bug Fixes
+
+- pull:
+  - resolve missing arguments ([adc6b0d](https://github.com/BobAnkh/auto-generate-changelog/commit/adc6b0d3a444ca2b19bb2ee863a9e2e7cf0e2282))
+
 ### Documentation
 
 - readme:

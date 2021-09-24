@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Unreleased
+
+Changes unreleased.
+
+### Feature
+
+- param:
+  - add repo detect and BRANCH option ([d7b7a99](https://github.com/BobAnkh/auto-generate-changelog/commit/d7b7a992110cd9454b29d4496f6b68b303a12e35))
+
 ## [v1.0.6](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.6) - 2021-08-18 02:51:28
 
 Feature: Add new input param `COMMITTER` for user to specify the committer to update file. It should be in format like `author <author@example>`

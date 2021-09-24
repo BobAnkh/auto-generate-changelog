@@ -47,15 +47,16 @@ jobs:
 
 **Please see notes below the table for more optional features**.
 
-| Inputs         | Description                                      | Required | Default                                                   |
-| -------------- | ------------------------------------------------ | -------- | --------------------------------------------------------- |
-| REPO_NAME      | Repository name                                  | no       | `''` which means current repository                       |
-| ACCESS_TOKEN   | Github Access Token                              | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`             |
-| PATH           | Path to the your file                            | no       | `/CHANGELOG.md`                                           |
-| BRANCH         | The branch to update file specified in PATH      | no       | `''` which means default branch                           |
-| COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`                   |
-| TYPE           | The type of commits you want to add to CHANGELOG | no       | `'feat:Feature,fix:Fix'`                                  |
-| COMMITTER      | The committer you want to use to update file     | no       | `''` which means default committer                        |
+| Inputs         | Description                                                 | Required | Default                                                   |
+| -------------- | ----------------------------------------------------------- | -------- | --------------------------------------------------------- |
+| REPO_NAME      | Repository name                                             | no       | `''` which means current repository                       |
+| ACCESS_TOKEN   | Github Access Token                                         | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`             |
+| PATH           | Path to the your file                                       | no       | `/CHANGELOG.md`                                           |
+| BRANCH         | The branch to update file specified in PATH                 | no       | `''` which means default branch                           |
+| PULL_REQUEST   | Open a new pull request if set to a target branch name      | no       | `''` which means not open pull request by default         |
+| COMMIT_MESSAGE | commit message                                              | no       | `docs(CHANGELOG): update release notes`                   |
+| TYPE           | The type of commits you want to add to CHANGELOG            | no       | `'feat:Feature,fix:Fix'`                                  |
+| COMMITTER      | The committer you want to use to update file                | no       | `''` which means default committer                        |
 
 > `${{secrets.GITHUB_TOKEN}}` has a rate limit smaller than Personal Access Token, so if you have much more requests(commits, prs, etc.), use PAT instead.
 >

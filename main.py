@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-09-24 10:59:18
+# @LastEditTime : 2021-09-24 16:33:36
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -116,7 +116,7 @@ class GithubChangelog:
 
     Use it to get changelog data and file content from Github and write new file content to Github
     '''
-    def __init__(self, ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, COMMIT_MESSAGE, COMMITTER):
+    def __init__(self, ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, PULL_REQUEST, COMMIT_MESSAGE, COMMITTER):
         '''
         Initial GithubContributors
 
@@ -125,12 +125,14 @@ class GithubChangelog:
             REPO_NAME (str): The name of the repository
             PATH (str): The path to the file
             BRANCH (str): The branch of the file
+            PULL_REQUEST (str): Pull request target branch, none means do not open a pull request
             COMMIT_MESSAGE (str): Commit message you want to use
             COMMITTER (str): Committer you want to use to commit the file
         '''
         self.__commit_message = COMMIT_MESSAGE
         self.__path = PATH
         self.__branch = BRANCH
+        self.__pull_request = PULL_REQUEST
         self.__sha = ''
         self.__releases = {}
         self.__changelog = ''
@@ -225,6 +227,9 @@ class GithubChangelog:
             else:
                 self.__repo.create_file(self.__path, self.__commit_message, changelog,
                                     self.__branch, self.__author)
+            print(f'[DEBUG] BRANCH: {self.__branch}, PULL_REQUEST: {self.__pull_request}')
+            if self.__pull_request != '' and self.__pull_request != self.__branch:
+                self.repo.create_pull(title=self.__commit_message, base=self.__pull_request, head=self.__branch)
 
 
 def strip_commits(commits, type_regex):
@@ -388,10 +393,11 @@ def main():
     BRANCH = get_inputs('BRANCH')
     if BRANCH == '':
         BRANCH = github.GithubObject.NotSet
+    PULL_REQUEST = get_inputs('PULL_REQUEST')
     COMMIT_MESSAGE = get_inputs('COMMIT_MESSAGE')
     COMMITTER = get_inputs('COMMITTER')
     part_name = re.split(r'\s?,\s?', get_inputs('TYPE'))
-    changelog = GithubChangelog(ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, COMMIT_MESSAGE, COMMITTER)
+    changelog = GithubChangelog(ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, PULL_REQUEST, COMMIT_MESSAGE, COMMITTER)
     changelog.get_data()
 
     CHANGELOG = generate_changelog(changelog.read_releases(), part_name)

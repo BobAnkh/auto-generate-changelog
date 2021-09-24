@@ -20,6 +20,10 @@ inputs:
     description: "The branch to update file specified in PATH"
     required: false
     default: ''
+  PULL_REQUEST:
+    description: "Open a new pull request if set to a target branch name"
+    required: false
+    default: ''
   COMMIT_MESSAGE:
     description: "Commit message"
     required: false

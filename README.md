@@ -49,20 +49,19 @@ jobs:
 
 | Inputs         | Description                                      | Required | Default                                                   |
 | -------------- | ------------------------------------------------ | -------- | --------------------------------------------------------- |
-| REPO_NAME      | Repository name                                  | yes      | No. **Please do remember to change it to your repo name** |
+| REPO_NAME      | Repository name                                  | no       | `''` which means current repository                       |
 | ACCESS_TOKEN   | Github Access Token                              | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`             |
 | PATH           | Path to the your file                            | no       | `/CHANGELOG.md`                                           |
+| BRANCH         | The branch to update file specified in PATH      | no       | `''` which means default branch                           |
 | COMMIT_MESSAGE | commit message                                   | no       | `docs(CHANGELOG): update release notes`                   |
-| TYPE           | The type of commits you want to add to CHANGELOG | no       | 'feat:Feature,fix:Fix'                                    |
-| COMMITTER      | The committer you want to use to update file     | no       | ''                                                        |
+| TYPE           | The type of commits you want to add to CHANGELOG | no       | `'feat:Feature,fix:Fix'`                                  |
+| COMMITTER      | The committer you want to use to update file     | no       | `''` which means default committer                        |
 
 > `${{secrets.GITHUB_TOKEN}}` has a rate limit smaller than Personal Access Token, so if you have much more requests(commits, prs, etc.), use PAT instead.
 >
 > `COMMITTER` should be in the format: `'author <author.example>'`
 >
 > You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
->
-> NOTE: You can use `<branch>:<file>` format to **specify the branch** where your file is located. e.g. 'dev:/CHANGELOG.md'
 >
 > NOTE: You can use format below to avoid some lines in release description to appear in CHANGELOG:
 >

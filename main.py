@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-08-18 10:42:18
+# @LastEditTime : 2021-09-24 10:59:18
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -40,32 +40,34 @@ def argument_parser():
     return args
 
 
-def set_local_env(env_name, env_value, prefix='INPUT'):
+def set_local_env(env_name: str, env_value: str, prefix='INPUT'):
     '''
     set local env for dev
 
     Args:
-        env_name (str): local env name
-        env_value (str): value of local env name
+        env_name (str): local env name.
+        env_value (str): value of local env name.
+        prefix (str, optional): prefix of env variable. Defaults to 'INPUT'.
     '''
     os.environ[prefix + '_{}'.format(env_name).upper()] = env_value
 
 
-def get_inputs(input_name):
+def get_inputs(input_name: str, prefix='INPUT') -> str:
     '''
     Get a Github actions input by name
 
     Args:
-        input_name (str): input_name in workflow file
+        input_name (str): input_name in workflow file.
+        prefix (str, optional): prefix of input variable. Defaults to 'INPUT'.
 
     Returns:
-        string: action_input
+        str: action_input
 
     References
     ----------
     [1] https://help.github.com/en/actions/automating-your-workflow-with-github-actions/metadata-syntax-for-github-actions#example
     '''
-    return os.getenv('INPUT_{}'.format(input_name).upper())
+    return os.getenv(prefix + '_{}'.format(input_name).upper())
 
 
 def set_env_from_file(file, args, prefix='INPUT'):
@@ -101,6 +103,8 @@ def set_env_from_file(file, args, prefix='INPUT'):
                     tmp = input('Please input the value of ' + param + ':')
             else:
                 tmp = params[param]
+        elif param == 'REPO_NAME' and params[param] == '':
+            tmp = input('Please input the value of ' + param + ':')
         else:
             tmp = params[param]
         set_local_env(param, tmp, prefix)
@@ -378,14 +382,14 @@ def main():
         os.exit()
     ACCESS_TOKEN = get_inputs('ACCESS_TOKEN')
     REPO_NAME = get_inputs('REPO_NAME')
+    if REPO_NAME == '':
+        REPO_NAME = get_inputs('REPOSITORY', 'GITHUB')
     PATH = get_inputs('PATH')
+    BRANCH = get_inputs('BRANCH')
+    if BRANCH == '':
+        BRANCH = github.GithubObject.NotSet
     COMMIT_MESSAGE = get_inputs('COMMIT_MESSAGE')
     COMMITTER = get_inputs('COMMITTER')
-    if re.match(r'.*:.*', PATH):
-        BRANCH = re.sub(r':.*', '', PATH)
-        PATH = re.sub(r'.*:', '', PATH)
-    else:
-        BRANCH = github.GithubObject.NotSet
     part_name = re.split(r'\s?,\s?', get_inputs('TYPE'))
     changelog = GithubChangelog(ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, COMMIT_MESSAGE, COMMITTER)
     changelog.get_data()

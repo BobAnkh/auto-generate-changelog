@@ -7,7 +7,8 @@ branding:
 inputs:
   REPO_NAME:
     description: "The name of the repo: user/repo_name"
-    required: true
+    required: false
+    default: ''
   ACCESS_TOKEN:
     description: "Github Access Token you want to use. Just pass GITHUB_TOKEN"
     required: true
@@ -15,6 +16,10 @@ inputs:
     description: "Path to the file you want to add contributors' list. You can use <branch>:<file> format to specify the branch"
     required: false
     default: '/CHANGELOG.md'
+  BRANCH:
+    description: "The branch to update file specified in PATH"
+    required: false
+    default: ''
   COMMIT_MESSAGE:
     description: "Commit message"
     required: false

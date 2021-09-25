@@ -20,8 +20,12 @@ Changes unreleased.
 ### Documentation
 
 - readme:
+  - update usage for new param ([16df1a0](https://github.com/BobAnkh/auto-generate-changelog/commit/16df1a0bae9972c7112738b6059540c5688481bd))
   - update usage for new param ([06a8569](https://github.com/BobAnkh/auto-generate-changelog/commit/06a8569a5d62765e94f300725cd38c6309ec1ff5))
   - update usage for params ([53f175c](https://github.com/BobAnkh/auto-generate-changelog/commit/53f175c06b93eb9c17b037293846175694083698))
+
+- README:
+  - update contributors ([89e0465](https://github.com/BobAnkh/auto-generate-changelog/commit/89e0465a8f694fd619022020fe9843392701877b))
 
 ## [v1.0.6](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.6) - 2021-08-18 02:51:28
 

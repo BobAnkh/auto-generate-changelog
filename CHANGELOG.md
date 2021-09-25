@@ -1,8 +1,13 @@
 # CHANGELOG
 
-## Unreleased
+## [v1.0.7](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.7) - 2021-09-25 02:36:00
 
-Changes unreleased.
+New Feature:
+- Split param `PATH` into `PATH` and `BRANCH`: you can specify which file path in `PATH` param and which branch to update changes in `BRANCH` param.
+- Add new param `PULL_REQUEST`, which must be used together with param `BRANCH`. Default set to `''` means not to open a pull request. You can set a target branch name in `PULL_REQUEST` that is different with `BRANCH` so that to do the following things:
+    - Commit changes(if have) to file specified in `PATH` in `BRANCH`(if not set means default branch)
+    - If `PULL_REQUEST` set to a different branch with `BRANCH` then a new pull request will be opened.
+  
 
 ### Feature
 

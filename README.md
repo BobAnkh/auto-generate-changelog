@@ -61,7 +61,9 @@ jobs:
 > `${{secrets.GITHUB_TOKEN}}` has a rate limit smaller than Personal Access Token, so if you have much more requests(commits, prs, etc.), use PAT instead.
 >
 > `COMMITTER` should be in the format: `'author <author.example>'`
->
+> 
+> NOTE: `PULL_REQUEST` must be used with `BRANCH` together, both **should be provided** if you want to **open a pull request**
+> 
 > You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
 >
 > NOTE: You can use format below to avoid some lines in release description to appear in CHANGELOG:

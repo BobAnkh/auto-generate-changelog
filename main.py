@@ -87,7 +87,7 @@ def set_env_from_file(file, args, prefix='INPUT'):
                 params = step['with']
                 break
     option_params = [
-        'REPO_NAME', 'ACCESS_TOKEN', 'PATH', 'COMMIT_MESSAGE', 'TYPE', 'COMMITTER'
+        'REPO_NAME', 'ACCESS_TOKEN', 'PATH', 'COMMIT_MESSAGE', 'TYPE', 'COMMITTER', 'DEFAULT_SCOPE', 'SUPPRESS_UNSCOPED'
     ]
     for param in option_params:
         if param not in params.keys():
@@ -232,26 +232,33 @@ class GithubChangelog:
                 self.repo.create_pull(title=self.__commit_message, body=self.__commit_message, base=self.__pull_request, head=self.__branch, draft=False, maintainer_can_modify=True)
 
 
-def strip_commits(commits, type_regex):
+def strip_commits(commits, type_regex, default_scope, suppress_unscoped):
     '''
     Bypass some commits
 
     Args:
         commits (list): list of commit(dict), whose keys are 'head', 'sha', 'url', 'pr_links'
         type_regex (string): regex expression to match.
+        default_scope (str): scope which matches all un-scoped commits
+        suppress_unscoped (bool): flag which suppresses entries for un-scoped commits
 
     Returns:
         dict: selected commits of every scope.
     '''
     # TODO: add an attribute to ignore scope 
-    regex = r'^'+ type_regex + r'[(](.+?)[)]'
+    regex = r'^' + type_regex + r'(?:[(](.+?)[)])?'
     scopes = {}
     for commit in commits:
-        if re.match(regex, commit['head']):
-            scope = re.findall(regex, commit['head'])[0]
-            if scope.lower() == 'changelog' and regex == r'^docs[(](.+?)[)]':
+        head = commit['head']
+        if re.match(regex, head):
+            scope = re.findall(regex, head)[0]
+            if scope == '':
+                if suppress_unscoped:
+                    continue
+                scope = default_scope
+            if scope.lower() == 'changelog' and regex == r'^docs(?:[(](.+?)[)])?':
                 continue
-            subject = re.sub(regex + r'\s?:\s?', '', commit['head'])
+            subject = re.sub(regex + r'\s?:\s?', '', head)
             if scope in scopes:
                 scopes[scope].append({'subject': subject, 'commit': commit})
             else:
@@ -260,19 +267,21 @@ def strip_commits(commits, type_regex):
     return scopes
 
 
-def generate_section(release_commits, regex):
+def generate_section(release_commits, regex, default_scope, suppress_unscoped):
     '''
     Generate scopes of a section
 
     Args:
         release_commits (dict): commits of the release
         regex (string): regex expression
+        default_scope (str): scope which matches all un-scoped commits
+        suppress_unscoped (bool): flag which suppresses entries for un-scoped commits
 
     Returns:
         string: content of section
     '''
     section = ''
-    scopes = strip_commits(release_commits, regex)
+    scopes = strip_commits(release_commits, regex, default_scope, suppress_unscoped)
     for scope in scopes:
         scope_content = f'''- {scope}:\n'''
         for sel_commit in scopes[scope]:
@@ -289,13 +298,15 @@ def generate_section(release_commits, regex):
     return section
 
 
-def generate_release_body(release_commits, part_name):
+def generate_release_body(release_commits, part_name, default_scope, suppress_unscoped):
     '''
     Generate release body using part_name_dict and regex_list
 
     Args:
         release_commits (dict): commits of the release
         part_name (list): a list of part_name, e.g. feat:Feature
+        default_scope (str): scope which matches all un-scoped commits
+        suppress_unscoped (bool): flag which suppresses entries for un-scoped commits
 
     Returns:
         string: body part of release info
@@ -304,19 +315,21 @@ def generate_release_body(release_commits, part_name):
     # TODO: add a new attribute to ignore some commits with another new function
     for part in part_name:
         regex, name = part.split(':')
-        sec = generate_section(release_commits, regex)
+        sec = generate_section(release_commits, regex, default_scope, suppress_unscoped)
         if sec != '':
             release_body = release_body + '### ' + name + '\n\n' + sec
     return release_body
 
 
-def generate_changelog(releases, part_name):
+def generate_changelog(releases, part_name, default_scope, suppress_unscoped):
     '''
     Generate CHANGELOG
 
     Args:
         releases: dict of release data
         part_name (list): a list of part_name, e.g. feat:Feature
+        default_scope (str): scope which matches all un-scoped commits
+        suppress_unscoped (bool): flag which suppresses entries for un-scoped commits
 
     Returns:
         string: content of CHANGELOG
@@ -363,7 +376,7 @@ def generate_changelog(releases, part_name):
             if description == '':
                 description = '*No description*'
             release_info = f'''## [{title}]({url}) - {date}\n\n{description}\n\n'''
-        release_body = generate_release_body(release_commits, part_name)
+        release_body = generate_release_body(release_commits, part_name, default_scope, suppress_unscoped)
         if release_body == '' and release_tag == 'Unreleased':
             continue
         else:
@@ -397,10 +410,12 @@ def main():
     COMMIT_MESSAGE = get_inputs('COMMIT_MESSAGE')
     COMMITTER = get_inputs('COMMITTER')
     part_name = re.split(r'\s?,\s?', get_inputs('TYPE'))
+    DEFAULT_SCOPE = get_inputs('DEFAULT_SCOPE')
+    SUPPRESS_UNSCOPED = get_inputs('SUPPRESS_UNSCOPED')
     changelog = GithubChangelog(ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, PULL_REQUEST, COMMIT_MESSAGE, COMMITTER)
     changelog.get_data()
 
-    CHANGELOG = generate_changelog(changelog.read_releases(), part_name)
+    CHANGELOG = generate_changelog(changelog.read_releases(), part_name, DEFAULT_SCOPE, SUPPRESS_UNSCOPED == 'true')
 
     if args.mode == 'local':
         with open(args.output, 'w', encoding='utf-8') as f:

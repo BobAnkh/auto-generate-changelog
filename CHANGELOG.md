@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Unreleased
+## [v1.1.0](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.1.0) - 2021-11-16 17:38:44
 
-Changes unreleased.
+Fix the bug that unscoped commits will now be picked up by default and listed under the scope `general`, which is configured by the new param `DEFAULT_SCOPE`. And if you don't want any unscoped commits to show up in your changelog, you can set param `SUPPRESS_UNSCOPED` to true (default to false).
 
 ### Feature
 

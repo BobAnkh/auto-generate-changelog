@@ -244,14 +244,17 @@ def strip_commits(commits, type_regex):
         dict: selected commits of every scope.
     '''
     # TODO: add an attribute to ignore scope 
-    regex = r'^'+ type_regex + r'[(](.+?)[)]'
+    regex = r'^' + type_regex + r'(?:[(](.+?)[)])?'
     scopes = {}
     for commit in commits:
-        if re.match(regex, commit['head']):
-            scope = re.findall(regex, commit['head'])[0]
-            if scope.lower() == 'changelog' and regex == r'^docs[(](.+?)[)]':
+        head = commit['head']
+        if re.match(regex, head):
+            scope = re.findall(regex, head)[0]
+            if scope == '':
+                scope = 'all'
+            if scope.lower() == 'changelog' and regex == r'^docs(?:[(](.+?)[)])?':
                 continue
-            subject = re.sub(regex + r'\s?:\s?', '', commit['head'])
+            subject = re.sub(regex + r'\s?:\s?', '', head)
             if scope in scopes:
                 scopes[scope].append({'subject': subject, 'commit': commit})
             else:

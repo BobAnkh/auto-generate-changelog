@@ -42,21 +42,21 @@ def test_env(generate_env):
 
 @pytest.mark.parametrize("commits, regex, scopes", case['test_strip_commits'])
 def test_strip_commits(commits, regex, scopes):
-    assert scopes == main.strip_commits(commits, regex)
+    assert scopes == main.strip_commits(commits, regex, "general", False)
 
 
 @pytest.mark.parametrize("release_commits, type_regex, sec", case['test_generate_section'])
 def test_generate_section(release_commits, type_regex, sec):
-    assert sec == main.generate_section(release_commits, type_regex)
+    assert sec == main.generate_section(release_commits, type_regex, "general", False)
 
 
 @pytest.mark.parametrize("release_commits, part_name, release_body", case['test_generate_release_body'])
 def test_generate_release_body(release_commits, part_name, release_body):
-    assert release_body == main.generate_release_body(release_commits, part_name)
+    assert release_body == main.generate_release_body(release_commits, part_name, "general", False)
 
 
 @pytest.mark.parametrize("releases, part_name, changelog", case['test_generate_changelog'])
 def generate_changelog(releases, part_name, changelog):
     for release in releases:
         releases[release]['created_at'] = datetime.datetime(2000, 1, 2, 3, 4, 5)
-    assert changelog == main.generate_changelog(releases, part_name)
+    assert changelog == main.generate_changelog(releases, part_name, "general", False)

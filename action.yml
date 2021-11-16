@@ -36,6 +36,14 @@ inputs:
     description: "The name and email of the committer. e.g. 'author <author@example.com>'"
     required: false
     default: ''
+  DEFAULT_SCOPE:
+    description: "The scope under which unscoped commits can be found e.g. 'fix: some general fix'"
+    required: false
+    default: 'general'
+  SUPPRESS_UNSCOPED:
+    description: "Suppress the generation of release notes for un-scoped commits e.g. 'fix: some general fix'"
+    required: false
+    default: 'false'
 runs:
   using: "docker"
   image: "Dockerfile"

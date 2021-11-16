@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Unreleased
+
+Changes unreleased.
+
+### Feature
+
+- main:
+  - add options to configure scope related behaviour (#75) ([d9d66d2](https://github.com/BobAnkh/auto-generate-changelog/commit/d9d66d2893adc3b342d018c65741d9aee56fc715)) ([#75](https://github.com/BobAnkh/auto-generate-changelog/pull/75))
+
 ## [v1.0.7](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.0.7) - 2021-09-25 02:36:00
 
 New Feature:
@@ -156,6 +165,11 @@ BREAKING CHANGE: FEAT,FIX,DOCS,CHORE,REFACTOR,PERF are removed.
 ## [v0.0.4](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v0.0.4) - 2020-09-05 12:03:11
 
 This might be the last release for this major version. I'm going to refactor the code to give more flexibility to the users in the future.
+
+### Feature
+
+- general:
+  - feature(main): add a newline to end of changelog ([e40fb49](https://github.com/BobAnkh/auto-generate-changelog/commit/e40fb4969d0b8d9f7ebc960bee346fee4474318b))
 
 ### Bug Fixes
 

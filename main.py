@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-12-29 09:16:06
+# @LastEditTime : 2021-12-29 09:26:46
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -278,10 +278,14 @@ class GithubChangelog:
                             self.__pull_request).commit.sha
                         self.__repo.create_git_ref(
                             f'refs/heads/{self.__branch}', new_sha)
-                        self.__repo.create_file(self.__path,
-                                                self.__commit_message,
-                                                changelog, self.__branch,
-                                                self.__author)
+                        try:
+                            self.__repo.create_file(self.__path,
+                                                    self.__commit_message,
+                                                    changelog, self.__branch,
+                                                    self.__author)
+                        except github.GithubException as e:
+                            print(f'[DEBUG] {self.__path}, {self.__commit_message}, {self.__branch}, {self.__author}')
+                            raise github.GithubException(e.status, e.data)
                     else:
                         raise github.GithubException(e.status, e.data)
 

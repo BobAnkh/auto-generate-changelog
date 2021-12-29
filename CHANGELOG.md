@@ -4,7 +4,15 @@
 
 Changes unreleased.
 
+### Feature
+
+- pr:
+  - create pr before submit content ([ccf0820](https://github.com/BobAnkh/auto-generate-changelog/commit/ccf08204e598f60cbff9316fb703a8e2341a8d32))
+
 ### Bug Fixes
+
+- commit:
+  - get default if branch not exist ([dcb039a](https://github.com/BobAnkh/auto-generate-changelog/commit/dcb039a2e51368f2307cc73b94e2620b12ca7f26))
 
 - main:
   - resolve pull request create ([de73071](https://github.com/BobAnkh/auto-generate-changelog/commit/de73071728fbe374e1c16397d4175ea50d66afa8))

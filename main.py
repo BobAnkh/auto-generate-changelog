@@ -230,6 +230,9 @@ class GithubChangelog:
             print(f'[DEBUG] Same changelog. Not push.')
             pass
         else:
+            if self.__pull_request != '' and self.__pull_request != self.__branch:
+                print(f'[DEBUG] Create pull request from {self.__branch} to {self.__pull_request}')
+                self.__repo.create_pull(title=self.__commit_message, body=self.__commit_message, base=self.__pull_request, head=self.__branch, draft=False, maintainer_can_modify=True)
             if self.__file_exists:
                 print(f'[DEBUG] Update changelog')
                 self.__repo.update_file(self.__path, self.__commit_message, changelog,
@@ -238,10 +241,7 @@ class GithubChangelog:
                 print(f'[DEBUG] Create changelog.')
                 self.__repo.create_file(self.__path, self.__commit_message, changelog,
                                     self.__branch, self.__author)
-            print(f'[DEBUG] BRANCH: {self.__branch}, PULL_REQUEST: {self.__pull_request}')
-            if self.__pull_request != '' and self.__pull_request != self.__branch:
-                print(f'[DEBUG] Create pull request from {self.__branch} to {self.__pull_request}')
-                self.__repo.create_pull(title=self.__commit_message, body=self.__commit_message, base=self.__pull_request, head=self.__branch, draft=False, maintainer_can_modify=True)
+            print(f'[DEBUG] BRANCH: {self.__branch}, PULL_REQUEST: {self.__pull_request}')   
 
 
 def strip_commits(commits, type_regex, default_scope, suppress_unscoped):

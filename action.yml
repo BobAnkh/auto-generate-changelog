@@ -15,7 +15,7 @@ inputs:
   PATH:
     description: "Path to the file you want to add contributors' list. You can use <branch>:<file> format to specify the branch"
     required: false
-    default: '/CHANGELOG.md'
+    default: 'CHANGELOG.md'
   BRANCH:
     description: "The branch to update file specified in PATH"
     required: false

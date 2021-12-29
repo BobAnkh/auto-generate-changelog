@@ -34,7 +34,7 @@ jobs:
       with:
         REPO_NAME: '<YourUserName>/<YourRepoName>'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        PATH: '/CHANGELOG.md'
+        PATH: 'CHANGELOG.md'
         COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
         TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
 ```

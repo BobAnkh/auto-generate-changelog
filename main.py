@@ -229,7 +229,7 @@ class GithubChangelog:
                                     self.__branch, self.__author)
             print(f'[DEBUG] BRANCH: {self.__branch}, PULL_REQUEST: {self.__pull_request}')
             if self.__pull_request != '' and self.__pull_request != self.__branch:
-                self.repo.create_pull(title=self.__commit_message, body=self.__commit_message, base=self.__pull_request, head=self.__branch, draft=False, maintainer_can_modify=True)
+                self.__repo.create_pull(title=self.__commit_message, body=self.__commit_message, base=self.__pull_request, head=self.__branch, draft=False, maintainer_can_modify=True)
 
 
 def strip_commits(commits, type_regex, default_scope, suppress_unscoped):

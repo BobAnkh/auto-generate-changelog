@@ -4,6 +4,11 @@
 
 Changes unreleased.
 
+### Bug Fixes
+
+- main:
+  - resolve pull request create ([de73071](https://github.com/BobAnkh/auto-generate-changelog/commit/de73071728fbe374e1c16397d4175ea50d66afa8))
+
 ### Documentation
 
 - readme:

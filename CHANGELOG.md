@@ -12,6 +12,10 @@ Changes unreleased.
 
 ### Bug Fixes
 
+- pr:
+  - add check before create ([4d502dd](https://github.com/BobAnkh/auto-generate-changelog/commit/4d502dddbbfcc12b7d22f8e9b92bb1d1c5ad0202))
+  - log dbg msg if fail to create ([5f9a23a](https://github.com/BobAnkh/auto-generate-changelog/commit/5f9a23a856eef22ee4dc717e89e5c23800e84429))
+
 - commit:
   - get default if branch not exist ([dcb039a](https://github.com/BobAnkh/auto-generate-changelog/commit/dcb039a2e51368f2307cc73b94e2620b12ca7f26))
 

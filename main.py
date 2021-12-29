@@ -157,7 +157,15 @@ class GithubChangelog:
         release_commit_sha_list = {self.__releases[x]['commit_sha']:x for x in self.__releases}
         release_tags = list(self.__releases.keys())[::-1]
         seq = 0
-        commits = self.__repo.get_commits(sha=self.__branch).reversed
+        # Get commits
+        try:
+            commits = self.__repo.get_commits(sha=self.__branch).reversed
+        except github.GithubException as e:
+            if e.status == 404:
+                commits = self.__repo.get_commits().reversed
+            else:
+                raise github.GithubException(e.status, e.data)
+
         selected_commits = []
         pbar = tqdm(desc='Commits progress', total=commits.totalCount)
         for commit in commits:

@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-09-24 16:33:36
+# @LastEditTime : 2021-12-29 09:16:06
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -87,7 +87,8 @@ def set_env_from_file(file, args, prefix='INPUT'):
                 params = step['with']
                 break
     option_params = [
-        'REPO_NAME', 'ACCESS_TOKEN', 'PATH', 'COMMIT_MESSAGE', 'TYPE', 'COMMITTER', 'DEFAULT_SCOPE', 'SUPPRESS_UNSCOPED'
+        'REPO_NAME', 'ACCESS_TOKEN', 'PATH', 'COMMIT_MESSAGE', 'TYPE',
+        'COMMITTER', 'DEFAULT_SCOPE', 'SUPPRESS_UNSCOPED'
     ]
     for param in option_params:
         if param not in params.keys():
@@ -116,7 +117,9 @@ class GithubChangelog:
 
     Use it to get changelog data and file content from Github and write new file content to Github
     '''
-    def __init__(self, ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, PULL_REQUEST, COMMIT_MESSAGE, COMMITTER):
+
+    def __init__(self, ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, PULL_REQUEST,
+                 COMMIT_MESSAGE, COMMITTER):
         '''
         Initial GithubContributors
 
@@ -141,20 +144,34 @@ class GithubChangelog:
         # References: https://pygithub.readthedocs.io/en/latest/github_objects/Repository.html#github.Repository.Repository
         g = github.Github(ACCESS_TOKEN)
         self.__repo = g.get_repo(REPO_NAME)
-        self.__author = github.GithubObject.NotSet if COMMITTER == '' else github.InputGitAuthor(COMMITTER.split(' ')[0], COMMITTER.split(' ')[1])
+        self.__author = github.GithubObject.NotSet if COMMITTER == '' else github.InputGitAuthor(
+            COMMITTER.split(' ')[0],
+            COMMITTER.split(' ')[1])
 
     def get_data(self):
         # get release info
         releases = self.__repo.get_releases()
-        self.__releases['Unreleased'] = {'html_url': '', 'body': '', 'created_at': '', 'commit_sha': ''}
+        self.__releases['Unreleased'] = {
+            'html_url': '',
+            'body': '',
+            'created_at': '',
+            'commit_sha': ''
+        }
         for release in releases:
-            self.__releases[release.tag_name] = {'html_url': release.html_url, 'body': re.sub(r'\r\n', r'\n', release.body), 'created_at': release.created_at}
+            self.__releases[release.tag_name] = {
+                'html_url': release.html_url,
+                'body': re.sub(r'\r\n', r'\n', release.body),
+                'created_at': release.created_at
+            }
         # get tags and commits
         tags = self.__repo.get_tags()
         for tag in tags:
             if tag.name in self.__releases:
                 self.__releases[tag.name]['commit_sha'] = tag.commit.sha
-        release_commit_sha_list = {self.__releases[x]['commit_sha']:x for x in self.__releases}
+        release_commit_sha_list = {
+            self.__releases[x]['commit_sha']: x
+            for x in self.__releases
+        }
         release_tags = list(self.__releases.keys())[::-1]
         seq = 0
         # Get commits
@@ -173,7 +190,9 @@ class GithubChangelog:
             message_head = message[0]
             if message_head[-3:] == '...' and len(message) > 1:
                 if message[1][0:3] == '...':
-                    message_head = re.sub(r'  ', r' ', message_head[:-3] + ' ' + message[1].split('\n')[0][3:])
+                    message_head = re.sub(
+                        r'  ', r' ', message_head[:-3] + ' ' +
+                        message[1].split('\n')[0][3:])
             # TODO: #5 revert: remove from selected_commits
             url = commit.html_url
             pulls = commit.get_pulls()
@@ -184,25 +203,38 @@ class GithubChangelog:
                 for pull in pulls:
                     pr = f''' ([#{pull.number}]({pull.html_url}))'''
                     pr_links.append(pr)
-            selected_commits.append({'head': message_head, 'sha': commit.sha, 'url': url, 'pr_links': pr_links})
+            selected_commits.append({
+                'head': message_head,
+                'sha': commit.sha,
+                'url': url,
+                'pr_links': pr_links
+            })
             if commit.sha == self.__releases[release_tags[seq]]['commit_sha']:
-                self.__releases[release_tags[seq]]['commits'] = selected_commits[::-1]
+                self.__releases[
+                    release_tags[seq]]['commits'] = selected_commits[::-1]
                 selected_commits = []
                 seq = seq + 1
             else:
                 if commit.sha in release_commit_sha_list:
-                    while (seq < release_tags.index(release_commit_sha_list[commit.sha])):
-                        print(f'\n[DEBUG]Skip {release_tags[seq]} because the release commit is not in the log history')
+                    while (seq < release_tags.index(
+                            release_commit_sha_list[commit.sha])):
+                        print(
+                            f'\n[DEBUG]Skip {release_tags[seq]} because the release commit is not in the log history'
+                        )
                         self.__releases[release_tags[seq]]['commits'] = []
                         seq = seq + 1
-                    if commit.sha == self.__releases[release_tags[seq]]['commit_sha']:
-                        self.__releases[release_tags[seq]]['commits'] = selected_commits[::-1]
+                    if commit.sha == self.__releases[
+                            release_tags[seq]]['commit_sha']:
+                        self.__releases[release_tags[seq]][
+                            'commits'] = selected_commits[::-1]
                         selected_commits = []
                         seq = seq + 1
             pbar.update(1)
         pbar.close()
         while (seq < len(release_tags) - 1):
-            print(f'\n[DEBUG]Skip {release_tags[seq]} because the release commit is not in the log history')
+            print(
+                f'\n[DEBUG]Skip {release_tags[seq]} because the release commit is not in the log history'
+            )
             self.__releases[release_tags[seq]]['commits'] = []
             seq = seq + 1
         self.__releases[release_tags[seq]]['commits'] = selected_commits[::-1]
@@ -228,20 +260,44 @@ class GithubChangelog:
     def write_data(self, changelog):
         if changelog == self.__changelog:
             print(f'[DEBUG] Same changelog. Not push.')
-            pass
         else:
-            if self.__pull_request != '' and self.__pull_request != self.__branch:
-                print(f'[DEBUG] Create pull request from {self.__branch} to {self.__pull_request}')
-                self.__repo.create_pull(title=self.__commit_message, body=self.__commit_message, base=self.__pull_request, head=self.__branch, draft=False, maintainer_can_modify=True)
             if self.__file_exists:
                 print(f'[DEBUG] Update changelog')
-                self.__repo.update_file(self.__path, self.__commit_message, changelog,
-                                    self.__sha, self.__branch, self.__author)
+                self.__repo.update_file(self.__path, self.__commit_message,
+                                        changelog, self.__sha, self.__branch,
+                                        self.__author)
             else:
                 print(f'[DEBUG] Create changelog.')
-                self.__repo.create_file(self.__path, self.__commit_message, changelog,
-                                    self.__branch, self.__author)
-            print(f'[DEBUG] BRANCH: {self.__branch}, PULL_REQUEST: {self.__pull_request}')   
+                try:
+                    self.__repo.create_file(self.__path, self.__commit_message,
+                                            changelog, self.__branch,
+                                            self.__author)
+                except github.GithubException as e:
+                    if e.status == 404:
+                        new_sha = self.__repo.get_branch(
+                            self.__pull_request).commit.sha
+                        self.__repo.create_git_ref(
+                            f'refs/heads/{self.__branch}', new_sha)
+                        self.__repo.create_file(self.__path,
+                                                self.__commit_message,
+                                                changelog, self.__branch,
+                                                self.__author)
+                    else:
+                        raise github.GithubException(e.status, e.data)
+
+            print(
+                f'[DEBUG] BRANCH: {self.__branch}, PULL_REQUEST: {self.__pull_request}'
+            )
+            if self.__pull_request != '' and self.__pull_request != self.__branch:
+                print(
+                    f'[DEBUG] Create pull request from {self.__branch} to {self.__pull_request}'
+                )
+                self.__repo.create_pull(title=self.__commit_message,
+                                        body=self.__commit_message,
+                                        base=self.__pull_request,
+                                        head=self.__branch,
+                                        draft=False,
+                                        maintainer_can_modify=True)
 
 
 def strip_commits(commits, type_regex, default_scope, suppress_unscoped):
@@ -257,7 +313,7 @@ def strip_commits(commits, type_regex, default_scope, suppress_unscoped):
     Returns:
         dict: selected commits of every scope.
     '''
-    # TODO: add an attribute to ignore scope 
+    # TODO: add an attribute to ignore scope
     regex = r'^' + type_regex + r'(?:[(](.+?)[)])?'
     scopes = {}
     for commit in commits:
@@ -268,7 +324,8 @@ def strip_commits(commits, type_regex, default_scope, suppress_unscoped):
                 if suppress_unscoped:
                     continue
                 scope = default_scope
-            if scope.lower() == 'changelog' and regex == r'^docs(?:[(](.+?)[)])?':
+            if scope.lower(
+            ) == 'changelog' and regex == r'^docs(?:[(](.+?)[)])?':
                 continue
             subject = re.sub(regex + r'\s?:\s?', '', head)
             if scope in scopes:
@@ -293,7 +350,8 @@ def generate_section(release_commits, regex, default_scope, suppress_unscoped):
         string: content of section
     '''
     section = ''
-    scopes = strip_commits(release_commits, regex, default_scope, suppress_unscoped)
+    scopes = strip_commits(release_commits, regex, default_scope,
+                           suppress_unscoped)
     for scope in scopes:
         scope_content = f'''- {scope}:\n'''
         for sel_commit in scopes[scope]:
@@ -310,7 +368,8 @@ def generate_section(release_commits, regex, default_scope, suppress_unscoped):
     return section
 
 
-def generate_release_body(release_commits, part_name, default_scope, suppress_unscoped):
+def generate_release_body(release_commits, part_name, default_scope,
+                          suppress_unscoped):
     '''
     Generate release body using part_name_dict and regex_list
 
@@ -327,7 +386,8 @@ def generate_release_body(release_commits, part_name, default_scope, suppress_un
     # TODO: add a new attribute to ignore some commits with another new function
     for part in part_name:
         regex, name = part.split(':')
-        sec = generate_section(release_commits, regex, default_scope, suppress_unscoped)
+        sec = generate_section(release_commits, regex, default_scope,
+                               suppress_unscoped)
         if sec != '':
             release_body = release_body + '### ' + name + '\n\n' + sec
     return release_body
@@ -358,7 +418,9 @@ def generate_changelog(releases, part_name, default_scope, suppress_unscoped):
         else:
             title = release_tag
             url = releases[release_tag]['html_url']
-            origin_desc = re.split(r'<!-- HIDE IN CHANGELOG BEGIN -->(?:.|\n)*?<!-- HIDE IN CHANGELOG END -->', releases[release_tag]['body'])
+            origin_desc = re.split(
+                r'<!-- HIDE IN CHANGELOG BEGIN -->(?:.|\n)*?<!-- HIDE IN CHANGELOG END -->',
+                releases[release_tag]['body'])
             if len(origin_desc) == 1:
                 description = origin_desc[0]
             else:
@@ -388,7 +450,8 @@ def generate_changelog(releases, part_name, default_scope, suppress_unscoped):
             if description == '':
                 description = '*No description*'
             release_info = f'''## [{title}]({url}) - {date}\n\n{description}\n\n'''
-        release_body = generate_release_body(release_commits, part_name, default_scope, suppress_unscoped)
+        release_body = generate_release_body(release_commits, part_name,
+                                             default_scope, suppress_unscoped)
         if release_body == '' and release_tag == 'Unreleased':
             continue
         else:
@@ -424,10 +487,12 @@ def main():
     part_name = re.split(r'\s?,\s?', get_inputs('TYPE'))
     DEFAULT_SCOPE = get_inputs('DEFAULT_SCOPE')
     SUPPRESS_UNSCOPED = get_inputs('SUPPRESS_UNSCOPED')
-    changelog = GithubChangelog(ACCESS_TOKEN, REPO_NAME, PATH, BRANCH, PULL_REQUEST, COMMIT_MESSAGE, COMMITTER)
+    changelog = GithubChangelog(ACCESS_TOKEN, REPO_NAME, PATH, BRANCH,
+                                PULL_REQUEST, COMMIT_MESSAGE, COMMITTER)
     changelog.get_data()
 
-    CHANGELOG = generate_changelog(changelog.read_releases(), part_name, DEFAULT_SCOPE, SUPPRESS_UNSCOPED == 'true')
+    CHANGELOG = generate_changelog(changelog.read_releases(), part_name,
+                                   DEFAULT_SCOPE, SUPPRESS_UNSCOPED == 'true')
 
     if args.mode == 'local':
         with open(args.output, 'w', encoding='utf-8') as f:

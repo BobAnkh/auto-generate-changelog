@@ -4,7 +4,7 @@
 # @Author       : BobAnkh
 # @Github       : https://github.com/BobAnkh
 # @Date         : 2020-08-06 10:48:37
-# @LastEditTime : 2021-12-29 09:26:46
+# @LastEditTime : 2021-12-29 09:53:19
 # @Description  : Main script of Github Action
 # @Copyright 2020 BobAnkh
 
@@ -278,14 +278,24 @@ class GithubChangelog:
                             self.__pull_request).commit.sha
                         self.__repo.create_git_ref(
                             f'refs/heads/{self.__branch}', new_sha)
+                        # get file content
                         try:
-                            self.__repo.create_file(self.__path,
-                                                    self.__commit_message,
-                                                    changelog, self.__branch,
-                                                    self.__author)
+                            contents = self.__repo.get_contents(
+                                self.__path, self.__branch)
                         except github.GithubException as e:
-                            print(f'[DEBUG] {self.__path}, {self.__commit_message}, {self.__branch}, {self.__author}')
-                            raise github.GithubException(e.status, e.data)
+                            if e.status == 404:
+                                self.__repo.create_file(
+                                    self.__path, self.__commit_message,
+                                    changelog, self.__branch, self.__author)
+                            else:
+                                raise github.GithubException(e.status, e.data)
+                        else:
+                            self.__sha = contents.sha
+                            self.__repo.update_file(self.__path,
+                                                    self.__commit_message,
+                                                    changelog, self.__sha,
+                                                    self.__branch,
+                                                    self.__author)
                     else:
                         raise github.GithubException(e.status, e.data)
 

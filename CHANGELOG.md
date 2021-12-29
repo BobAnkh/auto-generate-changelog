@@ -7,6 +7,7 @@ Changes unreleased.
 ### Feature
 
 - pr:
+  - detect branch to create ([7432a63](https://github.com/BobAnkh/auto-generate-changelog/commit/7432a6350cc2ca628dc0d9c3addac7e81245ac06))
   - create pr before submit content ([ccf0820](https://github.com/BobAnkh/auto-generate-changelog/commit/ccf08204e598f60cbff9316fb703a8e2341a8d32))
 
 ### Bug Fixes

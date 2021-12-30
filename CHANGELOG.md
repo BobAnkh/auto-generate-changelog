@@ -1,8 +1,10 @@
 # CHANGELOG
 
-## Unreleased
+## [v1.1.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.1.1) - 2021-12-29 11:35:12
 
-Changes unreleased.
+Fix bug of opening pull request when file/branch not exist.
+
+See #78 for more details
 
 ### Feature
 

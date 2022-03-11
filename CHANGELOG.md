@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Unreleased
+
+Changes unreleased.
+
+### Documentation
+
+- README:
+  - update contributors ([483962f](https://github.com/BobAnkh/auto-generate-changelog/commit/483962fdf04219faa0e752dcd2ece4ee50291bb7))
+
 ## [v1.1.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.1.1) - 2021-12-29 11:35:12
 
 Fix bug of opening pull request when file/branch not exist.

@@ -21,3 +21,4 @@ jobs:
         TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
         BRANCH: 'dev'
         INCREMENTAL_CHANGELOG: '5'
+        UNRELEASED_COMMITS: 'true'

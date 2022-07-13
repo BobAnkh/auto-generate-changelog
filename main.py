@@ -338,7 +338,7 @@ class GithubChangelog:
 
     def assemble_changelog(self):
         changelog = BEGIN_CHANGELOG_TITLE
-        for release in self.__releases:
+        for release in self.__releases.values():
             if release['content'] != '':
                 changelog += '\n\n' + release['content'].strip('\n')
         changelog += '\n\n' + END_CHANGELOG_SIGNATURE + '\n'

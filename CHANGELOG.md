@@ -6,6 +6,9 @@
 
 ### Feature
 
+- main:
+  - add logs ([f58349e](https://github.com/BobAnkh/auto-generate-changelog/commit/f58349e096c357bd8b5899a7003e11e4a8d5e4a5))
+
 - incr:
   - add incr generate ([999e098](https://github.com/BobAnkh/auto-generate-changelog/commit/999e098a789dcd53463e02f20d8d5f02c37d433c))
 

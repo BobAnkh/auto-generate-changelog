@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [v1.2.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.1) - 2022-07-13 12:57:47
+
+Fix the bug of regeneration release list.
+
+### Bug Fixes
+
+- changelog:
+  - resolve regenerate lists ([2a09c0a](https://github.com/BobAnkh/auto-generate-changelog/commit/2a09c0ad560160c850fdf1da210371f666d53a25))
+
 ## [v1.2.0](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.0) - 2022-07-13 12:48:35
 
 - Support incremental changelog generation

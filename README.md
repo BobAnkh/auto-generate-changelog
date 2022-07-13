@@ -11,7 +11,7 @@ Feel free to submit a pull request or an issue, but make sure to follow the temp
 
 Welcome contributors to improve this project together!
 
-**If you like this, please give me a star!**
+**If you like this, please give me a star**!
 
 ## Usage
 
@@ -30,7 +30,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - uses: BobAnkh/auto-generate-changelog@master
+    - uses: BobAnkh/auto-generate-changelog@v1
       with:
         REPO_NAME: '<YourUserName>/<YourRepoName>'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -45,34 +45,39 @@ jobs:
 
 ### Inputs
 
-**Please see notes below the table for more optional features**.
+**Please see NOTES below the table for how to set some of the parameters**.
 
-| Inputs            | Description                                                 | Required | Default                                                   |
-| ----------------- | ----------------------------------------------------------- | -------- | --------------------------------------------------------- |
-| REPO_NAME         | Repository name                                             | no       | `''` which means current repository                       |
-| ACCESS_TOKEN      | Github Access Token                                         | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`             |
-| PATH              | Path to the your file                                       | no       | `/CHANGELOG.md`                                           |
-| BRANCH            | The branch to update file specified in PATH                 | no       | `''` which means default branch                           |
-| PULL_REQUEST      | Open a new pull request if set to a target branch name      | no       | `''` which means not open pull request by default         |
-| COMMIT_MESSAGE    | commit message                                              | no       | `docs(CHANGELOG): update release notes`                   |
-| TYPE              | The type of commits you want to add to CHANGELOG            | no       | `'feat:Feature,fix:Fix'`                                  |
-| COMMITTER         | The committer you want to use to update file                | no       | `''` which means default committer                        |
-| DEFAULT_SCOPE     | The default scope to hold all unscoped commits              | no       | `general`                                                 |
-| SUPPRESS_UNSCOPED | Whether to exclude unscoped commits                         | no       | false                                                     |
+| Inputs                      | Description                                                             | Required | Default                                             |
+| --------------------------- | ----------------------------------------------------------------------- | -------- | --------------------------------------------------- |
+| REPO_NAME                   | Repository name                                                         | no       | `''` which means current repository                 |
+| ACCESS_TOKEN                | Github Access Token. See **NOTES 1**                                    | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`       |
+| PATH                        | Path to the your file                                                   | no       | `CHANGELOG.md`                                      |
+| BRANCH                      | The branch to update file specified in PATH                             | no       | `''` which means default branch                     |
+| PULL_REQUEST                | Open a new pull request if set to a target branch name. See **NOTES 2** | no       | `''` which means not open pull request by default   |
+| COMMIT_MESSAGE              | Commit message                                                          | no       | `docs(CHANGELOG): update release notes`             |
+| TYPE                        | The type of commits you want to add to CHANGELOG. See **NOTES 3**       | no       | `'feat:Feature,fix:Fix'`                            |
+| COMMITTER                   | The committer you want to use to update file. See **NOTES 4**           | no       | `''` which means default committer                  |
+| DEFAULT_SCOPE               | The default scope to hold all unscoped commits                          | no       | `general`                                           |
+| SUPPRESS_UNSCOPED           | Whether to exclude unscoped commits                                     | no       | false                                               |
+| UNRELEASED_COMMITS          | Whether to include unreleased commits in the changelog                  | no       | false                                               |
+| REGENERATE_COUNT            | Regenerate n recent releases' changelog. See **NOTES 5**                | no       | 0                                                   |
+| REPLACE_EMPTY_RELEASE_INFO  | Replace empty release info with some words                              | no       | false                                               |
 
-> `${{secrets.GITHUB_TOKEN}}` has a rate limit smaller than Personal Access Token, so if you have much more requests(commits, prs, etc.), use PAT instead.
->
-> `COMMITTER` should be in the format: `'author <author.example>'`
-> 
-> NOTE: `PULL_REQUEST` must be used with `BRANCH` together, both **should be provided** if you want to **open a pull request**
-> 
-> You can define the keyword detected from commit message and the corresonding word presented in the changelog in input `TYPE`. For example, define `feat:Feature` will detect commit message like `feat(main): add new option` and present this in changelog as part `Feature`
->
-> NOTE: You can use format below to avoid some lines in release description to appear in CHANGELOG:
->
+**NOTES 1**: `${{secrets.GITHUB_TOKEN}}` has a [rate limit](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) smaller than Personal Access Token (PAT), so if you have much more requests(commits, prs, etc.) or face a 403 rate-limit-error, use PAT instead.
+
+**NOTES 2**: `PULL_REQUEST` must be used with `BRANCH` together, both **should be provided** with a valid branch name if you want to **open a pull request**. The GA will open a pull request from the `BRANCH` (head branch) to the `PULL_REQUEST` (base branch). Leave `PULL_REQUEST` blank if you don't want to open a pull request.
+
+**NOTES 3**: You can define the keyword detected from commit message and the corresponding word presented in the changelog in input `TYPE`. For example, define `feat:Feature,fix:Bug Fixes` will have commit messages like `feat(main): add new option` to be presented in changelog under part `Feature` and have commit messages like `fix(server): adjust rendering` to be presented in changelog under part `Bug Fixes`.
+
+**NOTES 4**: `COMMITTER` should be in the format: `'author <author@email>'`
+
+**NOTES 5**: All the releases not exist in the changelog will of course be added to the changelog. Use this parameter to regenerate the last n releases' changelog. Default set to 0 means only generate for new releases. You can set to -1 to regenerate all the releases.
+
+**NOTES 6**: You can use the format below to avoid some lines in release description to appear in the CHANGELOG:
+
 > ```markdown
 > <!-- HIDE IN CHANGELOG BEGIN -->
-> See CHANGELOG for more details.
+> See CHANGELOG for more details. This line will be hided when changelog is generated.
 > <!-- HIDE IN CHANGELOG END -->
 > ```
 

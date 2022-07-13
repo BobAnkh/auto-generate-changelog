@@ -20,5 +20,5 @@ jobs:
         COMMIT_MESSAGE: 'docs(changelog): update release notes'
         TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
         BRANCH: 'dev'
-        INCREMENTAL_CHANGELOG: '5'
+        REGENERATE_COUNT: '5'
         UNRELEASED_COMMITS: 'true'

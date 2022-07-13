@@ -2,7 +2,17 @@
 
 ## Unreleased
 
-Changes unreleased.
+*No description*
+
+### Feature
+
+- incr:
+  - add incr generate ([999e098](https://github.com/BobAnkh/auto-generate-changelog/commit/999e098a789dcd53463e02f20d8d5f02c37d433c))
+
+### Bug Fixes
+
+- release:
+  - fix typo ([ecf8b65](https://github.com/BobAnkh/auto-generate-changelog/commit/ecf8b658a274957a45342708d61006ce98e5eb12))
 
 ### Documentation
 
@@ -63,6 +73,7 @@ New Feature:
 - Add new param `PULL_REQUEST`, which must be used together with param `BRANCH`. Default set to `''` means not to open a pull request. You can set a target branch name in `PULL_REQUEST` that is different with `BRANCH` so that to do the following things:
   - Commit changes(if have) to file specified in `PATH` in `BRANCH`(if not set means default branch)
   - If `PULL_REQUEST` set to a different branch with `BRANCH` then a new pull request will be opened.
+  
 
 ### Feature
 

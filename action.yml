@@ -48,8 +48,8 @@ inputs:
     description: "Whether to include unreleased commits in the changelog"
     required: false
     default: 'false'
-  INCREMENTAL_CHANGELOG:
-    description: "Regenerate n recent releases' changelog. All empty release will be generated. -1 means regenerating all the releases and 0 means no old releases will be regenerated"
+  REGENERATE_COUNT:
+    description: "Regenerate n recent releases' changelog. All non-exist releases will be generated. -1 means regenerating all the releases and 0 means no old releases will be regenerated"
     required: false
     default: '0'
   REPLACE_EMPTY_RELEASE_INFO:

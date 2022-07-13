@@ -182,7 +182,7 @@ class GithubChangelog:
             regenerate_releases = regenerate_releases[0:self.regenerate_count]
         for r in releases:
             if r.tag_name not in self.release_in_changelog and r.tag_name not in regenerate_releases:
-                regenerate_releases.append(r)
+                regenerate_releases.append(r.tag_name)
         if self.unreleased_commits:
             regenerate_releases.append('Unreleased')
             self.releases['Unreleased'] = {

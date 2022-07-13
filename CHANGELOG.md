@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## [v1.2.0](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.0) - 2022-07-13 12:48:35
+
+- Support incremental changelog generation
+- Users can replace the default empty release description
+- Users can control whether unreleased commits are included in changelog
+
+### Feature
+
+- changelog:
+  - support incremental generation ([8f2b648](https://github.com/BobAnkh/auto-generate-changelog/commit/8f2b648cd5d5ac04b7b04e8209a708e4e7e35a2a)) ([#91](https://github.com/BobAnkh/auto-generate-changelog/pull/91))
+
+### Documentation
+
+- README:
+  - update contributors ([483962f](https://github.com/BobAnkh/auto-generate-changelog/commit/483962fdf04219faa0e752dcd2ece4ee50291bb7))
+
 ## [v1.1.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.1.1) - 2021-12-29 11:35:12
 
 Fix bug of opening pull request when file/branch not exist.

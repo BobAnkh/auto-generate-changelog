@@ -27,7 +27,7 @@ inputs:
   COMMIT_MESSAGE:
     description: "Commit message"
     required: false
-    default: 'docs(CHANGELOG): update release notes'
+    default: 'docs(changelog): update release notes'
   TYPE:
     description: "The type of commits you want to add to CHANGELOG"
     required: false
@@ -44,6 +44,18 @@ inputs:
     description: "Suppress the generation of release notes for un-scoped commits e.g. 'fix: some general fix'"
     required: false
     default: 'false'
+  UNRELEASED_COMMITS:
+    description: "Whether to include unreleased commits in the changelog"
+    required: false
+    default: 'false'
+  INCREMENTAL_CHANGELOG:
+    description: "Regenerate n recent releases' changelog. All empty release will be generated. -1 means regenerating all the releases and 0 means no old releases will be regenerated"
+    required: false
+    default: '0'
+  REPLACE_EMPTY_RELEASE_INFO:
+    description: "Replace empty release info with some words"
+    required: false
+    default: '*No description*'
 runs:
   using: "docker"
   image: "Dockerfile"

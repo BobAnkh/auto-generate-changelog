@@ -30,7 +30,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - uses: BobAnkh/auto-generate-changelog@master
+    - uses: BobAnkh/auto-generate-changelog@v1
       with:
         REPO_NAME: '<YourUserName>/<YourRepoName>'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -51,7 +51,7 @@ jobs:
 | ----------------- | ----------------------------------------------------------- | -------- | --------------------------------------------------------- |
 | REPO_NAME         | Repository name                                             | no       | `''` which means current repository                       |
 | ACCESS_TOKEN      | Github Access Token                                         | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`             |
-| PATH              | Path to the your file                                       | no       | `/CHANGELOG.md`                                           |
+| PATH              | Path to the your file                                       | no       | `CHANGELOG.md`                                           |
 | BRANCH            | The branch to update file specified in PATH                 | no       | `''` which means default branch                           |
 | PULL_REQUEST      | Open a new pull request if set to a target branch name      | no       | `''` which means not open pull request by default         |
 | COMMIT_MESSAGE    | commit message                                              | no       | `docs(CHANGELOG): update release notes`                   |

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [v1.2.2](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.2) - 2022-07-27 02:11:14
+
+Fix the bug when analyzing the existing changelog if the result of regex search is None.
+
+### Bug Fixes
+
+- analyze:
+  - deal with search failure ([4a2eb69](https://github.com/BobAnkh/auto-generate-changelog/commit/4a2eb69805db4af39f374dc95eb502669fb4af95))
+
 ## [v1.2.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.1) - 2022-07-13 12:57:47
 
 Fix the bug of regeneration release list.

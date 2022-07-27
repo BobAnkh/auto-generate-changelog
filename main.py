@@ -299,7 +299,13 @@ class GithubChangelog:
         for release_body in body_content.split('\n\n## '):
             if release_body.startswith('Unreleased') or release_body == '':
                 continue
-            release_tag = re.search(r'\[.*?\]', release_body).group()[1:-1]
+            search_res = re.search(r'\[.*?\]', release_body)
+            if search_res is None:
+                print(
+                    '[WARN] This part is not in the correct format! Will ignore this part.',
+                    release_body.split('\n')[0])
+                continue
+            release_tag = search_res.group()[1:-1]
             self.release_in_changelog[
                 release_tag] = '## ' + release_body.strip('\n')
 

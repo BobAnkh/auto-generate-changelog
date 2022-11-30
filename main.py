@@ -313,10 +313,26 @@ class GithubChangelog:
         # Get commits
         try:
             commits = self.repo.get_commits(sha=self.branch)
+            if commits.totalCount == 0:
+                print('[WARN] No commits found on branch', self.branch)
+                message = {}
+                message['message'] = 'Not Found'
+                message[
+                    'documentation_url'] = 'https://docs.github.com/rest/commits/commits#list-commits'
+                raise github.GithubException.UnknownObjectException(
+                    404, message)
             return commits
         except github.GithubException as e:
             if e.status == 404:
                 commits = self.repo.get_commits()
+                if commits.totalCount == 0:
+                    print('[WARN] No commits found on default branch')
+                    message = {}
+                    message['message'] = 'Not Found'
+                    message[
+                        'documentation_url'] = 'https://docs.github.com/rest/commits/commits#list-commits'
+                    raise github.GithubException.UnknownObjectException(
+                        404, message)
                 return commits
             else:
                 raise github.GithubException(e.status, e.data)

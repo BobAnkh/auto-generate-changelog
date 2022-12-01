@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [v1.2.3](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.3) - 2022-11-30 14:50:21
+
+Change the check behavior to cooperate with upstream lib(pygithub)
+
+### Bug Fixes
+
+- github:
+  - follow check behavior of pygithub ([1c8e525](https://github.com/BobAnkh/auto-generate-changelog/commit/1c8e525f953393b1805dfa77ce5c217dc0f1d5ff))
+
 ## [v1.2.2](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.2) - 2022-07-27 02:11:14
 
 Fix the bug when analyzing the existing changelog if the result of regex search is None.

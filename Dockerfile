@@ -1,7 +1,7 @@
-FROM python:3.10.5-slim
+FROM python:3.11.1-slim
 
 RUN apt-get update && \
-    apt-cache madison git | awk '{print $3}'| xargs -i apt-get install -y --no-install-recommends git={} && \
+    apt-cache madison git | awk 'END {print $3}' | xargs -i apt-get install -y --no-install-recommends git={} && \
     rm -rf /var/lib/apt/lists/*
 
 COPY main.py entrypoint.sh requirements.txt /

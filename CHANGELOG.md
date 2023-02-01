@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [v1.2.4](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.4) - 2023-02-01 16:28:15
+
+Fix the bug of multiple git deps installed when building the image
+
+### Bug Fixes
+
+- general:
+  - resolve multiple deps installation ([8e25c68](https://github.com/BobAnkh/auto-generate-changelog/commit/8e25c687104ed33f7fff17dd72a33369bce89956))
+
 ## [v1.2.3](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.3) - 2022-11-30 14:50:21
 
 Change the check behavior to cooperate with upstream lib(pygithub)

@@ -1,4 +1,4 @@
-FROM python:3.11.2-slim
+FROM python:3.11.4-slim
 
 RUN apt-get update && \
     apt-cache madison git | awk 'END {print $3}' | xargs -i apt-get install -y --no-install-recommends git={} && \

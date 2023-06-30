@@ -15,7 +15,7 @@ Welcome contributors to improve this project together!
 
 ## Usage
 
-Create a workflow file such as `.github/workflows/changelog.yml` (you can find it in this repo)
+Create a workflow file such as [`.github/workflows/changelog.yml`](./.github/workflows/changelog.yml) (you can find it in this repo)
 
 ```yaml
 name: Generate changelog
@@ -30,7 +30,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    - uses: BobAnkh/auto-generate-changelog@v1
+    - uses: BobAnkh/auto-generate-changelog@v1.2.4
       with:
         REPO_NAME: '<YourUserName>/<YourRepoName>'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}

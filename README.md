@@ -116,21 +116,21 @@ optional arguments:
 <tr>
     <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
         <a href=https://github.com/BobAnkh>
-            <img src=https://avatars.githubusercontent.com/u/44333669?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Yixin Shen/>
+            <img src=https://private-avatars.githubusercontent.com/u/44333669?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MzQ2NDE0MDAsIm5iZiI6MTczNDY0MDIwMCwicGF0aCI6Ii91LzQ0MzMzNjY5In0.tUrJh4AH7fmLF4j-s5MKm88sZtlgPdYwjv9LAbf078k&v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Yixin Shen/>
             <br />
             <sub style="font-size:14px"><b>Yixin Shen</b></sub>
         </a>
     </td>
     <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
         <a href=https://github.com/joundso>
-            <img src=https://avatars.githubusercontent.com/u/56686638?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Jonathan Mang/>
+            <img src=https://private-avatars.githubusercontent.com/u/56686638?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MzQ2NDA2ODAsIm5iZiI6MTczNDYzOTQ4MCwicGF0aCI6Ii91LzU2Njg2NjM4In0.A77oT_dQy9znGAk79xQagSorkfXp2DmldGIBaLJTlZE&v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Jonathan Mang/>
             <br />
             <sub style="font-size:14px"><b>Jonathan Mang</b></sub>
         </a>
     </td>
     <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
         <a href=https://github.com/sruehl>
-            <img src=https://avatars.githubusercontent.com/u/1769155?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Sebastian Rühl/>
+            <img src=https://private-avatars.githubusercontent.com/u/1769155?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MzQ2NDA3NDAsIm5iZiI6MTczNDYzOTU0MCwicGF0aCI6Ii91LzE3NjkxNTUifQ.flpojv8VZO_q6A4m4pl9zxKUsok5OzTtgiLVQqaQB2s&v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Sebastian Rühl/>
             <br />
             <sub style="font-size:14px"><b>Sebastian Rühl</b></sub>
         </a>

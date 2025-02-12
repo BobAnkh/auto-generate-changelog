@@ -1,4 +1,4 @@
-on: 
+on:
   push:
     branches:
       - master
@@ -12,35 +12,34 @@ jobs:
         shell: bash
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.7' 
-        architecture: 'x64' 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip setuptools wheel
-        pip install -r requirements.txt
-        pip install pytest
-        pip install pytest-cov
-    - name: pytest
-      run: |
-        pytest -ra
-        pytest --cov=./ --cov-report=xml
-    - name: Code Coverage Report Upload
-      uses: codecov/codecov-action@v1
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.4"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
+          pip install pytest
+          pip install pytest-cov
+      - name: pytest
+        run: |
+          pytest -ra
+          pytest --cov=./ --cov-report=xml
+      - name: Code Coverage Report Upload
+        uses: codecov/codecov-action@v1
   build-test:
     defaults:
       run:
         shell: bash
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Build test
-      run: |
-        docker build .
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build test
+        run: |
+          docker build .

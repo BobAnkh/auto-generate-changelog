@@ -214,6 +214,7 @@ class GithubChangelog:
         self.get_exist_changelog()
         # get release info
         releases = self.repo.get_releases()
+        logger.info(f"Total releases in the repo: {releases.totalCount} {releases}")
         regenerate_releases = [r.tag_name for r in releases]
         logger.debug(f"All releases: {regenerate_releases}")
         if self.regenerate_count < 0:

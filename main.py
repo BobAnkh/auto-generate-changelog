@@ -28,7 +28,7 @@ def get_logger():
     )
 
     logger = logging.getLogger("cauldron-notify")
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
@@ -215,8 +215,11 @@ class GithubChangelog:
         # get release info
         releases = self.repo.get_releases()
         regenerate_releases = [r.tag_name for r in releases]
+        logger.debug(f"All releases: {regenerate_releases}")
         if self.regenerate_count < 0:
             pass
+        elif self.regenerate_count == 0:
+            regenerate_releases = []
         else:
             regenerate_releases = regenerate_releases[0 : self.regenerate_count]
         for r in releases:
@@ -262,6 +265,7 @@ class GithubChangelog:
             self.releases[x]["commit_sha"]: x for x in self.releases
         }
 
+        logger.debug(f"Before regenerate, releases:\n{self.releases}")
         cur_release = "Unreleased"
         # Get commits
         commits = self.get_github_commits()
@@ -308,6 +312,7 @@ class GithubChangelog:
             logger.warning(
                 "Failed to generate all the releases, left: " + str(regenerate_releases)
             )
+        logger.debug(f"After regenerate, releases:\n{self.releases}")
 
     def get_exist_changelog(self):
         """
@@ -332,6 +337,7 @@ class GithubChangelog:
             base = base.replace("\n", "")
             self.changelog = base64.b64decode(base).decode("utf-8")
             self.analyze_changelog()
+            logger.debug(f"release_in_changelog:\n{self.release_in_changelog}")
 
     def analyze_changelog(self):
         # analyze changelog
@@ -472,6 +478,7 @@ class GithubChangelog:
 
     def write_data(self):
         changelog = self.assemble_changelog()
+        logger.debug(f"New changelog:\n{changelog}")
         if changelog == self.changelog:
             logger.warning("Same changelog. Not push")
         else:

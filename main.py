@@ -348,16 +348,21 @@ class GithubChangelog:
                     "The changelog is not in the correct format! Will clear the changelog."
                 )
                 return
+        release_tag = None
         for release_body in body_content.split("\n\n## "):
             if release_body.startswith("Unreleased") or release_body == "":
                 continue
             search_res = re.search(r"\[.*?\]", release_body)
             if search_res is None:
-                self.release_in_changelog[release_tag] = "\n\n## " + release_body
-                release_body_head = release_body.split("\n")[0]
-                logger.warning(
-                    f"This part is not in the correct format! Will ignore this part: {release_body_head}",
-                )
+                if release_tag is not None:
+                    self.release_in_changelog[release_tag] = (
+                        "\n\n## " + release_body.strip("\n")
+                    )
+                else:
+                    release_body_head = release_body.split("\n")[0]
+                    logger.warning(
+                        f"This part is not in the correct format! Will ignore this part: {release_body_head}",
+                    )
                 continue
             release_tag = search_res.group()[1:-1]
             self.release_in_changelog[release_tag] = "## " + release_body.strip("\n")

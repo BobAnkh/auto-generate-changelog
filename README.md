@@ -1,6 +1,6 @@
 # auto-generate-changelog
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/47a06388ecd34ff5a1d623827d9bb659)](https://www.codacy.com/manual/bobankhshen/auto-generate-changelog/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BobAnkh/auto-generate-changelog&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/47a06388ecd34ff5a1d623827d9bb659)](https://www.codacy.com/manual/bobankhshen/auto-generate-changelog/dashboard?utm_source=github.com&utm_medium=referral&utm_content=BobAnkh/auto-generate-changelog&utm_campaign=Badge_Grade)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/BobAnkh/auto-generate-changelog?color=orange&logo=github-actions)
 ![language-python](https://img.shields.io/github/languages/top/BobAnkh/auto-generate-changelog?logo=python&logoColor=yellow)
 ![LICENSE Apache-2.0](https://img.shields.io/github/license/BobAnkh/auto-generate-changelog?logo=apache)
@@ -27,16 +27,16 @@ jobs:
   generate-changelog:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    - uses: BobAnkh/auto-generate-changelog@v1.2.5
-      with:
-        REPO_NAME: '<YourUserName>/<YourRepoName>'
-        ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        PATH: 'CHANGELOG.md'
-        COMMIT_MESSAGE: 'docs(CHANGELOG): update release notes'
-        TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: BobAnkh/auto-generate-changelog@v1.3.0
+        with:
+          REPO_NAME: "<YourUserName>/<YourRepoName>"
+          ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          PATH: "CHANGELOG.md"
+          COMMIT_MESSAGE: "docs(CHANGELOG): update release notes"
+          TYPE: "feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements"
 ```
 
 > NOTE: Generating CHANGELOG needs all the commit history so you should set `fetch-depth: 0` with `actions/checkout`
@@ -47,21 +47,21 @@ jobs:
 
 **Please see NOTES below the table for how to set some of the parameters**.
 
-| Inputs                      | Description                                                             | Required | Default                                             |
-| --------------------------- | ----------------------------------------------------------------------- | -------- | --------------------------------------------------- |
-| REPO_NAME                   | Repository name                                                         | no       | `''` which means current repository                 |
-| ACCESS_TOKEN                | Github Access Token. See **NOTES 1**                                    | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`       |
-| PATH                        | Path to the your file                                                   | no       | `CHANGELOG.md`                                      |
-| BRANCH                      | The branch to update file specified in PATH                             | no       | `''` which means default branch                     |
-| PULL_REQUEST                | Open a new pull request if set to a target branch name. See **NOTES 2** | no       | `''` which means not open pull request by default   |
-| COMMIT_MESSAGE              | Commit message                                                          | no       | `docs(CHANGELOG): update release notes`             |
-| TYPE                        | The type of commits you want to add to CHANGELOG. See **NOTES 3**       | no       | `'feat:Feature,fix:Fix'`                            |
-| COMMITTER                   | The committer you want to use to update file. See **NOTES 4**           | no       | `''` which means default committer                  |
-| DEFAULT_SCOPE               | The default scope to hold all unscoped commits                          | no       | `general`                                           |
-| SUPPRESS_UNSCOPED           | Whether to exclude unscoped commits                                     | no       | false                                               |
-| UNRELEASED_COMMITS          | Whether to include unreleased commits in the changelog                  | no       | false                                               |
-| REGENERATE_COUNT            | Regenerate n recent releases' changelog. See **NOTES 5**                | no       | 0                                                   |
-| REPLACE_EMPTY_RELEASE_INFO  | Replace empty release info with some words                              | no       | false                                               |
+| Inputs                     | Description                                                             | Required | Default                                           |
+| -------------------------- | ----------------------------------------------------------------------- | -------- | ------------------------------------------------- |
+| REPO_NAME                  | Repository name                                                         | no       | `''` which means current repository               |
+| ACCESS_TOKEN               | Github Access Token. See **NOTES 1**                                    | yes      | You can just pass `${{secrets.GITHUB_TOKEN}}`     |
+| PATH                       | Path to the your file                                                   | no       | `CHANGELOG.md`                                    |
+| BRANCH                     | The branch to update file specified in PATH                             | no       | `''` which means default branch                   |
+| PULL_REQUEST               | Open a new pull request if set to a target branch name. See **NOTES 2** | no       | `''` which means not open pull request by default |
+| COMMIT_MESSAGE             | Commit message                                                          | no       | `docs(CHANGELOG): update release notes`           |
+| TYPE                       | The type of commits you want to add to CHANGELOG. See **NOTES 3**       | no       | `'feat:Feature,fix:Fix'`                          |
+| COMMITTER                  | The committer you want to use to update file. See **NOTES 4**           | no       | `''` which means default committer                |
+| DEFAULT_SCOPE              | The default scope to hold all unscoped commits                          | no       | `general`                                         |
+| SUPPRESS_UNSCOPED          | Whether to exclude unscoped commits                                     | no       | false                                             |
+| UNRELEASED_COMMITS         | Whether to include unreleased commits in the changelog                  | no       | false                                             |
+| REGENERATE_COUNT           | Regenerate n recent releases' changelog. See **NOTES 5**                | no       | 0                                                 |
+| REPLACE_EMPTY_RELEASE_INFO | Replace empty release info with some words                              | no       | false                                             |
 
 **NOTES 1**: `${{secrets.GITHUB_TOKEN}}` has a [rate limit](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting) smaller than Personal Access Token (PAT), so if you have much more requests(commits, prs, etc.) or face a 403 rate-limit-error, use PAT instead.
 
@@ -77,7 +77,9 @@ jobs:
 
 > ```markdown
 > <!-- HIDE IN CHANGELOG BEGIN -->
+>
 > See CHANGELOG for more details. This line will be hided when changelog is generated.
+>
 > <!-- HIDE IN CHANGELOG END -->
 > ```
 

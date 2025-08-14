@@ -353,6 +353,7 @@ class GithubChangelog:
                 continue
             search_res = re.search(r"\[.*?\]", release_body)
             if search_res is None:
+                self.release_in_changelog[release_tag] = "\n\n## " + release_body
                 release_body_head = release_body.split("\n")[0]
                 logger.warning(
                     f"This part is not in the correct format! Will ignore this part: {release_body_head}",

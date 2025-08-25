@@ -1,5 +1,28 @@
 # CHANGELOG
 
+## [v1.3.0](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.3.0) - 2025-08-25 09:52:47+00:00
+
+## What's Changed
+
+- Bump dependencies version
+- Resolve changelog content parsing bugs
+
+## New Contributors
+* @ok-coder1 made their first contribution in https://github.com/BobAnkh/auto-generate-changelog/pull/136
+
+### Bug Fixes
+
+- general:
+  - resolve wrong changelog parsing ([bb1e50d](https://github.com/BobAnkh/auto-generate-changelog/commit/bb1e50dc5b8fcdc8221a366b383c630f71b05d11))
+
+### Documentation
+
+- README:
+  - update contributors ([629034f](https://github.com/BobAnkh/auto-generate-changelog/commit/629034f480ac35c19fddf5c43cd0ebb9d1144116))
+  - update contributors ([af5c6b2](https://github.com/BobAnkh/auto-generate-changelog/commit/af5c6b27dc33a12455ff66d686d519f68c52794d))
+  - update contributors ([3e5c2b8](https://github.com/BobAnkh/auto-generate-changelog/commit/3e5c2b88d4ce41cc0eafc3e6f2c1b59c48066331))
+  - update contributors ([370a7b7](https://github.com/BobAnkh/auto-generate-changelog/commit/370a7b7f839d671391b6d773413d0c86089cd3aa))
+
 ## [v1.2.5](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.5) - 2023-06-30 09:16:31
 
 Speed up the runtime by pre-installing dependencies in the image build process.

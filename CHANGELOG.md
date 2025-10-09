@@ -8,7 +8,8 @@
 - Resolve changelog content parsing bugs
 
 ## New Contributors
-* @ok-coder1 made their first contribution in https://github.com/BobAnkh/auto-generate-changelog/pull/136
+
+- @ok-coder1 made their first contribution in [auto-generate-changelog#136](https://github.com/BobAnkh/auto-generate-changelog/pull/136)
 
 ### Bug Fixes
 

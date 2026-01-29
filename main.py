@@ -213,9 +213,10 @@ class GithubChangelog:
         # get file content
         self.get_exist_changelog()
         # get release info
-        releases = self.repo.get_releases()
-        regenerate_releases = [r.tag_name for r in releases]
-        logger.debug(f"All releases: {regenerate_releases}")
+        releases = list(self.repo.get_releases())
+        all_release_tags = [r.tag_name for r in releases]
+        logger.debug(f"All releases: {all_release_tags}")
+        regenerate_releases = list(all_release_tags)
         if self.regenerate_count < 0:
             pass
         else:
@@ -259,66 +260,95 @@ class GithubChangelog:
                 "commit_sha": commit_sha,
                 "content": release_content,
             }
-        release_commit_sha_list = {
-            self.releases[x]["commit_sha"]: x for x in self.releases
-        }
 
         logger.debug(f"Before regenerate, releases:\n{self.releases}")
-        cur_release = "Unreleased"
-        # Get commits
-        commits = self.get_github_commits()
-        selected_commits = []
-        if len(regenerate_releases) > 0:
-            for commit in commits:
-                if commit.sha in release_commit_sha_list:
-                    if cur_release in regenerate_releases:
-                        commit_count = len(selected_commits)
-                        logger.info(
-                            f"Regenerate release: {cur_release} with {commit_count} commits"
-                        )
-                        release_content, status_code = self.get_release_content(
-                            cur_release, selected_commits
-                        )
-                        if status_code != 0 and status_code != 200:
-                            selected_commits = []
-                            logger.error(
-                                "Failed to get release content, status code: "
-                                + str(status_code)
-                            )
-                            break
-                        self.releases[cur_release]["content"] = release_content
-                        regenerate_releases.remove(cur_release)
-                        cur_release = release_commit_sha_list[commit.sha]
-                        if len(regenerate_releases) <= 0:
-                            selected_commits = []
-                            logger.info("All regenerate_releases are generated")
-                            break
-                    else:
-                        cur_release = release_commit_sha_list[commit.sha]
-                    selected_commits = [commit]
-                else:
-                    selected_commits.append(commit)
-        if len(selected_commits) > 0 and cur_release in regenerate_releases:
-            commit_count = len(selected_commits)
+
+        # Use compare API to get commits between tags for each release
+        for i, release_tag in enumerate(all_release_tags):
+            if release_tag not in regenerate_releases:
+                continue
+
+            # Determine the base (previous release) for comparison
+            if i + 1 < len(all_release_tags):
+                base_tag = all_release_tags[i + 1]
+            else:
+                # For the oldest release, get all commits up to that tag
+                base_tag = None
+
+            commits = self.get_commits_for_release(release_tag, base_tag)
+            commit_count = len(commits)
             logger.info(
-                f"Regenerate release: {cur_release} with {commit_count} commits"
+                f"Regenerate release: {release_tag} with {commit_count} commits"
             )
             release_content, status_code = self.get_release_content(
-                cur_release, selected_commits
+                release_tag, commits
             )
             if status_code != 0 and status_code != 200:
-                selected_commits = []
+                logger.error(
+                    "Failed to get release content, status code: " + str(status_code)
+                )
+                continue
+            self.releases[release_tag]["content"] = release_content
+            regenerate_releases.remove(release_tag)
+
+        # Handle unreleased commits
+        if "Unreleased" in regenerate_releases:
+            if len(all_release_tags) > 0:
+                base_tag = all_release_tags[0]
+            else:
+                base_tag = None
+            commits = self.get_commits_for_release(None, base_tag)
+            commit_count = len(commits)
+            logger.info(f"Regenerate release: Unreleased with {commit_count} commits")
+            release_content, status_code = self.get_release_content(
+                "Unreleased", commits
+            )
+            if status_code != 0 and status_code != 200:
                 logger.error(
                     "Failed to get release content, status code: " + str(status_code)
                 )
             else:
-                self.releases[cur_release]["content"] = release_content
-                regenerate_releases.remove(cur_release)
+                self.releases["Unreleased"]["content"] = release_content
+                regenerate_releases.remove("Unreleased")
+
         if len(regenerate_releases) > 0:
             logger.warning(
                 "Failed to generate all the releases, left: " + str(regenerate_releases)
             )
         logger.debug(f"After regenerate, releases:\n{self.releases}")
+
+    def get_commits_for_release(self, head_tag, base_tag):
+        """
+        Get commits for a release using the compare API.
+
+        Args:
+            head_tag (str): The tag for the current release (None for unreleased)
+            base_tag (str): The tag for the previous release (None for first release)
+
+        Returns:
+            list: List of commit objects between base_tag and head_tag
+        """
+        try:
+            if head_tag is None:
+                # Unreleased: compare from latest tag to branch HEAD
+                head_ref = self.branch if self.branch else self.repo.default_branch
+            else:
+                head_ref = head_tag
+
+            if base_tag is None:
+                # First release: get all commits up to the tag
+                # Use the repository's first commit as base
+                commits = []
+                for commit in self.repo.get_commits(sha=head_ref):
+                    commits.append(commit)
+                return commits
+
+            # Use compare API to get commits between tags
+            comparison = self.repo.compare(base_tag, head_ref)
+            return list(comparison.commits)
+        except github.GithubException as e:
+            logger.error(f"Failed to compare {base_tag}...{head_ref}: {e}")
+            return []
 
     def get_exist_changelog(self):
         """
@@ -380,34 +410,6 @@ class GithubChangelog:
                 self.release_in_changelog[release_tag] = "## " + release_body.strip(
                     "\n"
                 )
-
-    def get_github_commits(self):
-        # Get commits
-        try:
-            commits = self.repo.get_commits(sha=self.branch)
-            if commits.totalCount == 0:
-                logger.warning(f"No commits found on branch: {self.branch}")
-                message = {}
-                message["message"] = "Not Found"
-                message["documentation_url"] = (
-                    "https://docs.github.com/rest/commits/commits#list-commits"
-                )
-                raise github.GithubException.UnknownObjectException(404, message)
-            return commits
-        except github.GithubException as e:
-            if e.status == 404:
-                commits = self.repo.get_commits()
-                if commits.totalCount == 0:
-                    logger.warning("No commits found on default branch")
-                    message = {}
-                    message["message"] = "Not Found"
-                    message["documentation_url"] = (
-                        "https://docs.github.com/rest/commits/commits#list-commits"
-                    )
-                    raise github.GithubException.UnknownObjectException(404, message)
-                return commits
-            else:
-                raise github.GithubException(e.status, e.data)
 
     def get_release_content(self, release_tag, commits):
         """

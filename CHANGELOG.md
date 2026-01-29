@@ -1,6 +1,41 @@
 # CHANGELOG
 
-## [v1.2.5](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.5) - 2023-06-30 09:16:31
+## Unreleased
+
+*No description*
+
+### Bug Fixes
+
+- general:
+  - resolve wrong changelog parsing ([d80ad35](https://github.com/BobAnkh/auto-generate-changelog/commit/d80ad353e710465f7e7a008e6c97bfff74879bd2))
+
+- commit:
+  - use compare to fetch git history ([edf1d56](https://github.com/BobAnkh/auto-generate-changelog/commit/edf1d56fbe2dcec49103010b102d905c7b968c08))
+
+## [v1.3.0](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.3.0) - 2025-08-25 09:52:47+00:00
+
+## What's Changed
+
+- Bump dependencies version
+- Resolve changelog content parsing bugs
+
+## New Contributors
+* @ok-coder1 made their first contribution in https://github.com/BobAnkh/auto-generate-changelog/pull/136
+
+### Bug Fixes
+
+- general:
+  - resolve wrong changelog parsing ([bb1e50d](https://github.com/BobAnkh/auto-generate-changelog/commit/bb1e50dc5b8fcdc8221a366b383c630f71b05d11))
+
+### Documentation
+
+- README:
+  - update contributors ([370a7b7](https://github.com/BobAnkh/auto-generate-changelog/commit/370a7b7f839d671391b6d773413d0c86089cd3aa))
+  - update contributors ([3e5c2b8](https://github.com/BobAnkh/auto-generate-changelog/commit/3e5c2b88d4ce41cc0eafc3e6f2c1b59c48066331))
+  - update contributors ([af5c6b2](https://github.com/BobAnkh/auto-generate-changelog/commit/af5c6b27dc33a12455ff66d686d519f68c52794d))
+  - update contributors ([629034f](https://github.com/BobAnkh/auto-generate-changelog/commit/629034f480ac35c19fddf5c43cd0ebb9d1144116))
+
+## [v1.2.5](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.5) - 2023-06-30 09:16:31+00:00
 
 Speed up the runtime by pre-installing dependencies in the image build process.
 
@@ -19,7 +54,7 @@ Speed up the runtime by pre-installing dependencies in the image build process.
 - image:
   - speed up runtime (#109) ([8c5a0e1](https://github.com/BobAnkh/auto-generate-changelog/commit/8c5a0e10fe2f8f8ecb1eb098bc6a759eaa2ef421)) ([#109](https://github.com/BobAnkh/auto-generate-changelog/pull/109))
 
-## [v1.2.4](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.4) - 2023-02-01 16:28:15
+## [v1.2.4](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.4) - 2023-02-01 16:28:15+00:00
 
 Fix the bug of multiple git deps installed when building the image
 
@@ -28,7 +63,7 @@ Fix the bug of multiple git deps installed when building the image
 - general:
   - resolve multiple deps installation ([8e25c68](https://github.com/BobAnkh/auto-generate-changelog/commit/8e25c687104ed33f7fff17dd72a33369bce89956))
 
-## [v1.2.3](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.3) - 2022-11-30 14:50:21
+## [v1.2.3](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.3) - 2022-11-30 14:50:21+00:00
 
 Change the check behavior to cooperate with upstream lib(pygithub)
 
@@ -37,7 +72,7 @@ Change the check behavior to cooperate with upstream lib(pygithub)
 - github:
   - follow check behavior of pygithub ([1c8e525](https://github.com/BobAnkh/auto-generate-changelog/commit/1c8e525f953393b1805dfa77ce5c217dc0f1d5ff))
 
-## [v1.2.2](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.2) - 2022-07-27 02:11:14
+## [v1.2.2](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.2) - 2022-07-27 02:11:14+00:00
 
 Fix the bug when analyzing the existing changelog if the result of regex search is None.
 
@@ -46,7 +81,7 @@ Fix the bug when analyzing the existing changelog if the result of regex search 
 - analyze:
   - deal with search failure ([4a2eb69](https://github.com/BobAnkh/auto-generate-changelog/commit/4a2eb69805db4af39f374dc95eb502669fb4af95))
 
-## [v1.2.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.1) - 2022-07-13 12:57:47
+## [v1.2.1](https://github.com/BobAnkh/auto-generate-changelog/releases/tag/v1.2.1) - 2022-07-13 12:57:47+00:00
 
 Fix the bug of regeneration release list.
 
